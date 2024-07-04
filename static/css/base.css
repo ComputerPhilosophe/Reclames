@@ -1,18 +1,10 @@
-body{
-    background: linear-gradient(to bottom, #00A6FF, #ffffff);
-    background-attachment: fixed;
-    background-size: cover;
-    margin: 0;
-    padding: 0;    
-   
-}
-
-.container {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin-top: 20px;
-   padding: 20px;
+body {
+   background: rgb(0,166,255);
+   background: linear-gradient(180deg, rgba(0,166,255,1) 0%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 100%);
+   background-attachment: fixed;
+   background-size: cover;
+   margin: 0;
+   padding: 0;
 }
 
 .logo {
@@ -27,27 +19,23 @@ body{
    color: #4e8cff;
 }
 
-.texto-branco{
-   font-size: 16px;
+.texto-branco {
+   font-size: 24px;
    color: white;
+   padding: 2%;
 }
-
-
 
 .contato-texto {
    max-width: 70%;
    margin-top: 20px;
-   display: center; 
+   display: center;
 }
 
-.card {
-  
-   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+.card.sobre-nos {
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
    transition: 0.3s;
    background-color: blue;
- }
- 
- .card-image{
-   height: 300px; 
-   width: 60px;
+   width: 500px;
+   height: 125px;
+   border-radius: 20px;
 }
