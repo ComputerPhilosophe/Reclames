@@ -1,0 +1,62 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Principal{% endblock %}
+{% block conteudo %}
+<style>
+    .body{
+         background: linear-gradient(to bottom, #00A6FF, #ffffff);
+         background-attachment: fixed;
+         background-size: cover;
+         margin: 0;
+         padding: 0;    
+        
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .logo {
+        width: 200px;
+        height: auto;
+        max-width: 50%;
+    }
+
+    .texto-azul {
+        font-size: 36px;
+        font-weight: bold;
+        color: #4e8cff;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 200px); 
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contato-texto {
+        max-width: 70%;
+        margin-top: 20px; 
+    }
+
+</style>
+
+<div class="container">
+    <p class="texto-azul">Venha Conhecer a gente!</p>
+    <img src="/static/img/logo.svg" alt="Logo da sua empresa" class="logo">
+</div>
+
+<main>
+    <div class="contato-texto">
+        <h1></h1>
+        <p></p>
+    </div>
+</main>
+{% endblock %}
