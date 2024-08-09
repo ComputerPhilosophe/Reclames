@@ -15,7 +15,6 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/contato.html", {"request": request})
 
-
 @router.get("/redes_sociais", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/redes_sociais.html", {"request": request})
@@ -24,12 +23,15 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/sobre_nos.html", {"request": request})
 
-
 @router.get("/termos_uso", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/termos_uso.html", {"request": request})
 
-
 @router.get("/politica_privacidade", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/politica_privacidade.html", {"request": request})
+
+
+@router.get("/entrar", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/entrar.html", {"request": request})
