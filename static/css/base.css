@@ -55,8 +55,8 @@ body {
    transition: 0.3s;
    background-color: #1078a8;
    width: 1200px;
-   height: 1200px;
-   border-radius: 20px;
+   height: 1100px;
+   border-radius: 10px;
 }
 
 .card.termos-uso2 {
@@ -64,8 +64,8 @@ body {
    transition: 0.3s;
    background-color: white;
    width: 1200px;
-   height: 1150px;
-   border-radius: 20px;
+   height: 1100px;
+   border-radius: 10px;
 }
 
 .card.privacidade {
