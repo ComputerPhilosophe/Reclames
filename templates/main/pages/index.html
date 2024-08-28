@@ -1,15 +1,30 @@
+
 {% extends "pages/base.html" %}
 {% block subtitulo %}Principal{% endblock %}
 {% block conteudo %}
-<div class="row"> 
-    <div class="col-4 d-flex flex-column justify-content-center pt-5"> 
-        <img src="/static/img/logo.png" alt="" class="w-200" height="450" width="500"> 
-    </div>
 <div class="col-4 d-flex opacity-50"> 
     <body " style="background-image: url('/static/img/penha2.jpg'); 
              background-size: cover; 
              background-position: center;">    
  </div>
- 
- 
+    <div class="col-6 d-flex flex-column justify-content-center position-relative">
+        <div style="background-color: rgba(255, 252, 252, 0.8); position: absolute; top: 0; left: 0; width: 100%; height: 215%; z-index: 1;"></div>
+        <div class="d-flex flex-column justify-content-center align-items-center" style="z-index: 2; position: relative;">
+            <img src="/static/img/logo.png" alt="Logo" class="w-200" height="450" width="500">
+        </div>
+    </div>
+   
+        <div class="d-flex flex-column justify-content-center align-items-center" style="z-index: 2;">
+              
+                <button type="button" class="btn btn-primary btn-lg mt-4">Escolha sua cidade</button>
+            </div>
+        </div>
+        <!-- Coluna para o botão -->
+        <div class="col-2 d-flex justify-content-center align-items-center">
+            <!-- O botão está aqui para demonstração, pode ser removido se não for necessário -->
+        </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
