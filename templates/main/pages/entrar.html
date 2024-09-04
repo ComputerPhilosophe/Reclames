@@ -1,4 +1,4 @@
-{% extends "pages/base.html" %}
+{% extends "pages/base_fluid.html" %}
 {% block subtitulo %}Login{% endblock %}
 {% block conteudo %}
 <style>
@@ -22,11 +22,6 @@
         <hr>
     </div>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div class="container ">
         <div class="row d-flex justify-content-center align-items-stretch gap-5 ">
             <div class="card col-4 text-center">
@@ -34,7 +29,7 @@
                 </i>
                 <h3>Morador</h3>
                 <p>Quero reclamar e acompanhar minhas reclamações.</p>
-                <a href="/cadastro" class="nav-link"><button type="button" class="btn mb-3" style="background-color: #FF97B6; border: none; color: white">Acessar área do Morador</button></a>
+                <a href="/login_morador" class="nav-link"><button type="button" class="btn mb-3" style="background-color: #FF97B6; border: none; color: white">Acessar área do Morador</button></a>
             </div>
             <div class="card col-4 text-center">
                 <i class="bi bi-building mt-3 icon-azul"></i>
