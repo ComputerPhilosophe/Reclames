@@ -1,6 +1,12 @@
 {% extends "pages/base.html" %}
 {% block subtitulo %}Dúvidas Frequentes{% endblock %}
 {% block conteudo %}
+
+<style>
+    .icon-grande {
+      font-size: 7rem; /* Ajuste o valor conforme necessário */
+    }
+</style>
 <main>
     <div class="container">
         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -11,31 +17,29 @@
         <hr>
         <br>
         <br>
-        <br>
     </div>
     <div class="container ">
         <div class="row d-flex justify-content-center align-items-stretch gap-5 ">
 
             <div class="card col-4 text-center">
-                <i class="bi bi-person-circle mt-3">
+                <i class="bi bi-person-circle mt-3 icon-grande">
 
                 </i>
                 <h3>Sou <p class="text-center texto-azul">Morador</p></h3>
                 <p>Veja as principais dúvidas frequentes dos moradores.</p><br>
-                <button type="button" class="btn btn-secondary mb-3">Ajuda para o Morador</button>
-
-
+                <button type="button" class="btn btn-primary mb-3">Ajuda para o Morador</button>
             </div>
 
             <div class="card col-4 text-center">
-                <i class="bi bi-building mt-3"></i>
+                <i class="bi bi-building mt-3 icon-grande"></i>
 
                 <h3>Sou <p class="text-center texto-azul">Patrocinador</p></h3>
                 <p>Veja as principais dúvidas frequentes dos patrocinadores.</p>
-                <button type="button" class="btn btn-secondary mb-3">Ajuda para o Patrocinadordor</button>
-
+                <button type="button" class="btn btn-primary mb-3">Ajuda para o Patrocinadordor</button>
             
             </div>
+        </div>
+            
         </div>
     </div>
 </main>
