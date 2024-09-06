@@ -1,38 +1,39 @@
 {% extends "pages/base_fluid.html" %}
 {% block subtitulo %}Logar na conta{% endblock %}
 {% block conteudo %}
-<style>
-    body {
-        background-color: #FF97B6;
-        background-size: cover;
-    }
-</style>
-<div class="row flex-column flex-fill justify-content-center">
-    <div class="col-6 bg-light bg-opacity-50 flex-fill">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <form>
-                <div class="container">
-                <h3 class="text-left"><br>Entre na sua conta do ReclamES<br></h3>
-                <div class="row flex-column flex-fill justify-content-center">
-                      <div class="d-flex flex-column justify-content-center align-items-center">
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3 form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-                      </div>
-              </div>
-              </div>
-        </div>
+<div class="row flex-fill justify-content-center">
+  <div class="col-6 bg-light bg-opacity-50 flex-fill">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <form>
+        <h2 class="text-left"><br>Entre na sua conta do ReclamES<br></h2>
+        <h5 class="text-left"><br>Insira seus dados para acessar a área do morador</h5>
+        <br>
+        <div class="row flex-column flex-fill justify-content-center">
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email ou CNPJ:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Senha:</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+              <a href="esqueci_senha">
+                <div id="emailHelp" class="form-text">Esqueci minha Senha</div>
+              </a>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn mb-3 btn-lg" style="background-color: #FF97B6; border: none; color: white"">Entrar</button>
+          </div>
+        </div>      
+      </form>
+    </div>
+  </div>
+  <div class=" col-6 bg-light-custom2 bg-opacity-50 flex-fill d-flex align-items-center justify-content-center">
+    <button class="btn btn-primary btn-lg">Cadastro</button>      
+  </div>
 </div>
-{% endblock %}    
+{% endblock %}
