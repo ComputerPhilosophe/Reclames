@@ -1,6 +1,22 @@
 {% extends "pages/base_fluid.html" %}
 {% block subtitulo %}Logar na conta{% endblock %}
 {% block conteudo %}
+
+<style>
+  .btn-outline-white {
+    color: white;
+    border-color: white;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s; /* Para uma transição suave */
+  }
+  
+  .btn-outline-white:hover {
+    background-color: white; /* Fundo branco ao passar o mouse */
+    color: black; /* Texto preto para contraste no hover */
+    border-color: white; /* Mantém a borda branca */
+  }
+  </style>
+
 <div class="row flex-fill justify-content-center">
   <div class="col-6 bg-light bg-opacity-50 flex-fill">
     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -24,7 +40,7 @@
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              <label class="form-check-label" for="exampleCheck1">Lembre de mim</label>
             </div>
             <button type="submit" class="btn mb-3 btn-lg" style="background-color: #FF97B6; border: none; color: white"">Entrar</button>
           </div>
@@ -34,8 +50,8 @@
   </div>
   <div class="col-6 bg-light-custom bg-opacity-50 flex-fill d-flex flex-column align-items-center justify-content-center">
     <img src="static/img/reclamito.png"alt="Logo" class="w-200 h-50">
-    <h3>Ainda não tem um Cadastro?</h3>
-    <button type="button" class="btn btn-outline-dark">Cadastro</button>      
+    <h3 style="color: white;">Ainda não tem um Cadastro?</h3>
+    <a href="/cadastro_patrocinador" class="btn btn-outline-white">Cadastro</a>
   </div>
   </div>
      

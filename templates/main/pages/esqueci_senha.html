@@ -1,0 +1,74 @@
+{% extends "pages/base_fluid.html" %}
+{% block subtitulo %}Logar na conta{% endblock %}
+{% block conteudo %}
+
+
+<style>
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #007bff; /* Cor azul do título */
+    font-size: 2em; /* Tamanho da fonte */
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.search-box {
+    display: flex;
+    border: 2px solid #007bff; /* Borda azul */
+    border-radius: 50px; /* Bordas arredondadas */
+    overflow: hidden;
+    width: 100%; /* O campo de busca ocupa todo o espaço disponível */
+}
+
+.search-box input {
+    border: none;
+    padding: 15px 20px; /* Espaçamento interno */
+    flex-grow: 1;
+    font-size: 1.1em;
+    outline: none;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.search-box button img {
+    width: 24px; /* Tamanho do ícone de pesquisa */
+    height: 24px;
+}
+
+</style>
+
+<div class="container">
+    <br>
+    <h1>Esqueci minha senha</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>Faça uma busca por seu perfil (Nome, Email, CPF ou CNPJ) para enviarmos a nova senha aos e-mails já cadastrados.</p>
+    <form action="#" method="POST">
+        <div class="search-box">
+            <input type="text" placeholder="Digite o nome, email, CPF ou CNPJ cadastrados">
+            <button type="submit">
+                <img src="search-icon.svg" alt="Search Icon">
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock %}
