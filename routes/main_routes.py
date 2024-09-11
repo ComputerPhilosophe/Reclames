@@ -83,3 +83,13 @@ async def get_root(request: Request):
 
 
 
+@router.get("/duvidas_frequentes_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/duvidas_frequentes_patrocinador.html", {"request": request})
+
+
+
+
+
+
+
