@@ -1,18 +1,20 @@
 {% extends "pages/base_fluid.html" %}
-{% block subtitulo %}Logar na conta{% endblock %}
+{% block subtitulo %}Login Morador{% endblock %}
 {% block conteudo %}
 <style>
+
+
+.btn-outline-white:hover {
+  background-color: white;
+  color: black; 
+  border-color: white; 
+}
+
 .btn-outline-white {
   color: white;
   border-color: white;
   background-color: transparent;
-  transition: background-color 0.3s, color 0.3s; /* Para uma transição suave */
-}
-
-.btn-outline-white:hover {
-  background-color: white; /* Fundo branco ao passar o mouse */
-  color: black; /* Texto preto para contraste no hover */
-  border-color: white; /* Mantém a borda branca */
+  transition: background-color 0.3s, color 0.3s;
 }
 </style>
 

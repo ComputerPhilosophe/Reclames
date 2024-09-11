@@ -2,45 +2,34 @@
 {% block subtitulo %}Dúvidas Frequentes{% endblock %}
 {% block conteudo %}
 
-<style>
-    .icon-grande {
-      font-size: 7rem; /* Ajuste o valor conforme necessário */
-    }
-</style>
-<main>
-    <div class="container">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="col-12 bg-light bg-opacity-75 p-4"></div>
-            <img src="/static/img/ajudar.png" alt="logotipo" height="250" width="2000">
+<div class="flex-fill">
+    <img src="/static/img/ajudar.png" alt="logotipo" class="img-fluid w-100">
+</div>
+<h3 class="text-center texto-azul"><br>Como podemos ajudá-lo?<br></h3>
+<hr>
+<div class="container ">
+    <div class="row d-flex justify-content-center align-items-stretch gap-5 ">
+
+        <div class="card col-4 text-center">
+            <i class="bi bi-person-circle mt-3 icon-grande">
+            </i>
+            <h3>Sou <p class="text-center texto-azul">Morador</p>
+            </h3>
+            <p>Veja as principais dúvidas frequentes dos moradores.</p>
+            <button type="button" class="btn btn-primary mb-3">Ajuda para o Morador</button>
         </div>
-        <h3 class="text-center texto-azul"><br>Como podemos ajudá-lo?<br></h3>
-        <hr>
-      
-    </div>
-    <div class="container ">
-        <div class="row d-flex justify-content-center align-items-stretch gap-5 ">
 
-            <div class="card col-4 text-center">
-                <i class="bi bi-person-circle mt-3 icon-grande">
+        <div class="card col-4 text-center">
+            <i class="bi bi-building mt-3 icon-grande"></i>
 
-                </i>
-                <h3>Sou <p class="text-center texto-azul">Morador</p></h3>
-                <p>Veja as principais dúvidas frequentes dos moradores.</p>
-                <button type="button" class="btn btn-primary mb-3">Ajuda para o Morador</button>
-            </div>
+            <h3>Sou <p class="text-center texto-azul">Patrocinador</p>
+            </h3>
+            <p>Veja as principais dúvidas frequentes dos patrocinadores.</p>
+            <button type="button" class="btn btn-primary mb-3">Ajuda para o Patrocinadordor</button>
 
-            <div class="card col-4 text-center">
-                <i class="bi bi-building mt-3 icon-grande"></i>
-
-                <h3>Sou <p class="text-center texto-azul">Patrocinador</p></h3>
-                <p>Veja as principais dúvidas frequentes dos patrocinadores.</p>
-                <button type="button" class="btn btn-primary mb-3">Ajuda para o Patrocinadordor</button>
-            
-            </div>
-        </div>
-            
         </div>
     </div>
-</main>
+
+</div>
 
 {% endblock %}
