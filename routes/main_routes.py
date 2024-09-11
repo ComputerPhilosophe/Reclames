@@ -77,3 +77,9 @@ async def get_root(request: Request):
     return templates.TemplateResponse("pages/mapa.html", {"request": request})
 
 
+@router.get("/duvidas_frequentes_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/duvidas_frequentes_morador.html", {"request": request})
+
+
+
