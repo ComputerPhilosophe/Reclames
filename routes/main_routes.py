@@ -83,6 +83,10 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/ranking.html", {"request": request})
 
+@router.get("/interacao_proj_sug", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/interacao_proj_sug.html", {"request": request})
+
 @router.get("/perfil_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/perfil_morador.html", {"request": request})
@@ -90,13 +94,3 @@ async def get_root(request: Request):
 @router.get("/perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/perfil_patrocinadors.html", {"request": request})
-
-
-
-
-
-
-
-
-
-
