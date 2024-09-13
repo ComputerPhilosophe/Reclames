@@ -1,0 +1,207 @@
+{% extends "pages/base_fluid.html" %} 
+{% block subtitulo %}Criar conta{% endblock %} 
+{% block conteudo %} 
+ 
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <style> 
+        .custom-container { 
+            max-width: 500px; 
+            margin: auto; 
+            padding: 20px; 
+        } 
+ 
+        .mascot { 
+            display: flex; 
+            justify-content: center; 
+            margin-bottom: 10px; 
+        } 
+ 
+        .mascot img { 
+            width: 100px; 
+        } 
+ 
+        h2 { 
+            text-align: center; 
+            font-weight: bold; 
+        } 
+ 
+        .info-text { 
+            text-align: center; 
+            color: grey; 
+            margin-bottom: 20px; 
+        } 
+ 
+        .form-group { 
+            margin-bottom: 15px; 
+        } 
+ 
+        .small-text { 
+            font-size: 0.9rem; 
+            color: #6c757d; 
+        } 
+ 
+        .gray-box { 
+            background-color: #f0f4f7; 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-size: 0.9rem; 
+        } 
+        .btn-outline-white { 
+            color: black; 
+            border-color: black; 
+            background-color: transparent; 
+            transition: background-color 0.3s, color 0.3s; 
+        } 
+        .font-vermelho {
+            color: red;
+          }
+ 
+    </style> 
+ 
+<body> 
+<div class="custom-container bg-light rounded shadow-sm p-4 mt-5"> 
+    <div class="d-flex justify-content-center"> 
+        <i class="bi bi-building mt-3 icon-azul" style="font-size: 50px;"></i>
+    </div> 
+   
+    <h2><p class="text-center texto-azul">Quer saber quais os usuários que mais interagem, reclamam e sugerem no nosso site?
+        Tudo isso você pode encontrar aqui!</p></h2> 
+ 
+    <p class="d-inline-flex gap-1"> 
+        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample"> 
+        Como eu faço para responder uma reclamação?
+        </a> 
+      </p> 
+      <div class="collapse" id="collapseExample1"> 
+        <div class="card card-body"> 
+        1. Acesse a seção "Reclamações" após fazer login como patrocinador.<br> 
+        2. Selecione a reclamação desejada para visualizar os detalhes.<br> 
+        3. Analise a reclamação e reúna informações necessárias.<br> 
+        4. Prepare uma resposta clara e detalhada, abordando o problema.<br>
+        5. Envie a resposta e forneça informações de contato para acompanhamento.<br>
+        6. Monitore a situação e forneça atualizações, se necessário.<br> 
+        7. Solicite feedback após a resolução e use para melhorias futuras.<br> 
+           
+        <br>Responder às reclamações de forma eficiente fortalece a confiança dos moradores na empresa e promove uma comunidade mais harmoniosa e colaborativa.
+        </div><br>
+        
+      </div> 
+      <p class="d-inline-flex gap-1"> 
+        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample"> 
+        Por que o ReclamES desativou meu comentário? 
+        </a> 
+      </p> 
+      <div class="collapse" id="collapseExample2"> 
+        <div class="card card-body"> 
+        Desativamos um comentário quando entendemos que ele não está 
+        de acordo com nossos termos de uso. Isso pode acontecer em três  
+        situações:<br> 
+          
+        <br>1. Comentário não consumerista<br> 
+          
+        <br>O RES é uma plataforma de conteúdo voltada para a resolução de 
+        conflitos comerciais e consumeristas. Se sua reclamação não se  
+        enquadrar nesses critérios, não poderá ficar ativa.<br>
+          
+        <br>2. Comentário com conteúdo explicíto<br> 
+          
+        <br>Existem diversas formas de realizar um comentário dentro do nosso 
+        site, usando palavras adequadas e que dizem respeito a nossas  
+        diretrizes, um comentário que não se encaixa nesses critérios, será  
+        excluído.<br>
+          
+        <br>3. Duplicidade<br> 
+          
+        <br>No RES, cada comentário deve equivaler a uma reclamação, por isso não é permitido comentar mais de uma vez sobre a mesma situação.  
+        Sempre que a empresa identifica uma duplicidade, nós desativamos  
+        uma dos comentários e mantemos ativo o mais adequado para a  
+        continuidade do atendimento.
+        </div><br> 
+      </div> 
+      <p class="d-inline-flex gap-1"> 
+        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample"> 
+        O que é moderação de conteúdo?
+        </a> 
+      </p> 
+      <div class="collapse" id="collapseExample3"> 
+        <div class="card card-body"> 
+        A moderação tem o intuito de manter a qualidade 
+        do conteúdo disponível nas respostas públicas da 
+        empresa, além de ser a única forma de averiguar 
+        o comportamento do reclamante no ReclamES. 
+          
+          
+        Através dela, você pode solicitar nossa análise  
+        sobre reclamações que infrinjam nossos termos  
+        de uso, para que atuemos com a desativação,  
+        edição ou migração da reclamação ou até mesmo 
+        a anulação da nota.
+        </div> 
+      </div><br> 
+      <p class="d-inline-flex gap-1"> 
+        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample"> 
+        Como funciona o prazo de avaliação da reclamação?
+        </a> 
+      </p> 
+      <div class="collapse" id="collapseExample4"> 
+        <div class="card card-body"> 
+        A partir da primeira resposta pública da empresa  
+        para a reclamação, começa o prazo de 6 meses  
+        corridos para o consumidor fazer a avaliação do  
+        atendimento. 
+           
+        Enquanto estiver dentro do prazo, a reclamação  
+        permanece aberta para que o consumidor e  
+        empresa continuem enviando réplicas.  
+        A reclamação será tratada como encerrada  
+        somente quando o consumidor fizer a avaliação,  
+        ou após o prazo de 6 meses sem avaliação feita.
+        </div> 
+      </div><br> 
+      <p class="d-inline-flex gap-1"> 
+        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample"> 
+        Por que a limitação de acessos simultâneos à  
+        Área da Empresa é necessária?
+        </a> 
+      </p> 
+      <div class="collapse" id="collapseExample5"> 
+        <div class="card card-body"> 
+        A limitação de acessos visa garantir que boas práticas de  
+        segurança de dados e informações estejam ocorrendo  
+        dentro do Reclame AQUI. 
+           
+        Toda informação contida dentro da Área da Empresa é  
+        confidencial e não deve ser compartilhada com terceiros.  
+        A limitação de acessos simultâneos à Área da Empresa vem 
+        para combater: 
+           
+        - Exposição de informações confidenciais; 
+        - Dificuldade em atribuir responsabilidade por ações  
+          inseguras; 
+        - Conflitos de privacidade. 
+        Além disso, essa medida está de acordo com os padrões da  
+        Lei Geral de Proteção de Dados (LGPD). 
+           
+        O Reclame AQUI é referência em confiança e compromisso 
+        para as empresas e consumidores. Por isso, esse é o  
+        cenário ideal para assegurar direitos fundamentais de  
+        segurança cibernética e privacidade a todos os usuários da  
+        plataforma.
+        </div>
+      </div>
+      <br>
+      <div class="d-flex justify-content-center">
+        <font class="font-vermelho"><h2>Ainda está com dúvida?</h2></font>
+      </div>
+
+
+      <div class="d-flex justify-content-center">
+       <p> Acesse <a href="/contato"> Contato</a> e fale diretamente conosco <br> através do nosso Email ou Número</p>
+    </div>
+     
+</div> 
+ 
+</body> 
+ 
+{% endblock %}
