@@ -91,6 +91,11 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/ranking.html", {"request": request})
 
+@router.get("/interacao_proj_sug", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/interacao_proj_sug.html", {"request": request})
+
+
 
 
 
