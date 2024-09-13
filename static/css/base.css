@@ -17,7 +17,7 @@ body {
 .texto-azul {
    font-size: 36px;
    font-weight: bold;
-   color: #4e8cff;
+   color: #1078A8;
 }
 
 .texto-branco {
@@ -106,5 +106,11 @@ body {
 
 .bg-light-custom2 {
    background-color: #1078A8 !important;
+}
+
+.texto-azul3 {
+   font-size: 20px;
+   font-weight: bold;
+   color: #1078A8;
 }
 
