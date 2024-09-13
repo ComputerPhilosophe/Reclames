@@ -1,8 +1,10 @@
-{% extends "pages/base.html" %}
+{% extends "pages/base_fluid.html" %}
 {% block subtitulo %}Principal{% endblock %}
 {% block conteudo %}
 
-<h3 class="text-center texto-azul" >Venha conhecer a gente!</h3>
+<div class="container">
+<h3 class="text-center texto-azul mt-5" >Venha conhecer a gente!</h3>
+
 <div class="row">
     <div class="col-4 d-flex flex-column justify-content-center pt-5">
         <img src="/static/img/logo_reclames.svg" alt="" class="w-100">
@@ -19,5 +21,6 @@
               <h4 class="text-left texto-branco"><i class="bi bi-youtube p-3"></i>@reclamES</h4>
           </div>
     </div>
+</div>
 </div>
 {% endblock %}
