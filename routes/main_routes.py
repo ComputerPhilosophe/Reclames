@@ -31,11 +31,9 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/politica_privacidade.html", {"request": request})
 
-
 @router.get("/entrar", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/entrar.html", {"request": request})
-
 
 @router.get("/cadastro_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
@@ -61,21 +59,17 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/duvidas_frequentes.html", {"request": request})
 
-
 @router.get("/reclamar", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/reclamar.html", {"request": request})
-
 
 @router.get("/esqueci_senha", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/esqueci_senha.html", {"request": request})
 
-
 @router.get("/mapa", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/mapa.html", {"request": request})
-
 
 @router.get("/duvidas_frequentes_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
@@ -89,16 +83,14 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/ranking.html", {"request": request})
 
-<<<<<<< HEAD
 @router.get("/interacao_proj_sug", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/interacao_proj_sug.html", {"request": request})
 
-=======
 @router.get("/perfil_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/perfil_morador.html", {"request": request})
->>>>>>> 1e2516683144e0910024087608eada0bc89c8a9f
+
 
 
 
