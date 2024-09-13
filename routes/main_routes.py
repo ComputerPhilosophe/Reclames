@@ -93,4 +93,4 @@ async def get_root(request: Request):
 
 @router.get("/perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
-    return templates.TemplateResponse("pages/perfil_patrocinadors.html", {"request": request})
+    return templates.TemplateResponse("pages/perfil_patrocinador.html", {"request": request})
