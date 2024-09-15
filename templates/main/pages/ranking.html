@@ -2,79 +2,30 @@
 {% block subtitulo %}Criar conta{% endblock %}
 {% block conteudo %}
 
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .custom-container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .mascot {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .mascot img {
-            width: 100px;
-        }
-
-        h2 {
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .info-text {
-            text-align: center;
-            color: grey;
-            margin-bottom: 20px;
-        }
-
-        .required {
-            color: red;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .small-text {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-
-        .gray-box {
-            background-color: #f0f4f7;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-
-    </style>
-
 <body>
-<div class="custom-container bg-light rounded shadow-sm p-4 mt-5">
-    <div class="mascot">
-        <img src="/static/img/reclamito.png" alt="Mascote">
+<div class="custom-container bg-light rounded shadow-sm p-4 mt-5 mb-5" style="max-width: 500px; margin: auto; padding: 20px;">
+    <div class="mascot" style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <img src="/static/img/reclamito.png" alt="Mascote" style="width: 100px;">
     </div>
 
-   
-    <h2><p class="justify-content-center texto-azul3">Quer saber quais os usuários que mais interagem,
-        reclamam e sugerem no nosso site? <br>
-        Tudo isso você pode encontrar aqui!</p></h2>
-    <p class="info-text">A partir da interação que o usuário dá para a organização nós construímos o nosso Ranking e, assim, 
-                        ajudamos pessoas que querem analisar como está a situação do site, qual sua colocação e descobrir como 
-                        vai o seu atendimento.</p>
-
+    <h2 style="text-align: center; font-weight: bold;">
+        <p class="justify-content-center texto-azul3">Quer saber quais os usuários que mais interagem, reclamam e sugerem no nosso site? <br>
+        Tudo isso você pode encontrar aqui!</p>
+    </h2>
+    <p class="info-text" style="text-align: center; color: grey; margin-bottom: 20px;">
+        A partir da interação que o usuário dá para a organização nós construímos o nosso Ranking e, assim, 
+        ajudamos pessoas que querem analisar como está a situação do site, qual sua colocação e descobrir como 
+        vai o seu atendimento.
+    </p>
 
     <form>
         <div class="card" style="background-color: rgb(228, 227, 227);">
-            <br><h2><p class="justify-content-center texto-azul3">Usuários que mais interagem</p></h2>
+            <br>
+            <h2>
+                <p class="justify-content-center texto-azul3">Usuários que mais interagem</p>
+            </h2>
 
-            <div class="container">
+            <div class="container ">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
                         <ul class="list-group">
@@ -82,71 +33,69 @@
                                 1.<span><i class="bi bi-check-circle-fill text-success"></i> Lívia de Abreu </span>
                                 <span class="badge bg-primary rounded-pill">99.7%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">2.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Márcio Costa </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                2.<span><i class="bi bi-check-circle-fill text-success"></i> Márcio Costa </span>
                                 <span class="badge bg-primary rounded-pill">99.2%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">3.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Karina Andrade </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                3.<span><i class="bi bi-check-circle-fill text-success"></i> Karina Andrade </span>
                                 <span class="badge bg-primary rounded-pill">99.1%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">4.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Lígia da Silva </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                4.<span><i class="bi bi-check-circle-fill text-success"></i> Lígia da Silva </span>
                                 <span class="badge bg-primary rounded-pill">98.9%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">5.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Martha Lopes </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                5.<span><i class="bi bi-check-circle-fill text-success"></i> Martha Lopes </span>
                                 <span class="badge bg-primary rounded-pill">98.9%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">6.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Arthur Santos </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                6.<span><i class="bi bi-check-circle-fill text-success"></i> Arthur Santos </span>
                                 <span class="badge bg-primary rounded-pill">98.8%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">7.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Paulo Augusto </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                7.<span><i class="bi bi-check-circle-fill text-success"></i> Paulo Augusto </span>
                                 <span class="badge bg-primary rounded-pill">98.7%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">8.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Lara Prates </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                8.<span><i class="bi bi-check-circle-fill text-success"></i> Lara Prates </span>
                                 <span class="badge bg-primary rounded-pill">98.6%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">9.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Rogério Bopo </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                9.<span><i class="bi bi-check-circle-fill text-success"></i> Rogério Bopo </span>
                                 <span class="badge bg-primary rounded-pill">98.3%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">10.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Kamile Kim </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                10.<span><i class="bi bi-check-circle-fill text-success"></i> Kamile Kim </span>
                                 <span class="badge bg-primary rounded-pill">97.0%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">11.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Flávia Antunes </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                11.<span><i class="bi bi-check-circle-fill text-success"></i> Flávia Antunes </span>
                                 <span class="badge bg-primary rounded-pill">96.9%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">12.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Acassio Neves </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                12.<span><i class="bi bi-check-circle-fill text-success"></i> Acassio Neves </span>
                                 <span class="badge bg-primary rounded-pill">96.5%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">13.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Jorge Bemfi </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                13.<span><i class="bi bi-check-circle-fill text-success"></i> Jorge Bemfi </span>
                                 <span class="badge bg-primary rounded-pill">95.8%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">14.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Eduardo Lima </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                14.<span><i class="bi bi-check-circle-fill text-success"></i> Eduardo Lima </span>
                                 <span class="badge bg-primary rounded-pill">95.0%</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">15.
-                                <span><i class="bi bi-check-circle-fill text-success"></i> Rodrigo Nantes </span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                15.<span><i class="bi bi-check-circle-fill text-success"></i> Rodrigo Nantes </span>
                                 <span class="badge bg-primary rounded-pill">94.9%</span>
                             </li><br>
-                            
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </div>
-        
     </form>
 </div>
 

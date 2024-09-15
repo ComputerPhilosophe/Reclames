@@ -2,36 +2,31 @@
 {% block subtitulo %}Dúvidas Frequentes{% endblock %}
 {% block conteudo %}
 
-<div class="bg-light bg-opacity-75 flex-fill">
-<div>
-    <img src="/static/img/ajudar.png" alt="logotipo" class=" w-100">
+<div class="position-relative">
+    <img src="/static/img/ajudar.png" alt="logotipo" class="w-100" style="opacity: 0.7;">
+    <h2 class="position-absolute top-50 start-50 translate-middle text-center texto-azul" style="font-size: 3rem; font-weight: bold; color: black;">
+        Como podemos Ajudá-lo?
+    </h2>
 </div>
-</div>
-<h3 class="text-center texto-azul"><br>Como podemos ajudá-lo?<br></h3>
+
 <hr>
+
 <div class="container mb-5">
-    <div class="row d-flex justify-content-center align-items-stretch gap-5 ">
-        <div class="card col-4 text-center">
-            <i class="bi bi-person-circle mt-3 icon-grande" style="font-size: 50px;">
-            </i>
-            <h3>Sou <p class="text-center texto-azul">Morador</p>
-            </h3>
-            <p>Veja as principais dúvidas frequentes dos moradores.</p>
-            <a href="/duvidas_frequentes_morador" class="btn btn-primary mb-3">Ajuda para o morador</a>
+    <div class="row d-flex justify-content-center align-items-stretch gap-5">
+        <div class="card col-4 text-center" style="border: none; background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+            <i class="bi bi-person-circle mt-3 icon-grande" style="font-size: 60px; color: #007bff;"></i>
+            <h3>Sou <span class="text-center texto-azul" style="color: #007bff;">Morador</span></h3>
+            <p>Veja as <a href="/duvidas_frequentes_morador" style="color: #007bff; text-decoration: underline;">principais dúvidas</a> frequentes dos moradores.</p>
+            <a href="/duvidas_frequentes_morador" class="btn btn-primary mb-3" style="width: 100%; background-color: #007bff;">Ajuda para o Morador</a>
         </div>
-
-        <div class="card col-4 text-center">
-            <i class="bi bi-building mt-3 icon-grande" style="font-size: 50px;"></i>
-
-            <h3>Sou <p class="text-center texto-azul">Patrocinador</p>
-            </h3>
-            <p>Veja as principais dúvidas frequentes dos patrocinadores.</p>
-            <a href="/duvidas_frequentes_patrocinador" class="btn btn-primary mb-3">Ajuda para o patrocinador</a>
-          
-
+        <div class="card col-4 text-center" style="border: none; background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+            <i class="bi bi-building mt-3 icon-grande" style="font-size: 60px; color: #007bff;"></i>
+            <h3>Sou <span class="text-center texto-azul" style="color: #007bff;">Patrocinador</span></h3>
+            <p>Veja as <a href="/duvidas_frequentes_patrocinador" style="color: #007bff; text-decoration: underline;">principais dúvidas</a> frequentes dos patrocinadores.</p>
+            <a href="/duvidas_frequentes_patrocinador" class="btn btn-primary mb-3" style="width: 100%; background-color: #007bff;">Ajuda para o Patrocinador</a>
         </div>
     </div>
-
 </div>
+
 
 {% endblock %}
