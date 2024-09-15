@@ -102,3 +102,7 @@ async def get_root(request: Request):
 @router.get("/login_administrador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/login_administrador.html", {"request": request})
+
+@router.get("/alterar_perfil_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_patrocinador.html", {"request": request})
