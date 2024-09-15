@@ -3,139 +3,68 @@
 {% block conteudo %}
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
-<style> 
-    .custom-container { 
-        max-width: 500px; 
-        margin: auto; 
-        padding: 20px; 
-    } 
-
-    .mascote { 
-        display: flex; 
-        justify-content: center; 
-        margin-bottom: 10px; 
-    } 
-
-    .mascote img { 
-        width: 100px; 
-    } 
-
-    h2 { 
-        text-align: center; 
-        font-weight: bold; 
-    } 
-
-    .info-text { 
-        text-align: center; 
-        color: grey; 
-        margin-bottom: 20px; 
-    } 
-
-    .form-group { 
-        margin-bottom: 15px; 
-    } 
-
-    .small-text { 
-        font-size: 0.9rem; 
-        color: #6c757d; 
-    } 
-
-    .gray-box { 
-        background-color: #f0f4f7; 
-        padding: 10px; 
-        border-radius: 5px; 
-        font-size: 0.9rem; 
-    } 
-    
-    .file-upload { 
-        border: 2px dashed #ccc; 
-        padding: 20px; 
-        text-align: center; 
-        margin-bottom: 20px; 
-    } 
-    
-    .file-upload:hover { 
-        border-color: #007bff; 
-    }
-
-    .file-upload input[type="file"] {
-        display: none;
-    }
-
-    .upload-button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-    }
-
-    .upload-button:hover {
-        background-color: #0056b3;
-    }
-</style> 
-
-<body> 
-<div class="custom-container bg-light rounded shadow-sm p-4 mt-3"> 
-    <div class="mascote"> 
-        <img src="/static/img/reclamito.png" alt="Mascote"> 
+<div class="mb-5">
+<div class="custom-container bg-light rounded shadow-sm p-4 mt-3" style="max-width: 500px; margin: auto; padding: 20px;"> 
+    <div class="mascote" style="display: flex; justify-content: center; margin-bottom: 10px;"> 
+        <img src="/static/img/reclamito.png" alt="Mascote" style="width: 100px;"> 
     </div> 
 
-    <h2>Vamos começar! <p class="text-center texto-azul">Conte sua História</p></h2> 
-    <b><p class="info-text">Veja como são as reclamações em nosso site clicando <a href="/duvidas_frequentes_morador">aqui</a></p></b>
+    <h2 style="text-align: center; font-weight: bold;">Vamos começar! <p class="text-center texto-azul">Conte sua História</p></h2> 
+    <b><p class="info-text" style="text-align: center; color: grey; margin-bottom: 20px;">Veja como são as reclamações em nosso site clicando <a href="/duvidas_frequentes_morador">aqui</a></p></b>
     
     <font size="+1"><p class="text-center">Descreva o seu problema com a empresa</p></font>
-
     <form> 
-        <div class="form-group"> 
+        <div class="form-group" style="margin-bottom: 15px;"> 
             <label for="titulo_da_historia" class="required">Título da História</label> 
             <input type="text" id="titulo_da_historia" class="form-control" placeholder="Resuma em poucas palavras o seu problema." required maxlength="100"> 
         </div> 
-        <div class="form-group"> 
+        <div class="form-group" style="margin-bottom: 15px;"> 
             <label for="conte_sua_historia" class="required">Conte sua História</label> 
             <textarea id="conte_sua_historia" class="form-control" rows="4" placeholder="Escreva aqui o seu problema." required></textarea>
         </div> 
 
         <font size="+1"><b><p>Qual o telefone que a empresa pode entrar em contato?</p></b></font>
-        <div class="form-group"> 
+        <div class="form-group" style="margin-bottom: 15px;"> 
             <label for="celular" class="required">Celular</label> 
             <input type="tel" id="celular" class="form-control" placeholder="+55 (__)____-____" required pattern="\+?[0-9\s\-\(\)]{10,15}"> 
         </div> 
-        <div class="form-group"> 
+        <div class="form-group" style="margin-bottom: 15px;"> 
             <label for="telefone" class="required">Telefone</label> 
             <input type="tel" id="telefone" class="form-control" placeholder="+55 (__)____-____" pattern="\+?[0-9\s\-\(\)]{10,15}"> 
         </div> 
 
-        <!-- Teacher this was what I found on the internet on how to attach files -->
         <font size="+1"><b><p>Anexar arquivos?</p></b></font> 
-        <div class="file-upload" id="drop-area">
+        <div class="file-upload" id="drop-area" style="border: 2px dashed #ccc; padding: 20px; text-align: center; margin-bottom: 20px;">
             <p>Arraste e solte seus arquivos aqui ou</p>
-            <input type="file" id="fileElem" multiple accept="image/png, image/jpeg, application/pdf">
-            <button type="button" class="upload-button" id="uploadBtn">Selecione os Arquivos</button>
-            <p class="small-text">Formatos permitidos: PNG, JPG, PDF. Máximo de 5Mb por arquivo.</p>
+            <input type="file" id="fileElem" multiple accept="image/png, image/jpeg, application/pdf" style="display: none;">
+            <button type="button" class="upload-button" id="uploadBtn" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">Selecione os Arquivos</button>
+            <p class="small-text" style="font-size: 0.9rem; color: #6c757d;">Formatos permitidos: PNG, JPG, PDF. Máximo de 5Mb por arquivo.</p>
         </div>
-
         <u><p>Complete as etapas obrigatórias para postar a reclamação</p></u> 
         <div class="form-group mt-4"> 
             <button type="submit" class="btn btn-primary w-100">Reclamar</button> 
         </div> 
     </form> 
 </div> 
- <!-- It works to a certain extent -->
+
 <script>
     const fileElem = document.getElementById("fileElem");
     const uploadBtn = document.getElementById("uploadBtn");
     const dropArea = document.getElementById("drop-area");
+
     uploadBtn.addEventListener("click", () => {
         fileElem.click();
     });
+
     dropArea.addEventListener("dragover", (e) => {
         e.preventDefault();
         dropArea.style.borderColor = "#007bff";
     });
+
     dropArea.addEventListener("dragleave", () => {
         dropArea.style.borderColor = "#ccc";
     });
+
     dropArea.addEventListener("drop", (e) => {
         e.preventDefault();
         dropArea.style.borderColor = "#ccc";
@@ -148,7 +77,5 @@
         console.log(files);
     });
 </script>
-
-</body> 
-
+</div>
 {% endblock %}

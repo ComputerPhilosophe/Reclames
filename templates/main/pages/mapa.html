@@ -1,19 +1,93 @@
 {% extends "pages/base_fluid.html" %}
-{% block subtitulo %}mapa{% endblock %}
+{% block subtitulo %}Mapa{% endblock %}
 {% block conteudo %}
-
 
 <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
     <div class="container">
         <div class="d-flex justify-content-between w-75">
             <a href="/ranking" class="nav-link">Ranking</a>
-            <a href="/interacao_proj_sug" class="nav-link">Lista  de sugestões de Projetos</a>
+            <a href="/interacao_proj_sug" class="nav-link">Lista de sugestões de Projetos</a>
         </div>
     </div>
 </nav>
 
-<div class="mapBox">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d238584.50205763703!2d-41.080445713365705!3d-20.87677186727149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1726223954406!5m2!1spt-BR!2sbr" width="1900" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<div id="map" style="height: 650px; width: 100%;"></div>
+<div id="sidebar" style="display: none; position: absolute; left: 0; top: 0; height: 100%; width: 400px; background: #f0f0f0; z-index: 1000; padding: 20px; overflow-y: auto;">
+    <div id="sidebar-content">
+    </div>
+    <button id="closeSidebarBtn" style="position: absolute; top: 10px; left: 10px; padding: 5px 10px;">Fechar</button>
 </div>
+
+<script>
+    function initMap() {
+        const cachoeiroLocation = { lat: -20.8467, lng: -41.1122 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 10,
+            center: cachoeiroLocation,
+        });
+
+        const marker = new google.maps.Marker({
+            position: cachoeiroLocation,
+            map: map,
+            title: "Cachoeiro de Itapemirim"
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: `
+                <h1>Cachoeiro de Itapemirim</h1>
+                <p>Cidade do Estado do Espírito Santo</p>
+                <button id="showInfoBtn">Mostrar Informações</button>
+            `,
+        });
+
+        marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+            google.maps.event.addListener(infoWindow, 'domready', function() {
+                document.getElementById("showInfoBtn").addEventListener("click", showInfo);
+            });
+        });
+
+        function showInfo() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarContent = document.getElementById('sidebar-content');
+
+            sidebarContent.innerHTML = `
+                <h2>Cachoeiro de Itapemirim</h2>
+                <img src="/static/img/cachoeiro_itapemirim.jpg" style="width: 100%; margin-bottom: 15px;">
+                <h3>Reclamações Recentes</h3>
+                <ul>
+                    <li>Reclamação de Iluminação Pública - 30/08/2023 - Pendente</li>
+                    <li>Buracos na Avenida Principal - 28/08/2023 - Resolvida</li>
+                    <li>Coleta de Lixo Irregular - 26/08/2023 - Pendente</li>
+                </ul>
+                <h3>Projetos em Andamento</h3>
+                <ul>
+                    <li>Revitalização do Centro Histórico - Data de início: 01/09/2023</li>
+                    <li>Construção de Novas Escolas - Data de início: 15/09/2023</li>
+                    <li>Pavimentação das Vias Secundárias - Data de início: 05/09/2023</li>
+                </ul>
+                <h3>Pontos Turísticos</h3>
+                <ul>
+                    <li>Monte Aghá</li>
+                    <li>Pedra do Itabira</li>
+                    <li>Catedral de São Pedro</li>
+                </ul>
+                <div style="margin-top: 20px;">
+                    <a href= /interacao_proj_sug class="btn">Ver Reclamações</a>
+                     <a href= /interacao_proj_sug class="action-btn">Ver Projetos</a>
+                </div>
+            `;
+            sidebar.style.display = 'block';
+            document.getElementById('closeSidebarBtn').addEventListener('click', hideSidebar);
+        }
+
+        function hideSidebar() {
+            document.getElementById('sidebar').style.display = 'none';
+        }
+    }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp0xpofLpW_R6jGkjdomzrT68rwqvsX54&callback=initMap">
+</script>
 
 {% endblock %}

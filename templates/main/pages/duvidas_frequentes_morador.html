@@ -1,216 +1,99 @@
 {% extends "pages/base.html" %} 
-{% block subtitulo %}Criar conta{% endblock %} 
+{% block subtitulo %}Dúvidas frequentes morador{% endblock %} 
 {% block conteudo %} 
- 
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
-    <style> 
-        .custom-container { 
-            max-width: 500px; 
-            margin: auto; 
-            padding: 20px; 
-        } 
- 
-        .mascot { 
-            display: flex; 
-            justify-content: center; 
-            margin-bottom: 10px; 
-        } 
- 
-        .mascot img { 
-            width: 100px; 
-        } 
- 
-        h2 { 
-            text-align: center; 
-            font-weight: bold; 
-        } 
- 
-        .info-text { 
-            text-align: center; 
-            color: grey; 
-            margin-bottom: 20px; 
-        } 
- 
-        .form-group { 
-            margin-bottom: 10px; 
-        } 
- 
-        .small-text { 
-            font-size: 0.9rem; 
-            color: #6c757d; 
-        } 
- 
-        .gray-box { 
-            background-color: #f0f4f7; 
-            padding: 10px; 
-            border-radius: 5px; 
-            font-size: 0.9rem; 
-        } 
-        .btn-outline-white { 
-            color: black; 
-            border-color: black; 
-            background-color: transparent; 
-            transition: background-color 0.3s, color 0.3s; 
-        } 
-        .font-vermelho {
-            color: red;
-          }
- 
-    </style> 
- 
-<body> 
-<div class="custom-container bg-light rounded shadow-sm p-4 mt-4"> 
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+
+<div class="custom-container bg-light rounded shadow-sm p-4 mt-4" style="max-width: 500px; margin: auto; padding: 20px;"> 
     <div class="d-flex justify-content-center"> 
         <i class="bi bi-person-circle mt-3 fs-1" style="font-size: 50px;"></i>
     </div> 
-    <h2>Central de ajuda para o<p class="text-center texto-azul">Morador</p></h2> 
- 
-    <p class="d-inline-flex gap-1"> 
-        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample"> 
-          Como eu faço para publicar uma reclamação 
+    <h2 style="text-align: center; font-weight: bold;">Central de ajuda para o<p class="text-center texto-azul">Morador</p></h2> 
+
+    <p class="w-100"> 
+        <a class="btn btn-outline-white" style="color: black; border-color: black; background-color: transparent; width: 100%; transition: background-color 0.3s, color 0.3s;" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1"> 
+            Como eu faço para publicar uma reclamação
         </a> 
-      </p> 
-      <div class="collapse" id="collapseExample1"> 
+    </p> 
+    <div class="collapse" id="collapseExample1"> 
         <div class="card card-body"> 
-            1. Digite o nome da empresa/instituição/órgão na  
-            busca do site e clique para acessar a página 
-            2.Na página da empresa/instituição/órgão, clique  
-            em Reclamar 
-            3.Faça Login ou crie sua conta no ReclamES 
-            4.Preencha todos os campos da reclamação 
-             
-            Seja claro e objetivo na hora de contar sua  
-            história. Isso ajuda a empresa na hora de entrar  
-            em contato com você para resolver o problema.  
-             
-            Sucesso! Sua reclamação foi enviada para a  
-            empresa. 
-             
-            Agora é só aguardar a resposta da empresa,  
-            ela já foi notificada e você também será assim  
-            que receber um retorno. 
+            1. Digite o nome da empresa/instituição/órgão na busca do site e clique para acessar a página.<br>
+            2. Na página da empresa/instituição/órgão, clique em "Reclamar".<br>
+            3. Faça Login ou crie sua conta no ReclamES.<br>
+            4. Preencha todos os campos da reclamação.<br><br>
+            Seja claro e objetivo na hora de contar sua história. Isso ajuda a empresa na hora de entrar em contato com você para resolver o problema.<br><br>
+            Sucesso! Sua reclamação foi enviada para a empresa.<br><br>
+            Agora é só aguardar a resposta da empresa, ela já foi notificada e você também será assim que receber um retorno.
         </div><br>
-        
-      </div> 
-      <p class="d-inline-flex gap-1"> 
-        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample"> 
-        Por que o ReclamES desativou minha reclamação? 
+    </div> 
+
+    <p class="w-100"> 
+        <a class="btn btn-outline-white" style="color: black; border-color: black; background-color: transparent; width: 100%; transition: background-color 0.3s, color 0.3s;" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2"> 
+            Por que o ReclamES desativou minha reclamação? 
         </a> 
-      </p> 
-      <div class="collapse" id="collapseExample2"> 
+    </p> 
+    <div class="collapse" id="collapseExample2"> 
         <div class="card card-body"> 
-            Desativamos uma reclamação quando entendemos que ela não está 
-            de acordo com nossos termos de uso. Isso pode acontecer em três  
-            situações: 
-            
-            1.Reclamação não consumerista 
-            
-            O RES é uma plataforma de conteúdo voltada para a resolução de 
-            conflitos comerciais e consumeristas. Se sua reclamação não se  
-            enquadrar nesses critérios, não poderá ficar ativa. 
-            
-            2.Reclamação de outra empresa 
-            
-            Existem diversas empresas com nomes similares e isso pode  
-            confundir alguns consumidores. Quando a empresa identifica que  
-            recebeu uma reclamação que não é dela, a desativamos para que o 
-            consumidor possa cadastrar a empresa correta. 
-            
-            3.Duplicidade 
-            
-            No RA, cada reclamação deve equivaler a um problema, por isso não  
-            é permitido reclamar mais de uma vez sobre a mesma situação.  
-            Sempre que a empresa identifica uma duplicidade, nós desativamos  
-            uma das reclamações e mantemos ativa a mais adequada para a  
-            continuidade do atendimento.
+            Desativamos uma reclamação quando entendemos que ela não está de acordo com nossos termos de uso. Isso pode acontecer em três situações:<br><br>
+            1. Reclamação não consumerista.<br><br>
+            O RES é uma plataforma de conteúdo voltada para a resolução de conflitos comerciais e consumeristas. Se sua reclamação não se enquadrar nesses critérios, não poderá ficar ativa.<br><br>
+            2. Reclamação de outra empresa.<br><br>
+            Existem diversas empresas com nomes similares e isso pode confundir alguns consumidores. Quando a empresa identifica que recebeu uma reclamação que não é dela, a desativamos para que o consumidor possa cadastrar a empresa correta.<br><br>
+            3. Duplicidade.<br><br>
+            No RA, cada reclamação deve equivaler a um problema, por isso não é permitido reclamar mais de uma vez sobre a mesma situação. Sempre que a empresa identifica uma duplicidade, nós desativamos uma das reclamações e mantemos ativa a mais adequada para a continuidade do atendimento.
         </div><br> 
-      </div> 
-      <p class="d-inline-flex gap-1"> 
-        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample"> 
-        Como vou ter retorno sobre o status da minha reclamação?
-        </a> 
-      </p> 
-      <div class="collapse" id="collapseExample3"> 
-        <div class="card card-body"> 
-            Ao receber uma notificação de nova reclamação ou sugestão, 
-            a empresa responsável pode acessar o conteúdo detalhado 
-            postado pelo morador.  
-            Cada resposta da empresa incluirá informações específicas 
-            sobre as ações planejadas ou já tomadas para resolver a 
-            reclamação ou implementar a sugestão.  
- 
-            As empresas podem fornecer atualizações periódicas, 
-            permitindo que os moradores acompanhem o progresso em 
-            tempo real.
-        </div> 
-      </div><br> 
-      <p class="d-inline-flex gap-1"> 
-        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample"> 
-        Meus dados estão expostos no Google, o que faço?
-        </a> 
-      </p> 
-      <div class="collapse" id="collapseExample4"> 
-        <div class="card card-body"> 
-            Todas as reclamações são publicadas anonimamente  
-            (sem o nome do reclamante). Apenas a empresa e o  
-            Reclame AQUI têm acesso aos seus dados.  
-            Isso significa que, se os dados aparecem no Google,  
-            eles foram expostos no texto da reclamação ou em  
-            alguma das interações que aconteceram. 
-            
-            Por isso, é importante se atentar às informações que  
-            são registradas publicamente. Não é necessário  
-            informar seu CPF ou assinar seu nome ao final. 
-            
-            Mas se a exposição acontecer, nosso time pode editar 
-            esses dados. Para isso, siga as orientações: 
-            
-            1.Entre em contato com nosso time pelo chat no final  
-            dessa página. Por lá, nos informe o link (URL) e o ID  
-            da reclamação. O ID pode ser localizado abaixo do  
-            título da reclamação 
-            
-            2.Além da edição, solicitamos a desindexação  
-            da informação ao Google e ela não aparecerá mais.
-        </div> 
-      </div><br> 
-      <p class="d-inline-flex gap-1"> 
-        <a class="btn btn-outline-white" data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample"> 
-        Como  funciona o Ranking do ReclamES?
-        </a> 
-      </p> 
-      <div class="collapse" id="collapseExample5"> 
-        <div class="card card-body"> 
-            O Ranking de Moradores é uma forma interativa de destacar os 
-            usuários mais ativos na plataforma, reconhecendo aqueles
-            que mais contribuem com reclamações e sugestões de projetos.  
- 
-            O objetivo é incentivar a participação da comunidade, 
-            promovendo um ambiente colaborativo e engajado.  
-            Uma tabela visual apresenta os usuários mais ativos, 
-            ordenados pela soma total de reclamações e sugestões, 
-            incluindo colunas para a posição no ranking, nome do morador, 
-            total de reclamações, total de sugestões e total de atividades.  
- 
-            O ranking é atualizado periodicamente para refletir as contribuições 
-            mais recentes. Ao clicar no nome de um usuário, é possível visualizar 
-            um perfil detalhado com todas as suas contribuições,  incluindo foto de 
-            perfil, biografia e uma lista de todas as reclamações e sugestões postadas.
-        </div>
-      </div>
-      <br>
-      <div class="d-flex justify-content-center">
-        <font class="font-vermelho"><h2>Ainda está com dúvida?</h2></font>
-      </div>
+    </div> 
 
-
-      <div class="d-flex justify-content-center">
-       <p> Acesse <a href="/contato"> Contato</a> e fale diretamente conosco <br> através do nosso Email ou Número</p>
+    <p class="w-100"> 
+        <a class="btn btn-outline-white" style="color: black; border-color: black; background-color: transparent; width: 100%; transition: background-color 0.3s, color 0.3s;" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3"> 
+            Como vou ter retorno sobre o status da minha reclamação?
+        </a> 
+    </p> 
+    <div class="collapse" id="collapseExample3"> 
+        <div class="card card-body"> 
+            Ao receber uma notificação de nova reclamação ou sugestão, a empresa responsável pode acessar o conteúdo detalhado postado pelo morador.<br><br>
+            Cada resposta da empresa incluirá informações específicas sobre as ações planejadas ou já tomadas para resolver a reclamação ou implementar a sugestão.<br><br>
+            As empresas podem fornecer atualizações periódicas, permitindo que os moradores acompanhem o progresso em tempo real.
+        </div> 
     </div>
-     
+
+    <p class="w-100"> 
+        <a class="btn btn-outline-white" style="color: black; border-color: black; background-color: transparent; width: 100%; transition: background-color 0.3s, color 0.3s;" data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4"> 
+            Meus dados estão expostos no Google, o que faço?
+        </a> 
+    </p> 
+    <div class="collapse" id="collapseExample4"> 
+        <div class="card card-body"> 
+            Todas as reclamações são publicadas anonimamente (sem o nome do reclamante). Apenas a empresa e o Reclame AQUI têm acesso aos seus dados.<br><br>
+            Isso significa que, se os dados aparecem no Google, eles foram expostos no texto da reclamação ou em alguma das interações que aconteceram.<br><br>
+            Por isso, é importante se atentar às informações que são registradas publicamente. Não é necessário informar seu CPF ou assinar seu nome ao final.<br><br>
+            Mas se a exposição acontecer, nosso time pode editar esses dados. Para isso, siga as orientações:<br><br>
+            1. Entre em contato com nosso time pelo chat no final dessa página. Por lá, nos informe o link (URL) e o ID da reclamação. O ID pode ser localizado abaixo do título da reclamação.<br><br>
+            2. Além da edição, solicitamos a desindexação da informação ao Google e ela não aparecerá mais.
+        </div> 
+    </div>
+
+    <p class="w-100"> 
+        <a class="btn btn-outline-white" style="color: black; border-color: black; background-color: transparent; width: 100%; transition: background-color 0.3s, color 0.3s;" data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5"> 
+            Como funciona o Ranking do ReclamES?
+        </a> 
+    </p> 
+    <div class="collapse" id="collapseExample5"> 
+        <div class="card card-body"> 
+            O Ranking de Moradores é uma forma interativa de destacar os usuários mais ativos na plataforma, reconhecendo aqueles que mais contribuem com reclamações e sugestões de projetos.<br><br>
+            O objetivo é incentivar a participação da comunidade, promovendo um ambiente colaborativo e engajado.<br><br>
+            Uma tabela visual apresenta os usuários mais ativos, ordenados pela soma total de reclamações e sugestões, incluindo colunas para a posição no ranking, nome do morador, total de reclamações, total de sugestões e total de atividades.<br><br>
+            O ranking é atualizado periodicamente para refletir as contribuições mais recentes. Ao clicar no nome de um usuário, é possível visualizar um perfil detalhado com todas as suas contribuições, incluindo foto de perfil, biografia e uma lista de todas as reclamações e sugestões postadas.
+        </div>
+    </div>
+
+    <br>
+    <div class="d-flex justify-content-center">
+        <font style="color: red;"><h2>Ainda está com dúvida?</h2></font>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <p>Acesse <a href="/contato">Contato</a> e fale diretamente conosco <br> através do nosso Email ou Número</p>
+    </div>
 </div> 
- 
-</body> 
- 
 {% endblock %}
