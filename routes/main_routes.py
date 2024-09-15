@@ -103,6 +103,19 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/login_administrador.html", {"request": request})
 
+@router.get("/perfil_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_administrador.html", {"request": request})
+
+@router.get("/alterar_perfil_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_administrador.html", {"request": request})
+
+
 @router.get("/alterar_perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/alterar_perfil_patrocinador.html", {"request": request})
+
+@router.get("/alterar_perfil_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_morador.html", {"request": request})
