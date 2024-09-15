@@ -1,74 +1,24 @@
 {% extends "pages/base_fluid.html" %}
-{% block subtitulo %}Logar na conta{% endblock %}
+{% block subtitulo %}Esqueci a senha{% endblock %}
 {% block conteudo %}
 
-
-<style>
-.container {
-    text-align: center;
-}
-
-h1 {
-    color: #007bff; 
-    font-size: 2em; 
-    margin-bottom: 20px;
-}
-
-p {
-    color: #555;
-    margin-bottom: 30px;
-    font-size: 1.1em;
-}
-
-.search-box {
-    display: flex;
-    border: 2px solid #007bff; 
-    border-radius: 50px; 
-    overflow: hidden;
-    width: 100%; 
-}
-
-.search-box input {
-    border: none;
-    padding: 15px 20px; 
-    flex-grow: 1;
-    font-size: 1.1em;
-    outline: none;
-}
-
-.search-box button {
-    background: none;
-    border: none;
-    padding: 15px 20px;
-    cursor: pointer;
-}
-
-.search-box button img {
-    width: 24px; 
-    height: 24px;
-}
-
-</style>
-
-<div class="container">
-    <br>
-    <h1>Esqueci minha senha</h1>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <p>Faça uma busca por seu perfil (Nome, Email, CPF ou CNPJ) para enviarmos a nova senha aos e-mails já cadastrados.</p>
-    <form action="#" method="POST">
-        <div class="search-box">
-            <input type="text" placeholder="Digite o nome, email, CPF ou CNPJ cadastrados">
-            <button type="submit">
-                <img src="" alt="Search Icon">
-            </button>
-        </div>
-    </form>
+<div class="container" style="text-align: center;">
+    <div class="mt-5">
+        <h1 style="color: #007bff; font-size: 2em; margin-bottom: 20px;">Esqueci minha senha</h1>
+    </div>
+    <div class="mt-5">
+        <p style="color: #555; margin-bottom: 30px; font-size: 1.1em;">
+            Faça uma busca por seu perfil (Nome, Email, CPF ou CNPJ) para enviarmos a nova senha aos e-mails já cadastrados.
+        </p>
+        <form action="#" method="POST">
+            <div style="display: flex; border: 2px solid #007bff; border-radius: 50px; overflow: hidden; width: 100%;">
+                <input type="text" placeholder="Digite o nome, email, CPF ou CNPJ cadastrados" style="border: none; padding: 15px 20px; flex-grow: 1; font-size: 1.1em; outline: none;">
+                <button type="submit" style="background: none; border: none; padding: 15px 20px; cursor: pointer;">
+                    <i class="bi bi-search" style="width: 24px; height: 24px;"></i>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-
-
 
 {% endblock %}

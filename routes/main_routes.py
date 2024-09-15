@@ -94,9 +94,6 @@ async def get_root(request: Request):
 @router.get("/perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/perfil_patrocinador.html", {"request": request})
-
-
-
 @router.get("/instrucoes_mapa", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/instrucoes_mapa.html", {"request": request})
