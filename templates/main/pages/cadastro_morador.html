@@ -3,7 +3,8 @@
 {% block conteudo %}
 
 <body>
-<div class="custom-container bg-light rounded shadow-sm p-4 mt-3" style="max-width: 500px; margin: auto; padding: 20px;">
+<div class="custom-container bg-light rounded shadow-sm p-4 mt-3 mb-4" style="max-width: 500px; margin: auto; padding: 20px;">
+    <div class="mb-5"></div>
     <div class="mascote" style="display: flex; justify-content: center; margin-bottom: 10px;">
         <img src="/static/img/reclamito.png" alt="Reclamito" style="width: 100px;">
     </div>
@@ -13,7 +14,7 @@
         Essas informações são importantes para validarmos seu cadastro. <span class="required" style="color: red;">*</span> Campos obrigatórios
     </p>
 
-    <form>
+    <form style="margin-bottom: -5px;">
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="cpf" class="required" style="color: red;">CPF</label>
             <input type="text" id="cpf" class="form-control" placeholder="__/__/____/____-__">
@@ -103,7 +104,7 @@
         </div>
     </form>
 </div>
-
+</div>
 </body>
 </html>
 
