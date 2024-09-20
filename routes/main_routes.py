@@ -53,7 +53,6 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/mapa.html", {"request": request})
 
-
 @router.get("/ranking", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/ranking.html", {"request": request})
@@ -66,3 +65,57 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/instrucoes_mapa.html", {"request": request})
 
+
+@router.get("/login_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/login_administrador.html", {"request": request})
+
+@router.get("/perfil_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_administrador.html", {"request": request})
+
+@router.get("/alterar_perfil_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_administrador.html", {"request": request})
+
+@router.get("/alterar_perfil_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_morador.html", {"request": request})
+
+@router.get("/perfil_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_morador.html", {"request": request})
+
+@router.get("/cadastro_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/cadastro_morador.html", {"request": request})
+
+@router.get("/login_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/login_morador.html", {"request": request})
+
+
+@router.get("/perfil_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_patrocinador.html", {"request": request})
+
+@router.get("/alterar_perfil_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/alterar_perfil_patrocinador.html", {"request": request})
+
+@router.get("/login_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/login_patrocinador.html", {"request": request})
+
+@router.get("/cadastro_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})
+
+
+@router.get("/duvidas_frequentes_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/duvidas_frequentes_morador.html", {"request": request})
+
+@router.get("/duvidas_frequentes_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/duvidas_frequentes_patrocinador.html", {"request": request})
