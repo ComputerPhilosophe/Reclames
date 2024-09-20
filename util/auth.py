@@ -32,22 +32,22 @@ async def checar_autenticacao(request: Request, call_next):
     response = await call_next(request)
     if response.status_code == status.HTTP_307_TEMPORARY_REDIRECT:
         return response
-    # if usuario:
-    #     token = request.cookies[NOME_COOKIE_AUTH]
-    #     criar_cookie_auth(response, token)
     return response
 
 
 async def checar_autorizacao(request: Request):
     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
     area_do_usuario = request.url.path.startswith("/usuario")
-    area_do_aluno = request.url.path.startswith("/aluno")
-    area_do_professor = request.url.path.startswith("/professor")
-    if (area_do_usuario or area_do_aluno or area_do_professor) and not usuario.perfil:
+    area_do_patrocinador = request.url.path.startswith("/patrocinador")
+    area_do_morador = request.url.path.startswith("/morador")
+    area_do_administrador = request.url.path.startswith("/administrador")
+    if (area_do_usuario or area_do_morador or area_do_patrocinador or area_do_administrador) and not usuario.perfil:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
-    if area_do_aluno and usuario.perfil != 1:
+    if area_do_morador and usuario.perfil != 1:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
-    if area_do_professor and usuario.perfil != 2:
+    if area_do_patrocinador and usuario.perfil != 2:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+    if area_do_patrocinador and usuario.perfil != 3:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
 
 
@@ -102,13 +102,3 @@ def criar_cookie_auth(response, token):
     return response
 
 
-def configurar_swagger_auth(app):
-    app.openapi_schema = app.openapi()
-    app.openapi_schema["components"]["securitySchemes"] = {
-        "BearerAuth": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT",
-        }
-    }
-    app.openapi_schema["security"] = [{"BearerAuth": []}]
