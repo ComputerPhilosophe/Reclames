@@ -2,7 +2,7 @@
 1. Artur Luis Santana Souza
 2. Caio Brun de Oliveira
 3. Karina Mateus Marvila
-4. Lara Zanotteli
+4. Lara Zanotelli
 
 
 # Considerações sobre o mapa
