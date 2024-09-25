@@ -13,11 +13,3 @@ async def get_root(request: Request):
 @router.get("/alterar_perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/alterar_perfil_patrocinador.html", {"request": request})
-
-@router.get("/login_patrocinador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/login_patrocinador.html", {"request": request})
-
-@router.get("/cadastro_patrocinador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})

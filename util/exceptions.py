@@ -4,7 +4,7 @@ from fastapi.responses import RedirectResponse
 from util.cookies import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
 
-templates = obter_jinja_templates("templates/public")
+templates = obter_jinja_templates("templates/shared")
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
