@@ -136,7 +136,6 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/instrucoes_mapa.html", {"request": request})
 
-
 @router.get("/login_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/login_morador.html", {"request": request})
@@ -149,11 +148,9 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/login_administrador.html", {"request": request})
 
-
 @router.get("/cadastro_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/cadastro_morador.html", {"request": request})
-
 
 @router.get("/cadastro_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
