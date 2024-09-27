@@ -20,3 +20,4 @@ app.include_router(administrador_router)
 app.include_router(patrocinador_router)
 app.include_router(morador_router)
 
+
