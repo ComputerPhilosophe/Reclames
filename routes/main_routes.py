@@ -9,7 +9,7 @@ from util.templates import obter_jinja_templates
 router = APIRouter()
 templates = obter_jinja_templates("templates/main")
 
-@router.get("/")
+@router.get("/entrar")
 async def get_root(request: Request):
     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
     if not usuario:

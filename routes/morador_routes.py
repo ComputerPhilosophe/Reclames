@@ -12,4 +12,6 @@ async def get_root(request: Request):
 
 @router.get("/perfil_morador_exemplo", response_class=HTMLResponse)
 async def get_root(request: Request):
-    return templates.TemplateResponse("pages/perfil_morador_exemplo.html", {"request": request})
+    # captura o usuário logado
+    usuario = {id=1, nome="Fulano"}
+    return templates.TemplateResponse("pages/perfil_morador_exemplo.html", {"request": request, "usuario": usuario})
