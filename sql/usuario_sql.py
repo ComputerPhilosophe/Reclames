@@ -2,15 +2,25 @@ SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
+        cpf TEXT NOT NULL,
+        data_nascimento DATE NOT NULL,
         email TEXT NOT NULL UNIQUE,
         senha TEXT NOT NULL,
-        perfil INT NOT NULL,        
-        token TEXT)
-"""
+        perfil INT NOT NULL,
+        cnpj TEXT,
+        genero TEXT,       
+        endereco_cep TEXT,
+        endereco_logradouro TEXT NOT NULL,
+        endereco_numero TEXT NOT NULL,
+        endereco_complemento TEXT,
+        endereco_bairro TEXT NOT NULL,
+        endereco_cidade TEXT NOT NULL,
+        endereco_uf TEXT NOT NULL)
+    """
 
 SQL_INSERIR = """
-    INSERT INTO usuario(id, nome, email, senha, perfil)
-    VALUES (?, ?, ?)
+    INSERT INTO usuario(nome, cpf, data_nascimento, email, senha, perfil, cnpj, genero, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade, endereco_uf)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 SQL_ALTERAR = """

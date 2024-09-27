@@ -23,9 +23,20 @@ class UsuarioRepo:
                     (
                         usuario.id,
                         usuario.nome,
+                        usuario.cpf,
+                        usuario.data_nascimento,
                         usuario.email,
                         usuario.senha,
                         usuario.perfil,
+                        usuario.cnpj,
+                        usuario.genero,    
+                        usuario.endereco_cep,
+                        usuario.endereco_logradouro,
+                        usuario.endereco_numero,
+                        usuario.endereco_complemento,
+                        usuario.endereco_bairro,
+                        usuario.endereco_cidade,
+                        usuario.endereco_uf, 
                     ),
                 )
                 if cursor.rowcount > 0:
