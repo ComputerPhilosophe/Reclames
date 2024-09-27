@@ -8,7 +8,7 @@ class Usuario:
     id: Optional[int] = None
     nome: Optional[str] = None
     cpf: Optional[str] = None
-    data_nascimento: [date] = None # type: ignore
+    data_nascimento: Optional[date] = None
     email: Optional[str] = None
     senha: Optional[str] = None
     perfil: Optional[int] = None

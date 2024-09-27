@@ -19,9 +19,7 @@ class UsuarioRepo:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 cursor.execute(
-                    SQL_INSERIR,
-                    (
-                        usuario.id,
+                    SQL_INSERIR, (                        
                         usuario.nome,
                         usuario.cpf,
                         usuario.data_nascimento,
@@ -36,9 +34,8 @@ class UsuarioRepo:
                         usuario.endereco_complemento,
                         usuario.endereco_bairro,
                         usuario.endereco_cidade,
-                        usuario.endereco_uf, 
-                    ),
-                )
+                        usuario.endereco_uf
+                    ))
                 if cursor.rowcount > 0:
                     return usuario
         except sqlite3.Error as ex:
@@ -46,12 +43,12 @@ class UsuarioRepo:
             return None
 
     @classmethod
-    def alterar(cls, usuario: Usuario) -> bool:
+    def alterar_dados(cls, usuario: Usuario) -> bool:
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 cursor.execute(
-                    SQL_ALTERAR,
+                    SQL_ALTERAR_DADOS,
                     (
                         usuario.nome,
                         usuario.email,
@@ -62,13 +59,40 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
             return False
-
+        
     @classmethod
-    def alterar_token(cls, id: int, token: str) -> bool:
+    def alterar_endereco(cls, usuario: Usuario) -> bool:
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                cursor.execute(SQL_ALTERAR_TOKEN, (id, token))
+                cursor.execute(
+                    SQL_ALTERAR_ENDERECO,
+                    (
+                        usuario.endereco_cep,
+                        usuario.endereco_logradouro,
+                        usuario.endereco_numero,
+                        usuario.endereco_complemento,
+                        usuario.endereco_bairro,
+                        usuario.endereco_cidade,
+                        usuario.endereco_uf,
+                    ),
+                )
+                return cursor.rowcount > 0
+        except sqlite3.Error as ex:
+            print(ex)
+            return False
+
+    @classmethod
+    def alterar_senha(cls, usuario: Usuario) -> bool:
+        try:
+            with obter_conexao() as conexao:
+                cursor = conexao.cursor()
+                cursor.execute(
+                    SQL_ALTERAR_DADOS,
+                    (
+                        usuario.senha,
+                    ),
+                )
                 return cursor.rowcount > 0
         except sqlite3.Error as ex:
             print(ex)
@@ -106,21 +130,6 @@ class UsuarioRepo:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 tupla = cursor.execute(SQL_OBTER_POR_EMAIL, (email,)).fetchone()
-                if tupla:
-                    usuario = Usuario(*tupla)
-                    return usuario
-                else:
-                    return None
-        except sqlite3.Error as ex:
-            print(ex)
-            return None
-        
-    @classmethod
-    def obter_por_token(cls, token: str) -> Optional[Usuario]:
-        try:
-            with obter_conexao() as conexao:
-                cursor = conexao.cursor()
-                tupla = cursor.execute(SQL_OBTER_POR_TOKEN, (token,)).fetchone()
                 if tupla:
                     usuario = Usuario(*tupla)
                     return usuario

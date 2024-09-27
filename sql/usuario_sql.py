@@ -9,7 +9,7 @@ SQL_CRIAR_TABELA = """
         perfil INT NOT NULL,
         cnpj TEXT,
         genero TEXT,       
-        endereco_cep TEXT,
+        endereco_cep TEXT NOT NULL,
         endereco_logradouro TEXT NOT NULL,
         endereco_numero TEXT NOT NULL,
         endereco_complemento TEXT,
@@ -23,15 +23,20 @@ SQL_INSERIR = """
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
-SQL_ALTERAR = """
+SQL_ALTERAR_DADOS = """
     UPDATE usuario
     SET nome=?, email=?
     WHERE id=?
 """
 
-SQL_ALTERAR_TOKEN = """
+SQL_ALTERAR_ENDERECO = """
     UPDATE usuario
-    SET token=?
+    SET endereco_cep=?, endereco_logradouro=?, endereco_numero=?, endereco_complemento=?, endereco_bairro=?, endereco_cidade=?, endereco_uf=?
+    WHERE id=?
+"""
+SQL_ALTERAR_SENHA = """
+    UPDATE usuario
+    SET senha=?
     WHERE id=?
 """
 
