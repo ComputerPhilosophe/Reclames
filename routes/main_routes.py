@@ -15,9 +15,9 @@ async def get_root(request: Request):
     if not usuario:
         return templates.TemplateResponse("pages/entrar.html", {"request": request})
     if usuario.perfil == 1:
-        return RedirectResponse("/aluno", status_code=stat.HTTP_303_SEE_OTHER)
+        return RedirectResponse("/patrocinador", status_code=stat.HTTP_303_SEE_OTHER)
     if usuario.perfil == 2:
-        return RedirectResponse("/professor", status_code=stat.HTTP_303_SEE_OTHER)
+        return RedirectResponse("/morador", status_code=stat.HTTP_303_SEE_OTHER)
 
 @router.post("/post_entrar")
 async def post_entrar(
@@ -30,8 +30,8 @@ async def post_entrar(
     token = criar_token(usuario[0], usuario[1], usuario[2])
     nome_perfil = None
     match (usuario[2]):
-        case 1: nome_perfil = "aluno"
-        case 2: nome_perfil = "professor"
+        case 1: nome_perfil = "morador"
+        case 2: nome_perfil = "patrocinador"
         case _: nome_perfil = ""
     
     response = RedirectResponse(f"/{nome_perfil}", status_code=stat.HTTP_303_SEE_OTHER)    
@@ -155,6 +155,18 @@ async def get_root(request: Request):
 @router.get("/cadastro_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})
+
+@router.get("/perfil_administrador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_administrador.html", {"request": request})
+
+@router.get("/perfil_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_patrocinador.html", {"request": request})
+
+@router.get("/perfil_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/perfil_morador.html", {"request": request})
 
 @router.get("/duvidas_frequentes_morador", response_class=HTMLResponse)
 async def get_root(request: Request):

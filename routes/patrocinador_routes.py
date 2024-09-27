@@ -8,7 +8,7 @@ templates = obter_jinja_templates("templates/main")
 
 @router.get("/perfil_patrocinador_exemplo", response_class=HTMLResponse)
 async def get_root(request: Request):
-    return templates.TemplateResponse("pages/perfil_patrocinador.html", {"request": request})
+    return templates.TemplateResponse("pages/perfil_patrocinador_exemplo.html", {"request": request})
 
 @router.get("/alterar_perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
