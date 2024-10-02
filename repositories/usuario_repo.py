@@ -3,6 +3,7 @@ import sqlite3
 from typing import Optional
 from models.usuario_model import Usuario
 from sql.usuario_sql import *
+from util.auth import obter_hash_senha
 from util.database import obter_conexao
 
 
@@ -41,6 +42,37 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+    
+    @classmethod
+    def inserir_admins(cls):
+        try:
+            senha_hash = obter_hash_senha("123456")
+            with obter_conexao() as conexao:
+                cursor = conexao.cursor()
+                # inserir Caio
+                cursor.execute(
+                    SQL_INSERIR, (                        
+                        "Caio Brun de Oliveira",
+                        "15447833925",
+                        "18/04/2005",
+                        "caiobrundeoliveira@gmail.com",
+                        senha_hash,
+                        "3",
+                        "Masculino",    
+                        "29308115",
+                        "Rua Parecis",
+                        "22",
+                        "hospital elefante branco",
+                        "Aquidaban",
+                        "Cachoeiro de Itapemirim",
+                        "ES"
+                        
+                    ))
+        except sqlite3.Error as ex:
+                 print(ex)
+        return None
+                # inserir Lara
+         
 
     @classmethod
     def alterar_dados(cls, usuario: Usuario) -> bool:

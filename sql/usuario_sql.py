@@ -2,7 +2,7 @@ SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        cpf TEXT NOT NULL,
+        cpf TEXT,
         data_nascimento DATE NOT NULL,
         email TEXT NOT NULL UNIQUE,
         senha TEXT NOT NULL,

@@ -10,6 +10,7 @@ from routes.patrocinador_routes import router as patrocinador_router
 from routes.morador_routes import router as morador_router
 
 UsuarioRepo.criar_tabela()
+UsuarioRepo.inserir_admins()
 app = FastAPI(dependencies=[Depends(checar_autorizacao)])
 app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 app.middleware(middleware_type="http")(checar_autenticacao)

@@ -48,7 +48,7 @@ async def post_entrar(
 async def get_cadastrar(request: Request):
     return templates.TemplateResponse("pages/cadastrar.html", {"request": request})
 
-@router.post("/post_cadastrar")
+@router.post("/post_cadastrar_morador")
 async def post_cadastrar(
     nome: str = Form(...),
     email: str = Form(...),
