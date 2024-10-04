@@ -46,19 +46,19 @@ SQL_EXCLUIR = """
 """
 
 SQL_OBTER_POR_ID = """
-    SELECT id, nome, email, perfil, token
+    SELECT id, nome, email, perfil
     FROM usuario
     WHERE id=?
 """
 
 SQL_OBTER_POR_EMAIL = """
-    SELECT id, nome, email, perfil, token
+    SELECT id, nome, email, perfil, senha
     FROM usuario
-    WHERE id=?
+    WHERE email=?
 """
 
 SQL_OBTER_POR_TOKEN = """
-    SELECT id, nome, email, perfil, token
+    SELECT id, nome, email, perfil
     FROM usuario
     WHERE token=?
 """

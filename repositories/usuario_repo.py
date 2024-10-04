@@ -54,10 +54,11 @@ class UsuarioRepo:
                     SQL_INSERIR, (                        
                         "Caio Brun de Oliveira",
                         "15447833925",
-                        "18/04/2005",
+                        "2005-04-18",
                         "caiobrundeoliveira@gmail.com",
                         senha_hash,
                         "3",
+                        "",
                         "Masculino",    
                         "29308115",
                         "Rua Parecis",
@@ -65,15 +66,14 @@ class UsuarioRepo:
                         "hospital elefante branco",
                         "Aquidaban",
                         "Cachoeiro de Itapemirim",
-                        "ES"
-                        
-                    ))
+                        "ES"                        
+                    ))                  
+                #nome, cpf, data_nascimento, email, senha, perfil, cnpj, genero, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade, endereco_uf
         except sqlite3.Error as ex:
                  print(ex)
         return None
                 # inserir Lara
          
-
     @classmethod
     def alterar_dados(cls, usuario: Usuario) -> bool:
         try:
@@ -161,9 +161,14 @@ class UsuarioRepo:
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                tupla = cursor.execute(SQL_OBTER_POR_EMAIL, (email,)).fetchone()
-                if tupla:
-                    usuario = Usuario(*tupla)
+                (id, nome, email, perfil, senha) = cursor.execute(SQL_OBTER_POR_EMAIL, (email,)).fetchone()
+                if id:
+                    usuario = Usuario(
+                        id=id, 
+                        nome=nome, 
+                        email=email, 
+                        perfil=perfil, 
+                        senha=senha)
                     return usuario
                 else:
                     return None

@@ -1,9 +1,9 @@
 from os import stat
-from fastapi import APIRouter, Form, Request
+from fastapi import APIRouter, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
-from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
+from util.auth import NOME_COOKIE_AUTH, conferir_senha, criar_token, obter_hash_senha
 from util.templates import obter_jinja_templates
 
 router = APIRouter()
@@ -15,26 +15,31 @@ async def get_root(request: Request):
     if not usuario:
         return templates.TemplateResponse("pages/entrar.html", {"request": request})
     if usuario.perfil == 1:
-        return RedirectResponse("/patrocinador", status_code=stat.HTTP_303_SEE_OTHER)
+        return RedirectResponse("/patrocinador", status_code=status.HTTP_303_SEE_OTHER)
     if usuario.perfil == 2:
-        return RedirectResponse("/morador", status_code=stat.HTTP_303_SEE_OTHER)
+        return RedirectResponse("/morador", status_code=status.HTTP_303_SEE_OTHER)
+    if usuario.perfil == 3:
+        return RedirectResponse("/administrador", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.post("/post_entrar")
 async def post_entrar(
     email: str = Form(...), 
     senha: str = Form(...)):
-    usuario = UsuarioRepo.checar_credenciais(email, senha)
+    usuario = UsuarioRepo.obter_por_email(email)    
     if usuario is None:
-        response = RedirectResponse("/", status_code=stat.HTTP_303_SEE_OTHER)
+        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
         return response
-    token = criar_token(usuario[0], usuario[1], usuario[2])
+    if not conferir_senha(senha, usuario.senha):
+        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
+        return response
+    token = criar_token(usuario.nome, usuario.email, usuario.perfil)
     nome_perfil = None
-    match (usuario[2]):
+    match (usuario.perfil):
         case 1: nome_perfil = "morador"
         case 2: nome_perfil = "patrocinador"
-        case _: nome_perfil = ""
+        case 3: nome_perfil = "administrador"
     
-    response = RedirectResponse(f"/{nome_perfil}", status_code=stat.HTTP_303_SEE_OTHER)    
+    response = RedirectResponse(f"administrador/perfil_administrador", status_code=status.HTTP_303_SEE_OTHER)    
     response.set_cookie(
         key=NOME_COOKIE_AUTH,
         value=token,
@@ -57,15 +62,15 @@ async def post_cadastrar(
     confsenha: str = Form(...),
     perfil: int = Form(...)):
     if senha != confsenha:
-        return RedirectResponse("/cadastrar", status_code=stat.HTTP_303_SEE_OTHER)
+        return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
     senha_hash = obter_hash_senha(senha)
     usuario = Usuario(None, nome, email, telefone, senha_hash, None, perfil)
     UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/", status_code=stat.HTTP_303_SEE_OTHER)
+    return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.get("/sair")
 async def get_sair():
-    response = RedirectResponse("/", status_code=stat.HTTP_307_TEMPORARY_REDIRECT)
+    response = RedirectResponse("/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
     response.set_cookie(
         key=NOME_COOKIE_AUTH,
         value="",
