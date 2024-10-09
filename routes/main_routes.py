@@ -55,7 +55,14 @@ async def get_cadastrar(request: Request):
 
 @router.post("/post_cadastrar_morador")
 async def post_cadastrar(
+    cpf: str = Form(...),
     nome: str = Form(...),
+    data_nasc: str = Form(...),
+    genero: str = Form(...),
+    cidade: str = Form(...),
+    bairro: str = Form(...),
+    CEP:    str = 
+
     email: str = Form(...),
     telefone: str = Form(...),
     senha: str = Form(...),
@@ -66,7 +73,7 @@ async def post_cadastrar(
     senha_hash = obter_hash_senha(senha)
     usuario = Usuario(None, nome, email, telefone, senha_hash, None, perfil)
     UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse("/perfil_morador_exemplo", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.get("/sair")
 async def get_sair():
@@ -105,9 +112,6 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/politica_privacidade.html", {"request": request})
 
-@router.get("/entrar", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/entrar.html", {"request": request})
 
 @router.get("/sobre_o_es", response_class=HTMLResponse)
 async def get_root(request: Request):
