@@ -49,7 +49,6 @@ class UsuarioRepo:
             senha_hash = obter_hash_senha("123456")
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                # inserir Caio
                 cursor.execute(
                     SQL_INSERIR, (                        
                         "Caio Brun de Oliveira",

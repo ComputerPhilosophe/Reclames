@@ -13,7 +13,7 @@
         Essas informações são importantes para validarmos seu cadastro. <span class="required" style="color: red;">*</span> Campos obrigatórios
     </p>
 
-    <form>
+    <form action="/post_cadastrar_morador" method="post">
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="cnpj" class="required" style="color: red;">CNPJ</label>
             <input type="text" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
@@ -34,20 +34,60 @@
         <div class="gray-box" style="background-color: #f0f4f7; padding: 10px; border-radius: 5px; font-size: 0.9rem;">
             Nome social é o nome que pessoas transgêneros e travestis preferem ser chamadas, e possui a mesma proteção concedida ao nome de registro. É assegurado pelo Decreto 8727/16.
         </div>
-        <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="genero" class="required" style="color: red;">Com qual gênero você se identifica?</label>
-            <select class="form-select" id="genero">
-                <option>Selecione seu gênero</option>
-                <option>Feminino</option>
-                <option>Masculino</option>
-                <option>Outro</option>
-            </select>
-        </div>
+    
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
             <div class="col-md-6">
                 <label for="cidade" class="required" style="color: red;">Cidade</label>
                 <select class="form-select" id="cidade">
                     <option>Selecione sua cidade</option>
+                    <option>Alegre</option>
+                    <option>Anchieta</option>
+                    <option>Apiacá</option>
+                    <option>Aracruz</option>
+                    <option>Baixo Guandu</option>
+                    <option>Barra de São Francisco</option>
+                    <option>Boa Esperança</option>
+                    <option>Bom Jesus do Norte</option>
+                    <option>Brejetuba</option>
+                    <option>Cariacica</option>
+                    <option>Castelo</option>
+                    <option>Colatina</option>
+                    <option>Conceição da Barra</option>
+                    <option>Conceição do Castelo</option>
+                    <option>Divino de São Lourenço</option>
+                    <option>Domingos Martins</option>
+                    <option>Ecoporanga</option>
+                    <option>Fundão</option>
+                    <option>Governador Lindenberg</option>
+                    <option>Guaçuí</option>
+                    <option>Guarapari</option>
+                    <option>IBiporã</option>
+                    <option>Itaguaçu</option>
+                    <option>Itapemirim</option>
+                    <option>Jerônimo Monteiro</option>
+                    <option>João Neiva</option>
+                    <option>Laranja da Terra</option>
+                    <option>Linhares</option>
+                    <option>Mantenópolis</option>
+                    <option>Marataízes</option>
+                    <option>Montanha</option>
+                    <option>Mucurici</option>
+                    <option>Nova Venécia</option>
+                    <option>Piúma</option>
+                    <option>Pontões</option>
+                    <option>Presidente Kennedy</option>
+                    <option>Rio Bananal</option>
+                    <option>Rio Novo do Sul</option>
+                    <option>Santa Teresa</option>
+                    <option>São Domingos do Norte</option>
+                    <option>São Gabriel da Palha</option>
+                    <option>São Mateus</option>
+                    <option>São Roque do Canaã</option>
+                    <option>Serra</option>
+                    <option>Sooretama</option>
+                    <option>Vargem Alta</option>
+                    <option>Vila Velha</option>
+                    <option>Vitória</option>
                 </select>
             </div>
             <div class="col-md-6">

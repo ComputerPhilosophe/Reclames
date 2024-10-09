@@ -20,63 +20,305 @@
 
 <script>
     function initMap() {
-        const cachoeiroLocation = { lat: -20.8467, lng: -41.1122 };
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 10,
-            center: cachoeiroLocation,
+            zoom: 7,
+            center: { lat: -20.3155, lng: -40.3128 },
         });
 
-        const marker = new google.maps.Marker({
-            position: cachoeiroLocation,
-            map: map,
-            title: "Cachoeiro de Itapemirim"
-        });
+        const cities = [
+            {
+                name: "Vitória",
+                location: { lat: -20.3155, lng: -40.3128 },
+                image: "/static/img/vitoria.jpg",
+                details: `
+                    <h2>Vitória</h2>
+                    <img src="/static/img/vitoria.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Iluminação Pública - Pendente</li>
+                        <li>Coleta de Lixo Irregular - Resolvida</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Revitalização da Orla - Início: 01/10/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia de Camburi</li>
+                        <li>Parque da Pedra da Cebola</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Vila Velha",
+                location: { lat: -20.3060, lng: -40.2924 },
+                image: "/static/img/vila_velha.jpg",
+                details: `
+                    <h2>Vila Velha</h2>
+                    <img src="/static/img/vila_velha.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Buracos na Avenida - Resolvida</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Construção de Ciclovias - Início: 15/10/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia da Costa</li>
+                        <li>Convento da Penha</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Guarapari",
+                location: { lat: -20.6555, lng: -40.5143 },
+                image: "/static/img/guarapari.jpg",
+                details: `
+                    <h2>Guarapari</h2>
+                    <img src="/static/img/guarapari.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Poluição nas Praias - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Melhoria da Infraestrutura - Início: 20/09/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia do Morro</li>
+                        <li>Praia de Meaípe</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Cachoeiro de Itapemirim",
+                location: { lat: -20.8467, lng: -41.1122 },
+                image: "/static/img/cachoeiro_itapemirim.jpg",
+                details: `
+                    <h2>Cachoeiro de Itapemirim</h2>
+                    <img src="/static/img/cachoeiro_itapemirim.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Iluminação Pública - Pendente</li>
+                        <li>Buracos na Avenida Principal - Resolvida</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Revitalização do Centro Histórico - Início: 01/09/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Casa do Roberto Carlos</li>
+                        <li>Pedra do Itabira</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Colatina",
+                location: { lat: -20.3169, lng: -40.6254 },
+                image: "/static/img/colatina.jpg",
+                details: `
+                    <h2>Colatina</h2>
+                    <img src="/static/img/colatina.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Falta de Sinalização - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Construção de Praças - Início: 25/09/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Catedral de Colatina</li>
+                        <li>Rio Doce</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Linhares",
+                location: { lat: -19.3944, lng: -40.6555 },
+                image: "/static/img/linhares.jpg",
+                details: `
+                    <h2>Linhares</h2>
+                    <img src="/static/img/linhares.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Buracos na Rua - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Melhoria no Transporte Público - Início: 01/11/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia de Pontal do Ipiranga</li>
+                        <li>Parque Nacional de Linhares</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "São Mateus",
+                location: { lat: -18.7339, lng: -39.8591 },
+                image: "/static/img/sao_mateus.jpg",
+                details: `
+                    <h2>São Mateus</h2>
+                    <img src="/static/img/sao_mateus.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Reclamação de Coleta de Lixo - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Construção de Novas Escolas - Início: 10/11/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia da Barra</li>
+                        <li>Igreja Matriz de São Mateus</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Domingos Martins",
+                location: { lat: -20.3675, lng: -40.6774 },
+                image: "/static/img/domingos_martins.jpg",
+                details: `
+                    <h2>Domingos Martins</h2>
+                    <img src="/static/img/domingos_martins.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Falta de Iluminação - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Revitalização do Centro - Início: 01/12/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Parque Estadual da Pedra Azul</li>
+                        <li>Igreja de Santa Isabel</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Serra",
+                location: { lat: -20.1852, lng: -40.2954 },
+                image: "/static/img/serra.jpg",
+                details: `
+                    <h2>Serra</h2>
+                    <img src="/static/img/serra.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Falta de Transporte Público - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Melhoria da Malha Viária - Início: 05/10/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Praia de Manguinhos</li>
+                        <li>Praia da Costa</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+            {
+                name: "Afonso Claudio",
+                location: { lat: -20.4202, lng: -40.4691 },
+                image: "/static/img/afonso_claudio.jpg",
+                details: `
+                    <h2>Afonso Cláudio</h2>
+                    <img src="/static/img/afonso_claudio.jpg" style="width: 100%; margin-bottom: 15px;">
+                    <h3>Reclamações Recentes</h3>
+                    <ul>
+                        <li>Reclamação de Estradas - Pendente</li>
+                    </ul>
+                    <h3>Projetos em Andamento</h3>
+                    <ul>
+                        <li>Revitalização da Praça Central - Início: 15/11/2023</li>
+                    </ul>
+                    <h3>Pontos Turísticos</h3>
+                    <ul>
+                        <li>Rota dos Vinhos</li>
+                        <li>Parque Natural da Cidade</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
+                        <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
+                    </div>
+                `,
+            },
+        ];
 
-        const infoWindow = new google.maps.InfoWindow({
-            content: `
-                <h1>Cachoeiro de Itapemirim</h1>
-                <p>Cidade do Estado do Espírito Santo</p>
-                <button id="showInfoBtn">Mostrar Informações</button>
-            `,
-        });
+        cities.forEach(city => {
+            const marker = new google.maps.Marker({
+                position: city.location,
+                map: map,
+                title: city.name,
+            });
 
-        marker.addListener("click", () => {
-            infoWindow.open(map, marker);
-            google.maps.event.addListener(infoWindow, 'domready', function() {
-                document.getElementById("showInfoBtn").addEventListener("click", showInfo);
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <h1>${city.name}</h1>
+                    <p><button id="showInfoBtn${city.name.replace(/\s+/g, '')}">Mostrar Informações</button></p>
+                `,
+            });
+
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+                google.maps.event.addListener(infoWindow, 'domready', function() {
+                    document.getElementById(`showInfoBtn${city.name.replace(/\s+/g, '')}`).addEventListener("click", () => {
+                        showInfo(city.details);
+                    });
+                });
             });
         });
 
-        function showInfo() {
+        function showInfo(details) {
             const sidebar = document.getElementById('sidebar');
             const sidebarContent = document.getElementById('sidebar-content');
 
-            sidebarContent.innerHTML = `
-                <h2>Cachoeiro de Itapemirim</h2>
-                <img src="/static/img/cachoeiro_itapemirim.jpg" style="width: 100%; margin-bottom: 15px;">
-                <h3>Reclamações Recentes</h3>
-                <ul>
-                    <li>Reclamação de Iluminação Pública - 30/08/2023 - Pendente</li>
-                    <li>Buracos na Avenida Principal - 28/08/2023 - Resolvida</li>
-                    <li>Coleta de Lixo Irregular - 26/08/2023 - Pendente</li>
-                </ul>
-                <h3>Projetos em Andamento</h3>
-                <ul>
-                    <li>Revitalização do Centro Histórico - Data de início: 01/09/2023</li>
-                    <li>Construção de Novas Escolas - Data de início: 15/09/2023</li>
-                    <li>Pavimentação das Vias Secundárias - Data de início: 05/09/2023</li>
-                </ul>
-                <h3>Pontos Turísticos</h3>
-                <ul>
-                    <li>Casa do Roberto Carlos</li>
-                    <li>Pedra do Itabira</li>
-                    <li>Catedral de São Pedro</li>
-                </ul>
-                <div style="margin-top: 20px;">
-                    <a href="/interacao_proj_sug" class="btn btn-primary">Reclamações</a>
-                    <a href="/interacao_proj_sug" class="btn btn-primary">Projetos</a>
-                </div>
-            `;
+            sidebarContent.innerHTML = details;
             sidebar.style.display = 'block';
             document.getElementById('closeSidebarBtn').addEventListener('click', hideSidebar);
         }
@@ -86,6 +328,8 @@
         }
     }
 </script>
+
+
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp0xpofLpW_R6jGkjdomzrT68rwqvsX54&callback=initMap">
 </script>

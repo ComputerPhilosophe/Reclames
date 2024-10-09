@@ -12,7 +12,7 @@ templates = obter_jinja_templates("templates/main")
 @router.get("/entrar")
 async def get_root(request: Request):
     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
-    if not usuario:
+    if not usuario or not usuario.perfil:
         return templates.TemplateResponse("pages/entrar.html", {"request": request})
     if usuario.perfil == 1:
         return RedirectResponse("/patrocinador", status_code=status.HTTP_303_SEE_OTHER)
@@ -54,14 +54,14 @@ async def get_cadastrar(request: Request):
     return templates.TemplateResponse("pages/cadastrar.html", {"request": request})
 
 @router.post("/post_cadastrar_morador")
-async def post_cadastrar(
+async def post_cadastrar_morador(
     cpf: str = Form(...),
     nome: str = Form(...),
     data_nasc: str = Form(...),
     genero: str = Form(...),
     cidade: str = Form(...),
     bairro: str = Form(...),
-    CEP:    str = Form(...),
+    cep:    str = Form(...),
     numero: str = Form(...),
     complemento: str = Form(...),
     logradouro:  str = Form(...),
@@ -72,9 +72,31 @@ async def post_cadastrar(
     if senha != confsenha:
         return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
     senha_hash = obter_hash_senha(senha)
-    usuario = Usuario(None, nome, email, telefone, senha_hash, None, perfil)
+    usuario = Usuario(None, cpf, nome, data_nasc, genero, cidade, bairro, cep, numero, complemento,logradouro, email, senha_hash, None, perfil)
     UsuarioRepo.inserir(usuario)
     return RedirectResponse("/perfil_morador_exemplo", status_code=status.HTTP_303_SEE_OTHER)
+
+@router.post("/post_cadastrar_patrocinador")
+async def post_cadastrar_patrocinador(
+    cnpj: str = Form(...),
+    nome: str = Form(...),
+    data_nasc: str = Form(...),
+    cidade: str = Form(...),
+    bairro: str = Form(...),
+    cep:    str = Form(...),
+    numero: str = Form(...),
+    complemento: str = Form(...),
+    logradouro:  str = Form(...),
+    email: str = Form(...),
+    senha: str = Form(...),
+    confsenha: str = Form(...),
+    perfil: int = Form(...)):
+    if senha != confsenha:
+        return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
+    senha_hash = obter_hash_senha(senha)
+    usuario = Usuario(None, cnpj, nome, data_nasc, cidade, bairro, cep, numero, complemento,logradouro, email, senha_hash, None, perfil)
+    UsuarioRepo.inserir(usuario)
+    return RedirectResponse("/perfil_patrocinador_exemplo", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.get("/sair")
 async def get_sair():
