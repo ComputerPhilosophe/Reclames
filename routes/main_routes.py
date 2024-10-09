@@ -61,10 +61,11 @@ async def post_cadastrar(
     genero: str = Form(...),
     cidade: str = Form(...),
     bairro: str = Form(...),
-    CEP:    str = 
-
+    CEP:    str = Form(...),
+    numero: str = Form(...),
+    complemento: str = Form(...),
+    logradouro:  str = Form(...),
     email: str = Form(...),
-    telefone: str = Form(...),
     senha: str = Form(...),
     confsenha: str = Form(...),
     perfil: int = Form(...)):
