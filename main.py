@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.staticfiles import StaticFiles
 from repositories.usuario_repo import UsuarioRepo
@@ -9,6 +10,8 @@ from routes.administrador_routes import router as administrador_router
 from routes.patrocinador_routes import router as patrocinador_router
 from routes.morador_routes import router as morador_router
 
+
+load_dotenv()
 UsuarioRepo.criar_tabela()
 UsuarioRepo.inserir_admins()
 app = FastAPI(dependencies=[Depends(checar_autorizacao)])

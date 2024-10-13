@@ -7,10 +7,10 @@ router = APIRouter(prefix="/administrador")
 templates = obter_jinja_templates("templates/main")
 
 @router.get("/perfil_administrador", response_class=HTMLResponse)
-async def get_root(request: Request):
+async def get_perfil_administrador(request: Request):
     return templates.TemplateResponse("pages/perfil_administrador.html", {"request": request})
 
 @router.get("/alterar_perfil_administrador", response_class=HTMLResponse)
-async def get_root(request: Request):
+async def get_perfil_administrador(request: Request):
     return templates.TemplateResponse("pages/alterar_perfil_administrador.html", {"request": request})
 

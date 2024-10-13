@@ -1,16 +1,20 @@
+from datetime import date
 from os import stat
+import bcrypt
 from fastapi import APIRouter, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
+from dtos.usuario_autenticado import UsuarioAutenticado
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
-from util.auth import NOME_COOKIE_AUTH, conferir_senha, criar_token, obter_hash_senha
+from util.auth import NOME_COOKIE_AUTH, adicionar_token, conferir_senha, criar_token, obter_hash_senha
+from util.cookies import adicionar_mensagem_erro, adicionar_mensagem_sucesso
 from util.templates import obter_jinja_templates
 
 router = APIRouter()
 templates = obter_jinja_templates("templates/main")
 
 @router.get("/entrar")
-async def get_root(request: Request):
+async def get_entrar(request: Request):
     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
     if not usuario or not usuario.perfil:
         return templates.TemplateResponse("pages/entrar.html", {"request": request})
@@ -21,82 +25,135 @@ async def get_root(request: Request):
     if usuario.perfil == 3:
         return RedirectResponse("/administrador", status_code=status.HTTP_303_SEE_OTHER)
 
-@router.post("/post_entrar")
-async def post_entrar(
-    email: str = Form(...), 
-    senha: str = Form(...)):
-    usuario = UsuarioRepo.obter_por_email(email)    
-    if usuario is None:
-        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
+@router.post("/entrar")
+async def post_entrar(request: Request):
+    dados = dict(await request.form())
+    email = dados["email"]
+    senha = dados["senha"]
+    senha_hash = UsuarioRepo.obter_senha_por_email(email)
+    if senha_hash and bcrypt.checkpw(senha.encode(), senha_hash.encode()):
+        usuario = UsuarioRepo.obter_dados_por_email(email)
+        usuarioAutenticado = UsuarioAutenticado(
+            id=usuario.id,
+            nome=usuario.nome,
+            email=usuario.email,
+            perfil=usuario.perfil,
+        )
+        token = criar_token(usuarioAutenticado)
+        nome_perfil = None
+        match (usuarioAutenticado.perfil):
+            case 1: nome_perfil = "morador"
+            case 2: nome_perfil = "patrocinador"
+            case 3: nome_perfil = "administrador"    
+        response = RedirectResponse(f"/{nome_perfil}/perfil_{nome_perfil}", status.HTTP_303_SEE_OTHER)    
+        adicionar_token(response, token)
+        adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
         return response
-    if not conferir_senha(senha, usuario.senha):
-        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
+    else:    
+        response = RedirectResponse("/entrar", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(response, "Credenciais inválidas! Cheque os valores digitados e tente novamente.")
         return response
-    token = criar_token(usuario.nome, usuario.email, usuario.perfil)
-    nome_perfil = None
-    match (usuario.perfil):
-        case 1: nome_perfil = "morador"
-        case 2: nome_perfil = "patrocinador"
-        case 3: nome_perfil = "administrador"
+   
     
-    response = RedirectResponse(f"administrador/perfil_administrador", status_code=status.HTTP_303_SEE_OTHER)    
-    response.set_cookie(
-        key=NOME_COOKIE_AUTH,
-        value=token,
-        max_age=3600*24*365*10,
-        httponly=True,
-        samesite="lax"
-    )
-    return response
+   
 
-@router.get("/cadastrar")
-async def get_cadastrar(request: Request):
-    return templates.TemplateResponse("pages/cadastrar.html", {"request": request})
 
-@router.post("/post_cadastrar_morador")
-async def post_cadastrar_morador(
-    cpf: str = Form(...),
-    nome: str = Form(...),
-    data_nasc: str = Form(...),
-    genero: str = Form(...),
-    cidade: str = Form(...),
-    bairro: str = Form(...),
-    cep:    str = Form(...),
-    numero: str = Form(...),
-    complemento: str = Form(...),
-    logradouro:  str = Form(...),
-    email: str = Form(...),
-    senha: str = Form(...),
-    confsenha: str = Form(...),
-    perfil: int = Form(...)):
-    if senha != confsenha:
-        return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
-    senha_hash = obter_hash_senha(senha)
-    usuario = Usuario(None, cpf, nome, data_nasc, genero, cidade, bairro, cep, numero, complemento,logradouro, email, senha_hash, None, perfil)
-    UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/perfil_morador_exemplo", status_code=status.HTTP_303_SEE_OTHER)
+@router.get("/cadastro_morador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/cadastro_morador.html", {"request": request})
 
-@router.post("/post_cadastrar_patrocinador")
-async def post_cadastrar_patrocinador(
-    cnpj: str = Form(...),
-    nome: str = Form(...),
-    data_nasc: str = Form(...),
-    cidade: str = Form(...),
-    bairro: str = Form(...),
-    cep:    str = Form(...),
-    numero: str = Form(...),
-    complemento: str = Form(...),
-    logradouro:  str = Form(...),
-    email: str = Form(...),
-    senha: str = Form(...),
-    confsenha: str = Form(...),
-    perfil: int = Form(...)):
-    if senha != confsenha:
-        return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
-    senha_hash = obter_hash_senha(senha)
-    usuario = Usuario(None, cnpj, nome, data_nasc, cidade, bairro, cep, numero, complemento,logradouro, email, senha_hash, None, perfil)
-    UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/perfil_patrocinador_exemplo", status_code=status.HTTP_303_SEE_OTHER)
+@router.get("/cadastro_patrocinador", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})
+
+@router.post("/cadastro_morador")
+async def post_cadastrar(request: Request):
+    # capturar os dados do formulário de cadastro como um dicionário
+    dados = dict(await request.form())
+    # normalizar os dados para tipificar os valores corretamente
+    dados["data_nascimento"] = date.fromisoformat(dados["data_nascimento"])
+    dados["perfil"] = int(dados["perfil"])
+    # validar dados do formulário
+    erros = []
+    if dados["senha"] == dados["confirmacao_senha"]:
+        dados.pop("confirmacao_senha")
+    else:
+        erros.append("As senhas não conferem.")
+    if erros:
+        response = RedirectResponse("/cadastro_morador", status.HTTP_303_SEE_OTHER)
+        html = "<h6>Erros encontrados:</h6>"
+        html += "<ul>"
+        for erro in erros:
+            html += f"<li>{erro}</li>"
+        html += "</ul>"
+        adicionar_mensagem_erro(response, html)
+        return response
+    # criptografar a senha com bcrypt
+    senha_hash = bcrypt.hashpw(dados["senha"].encode(), bcrypt.gensalt())
+    dados["senha"] = senha_hash.decode()
+    # criar um objeto Usuario com os dados do dicionário
+    usuario = Usuario(**dados)
+    # inserir o objeto Usuario no banco de dados usando o repositório
+    usuario = UsuarioRepo.inserir(usuario)
+    # se inseriu com sucesso, redirecionar para a página de login
+    if usuario:
+        response = RedirectResponse("/login_morador", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_sucesso(response, "Cadastro realizado com sucesso!")
+        return response
+    # se não inseriu, redirecionar para a página de cadastro com mensagem de erro
+    else:
+        response = RedirectResponse("/cadastro_morador", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(
+            response,
+            "Ocorreu um problema ao realizar seu cadastro. Tente novamente mais tarde.",
+        )
+        return response
+
+
+@router.post("/cadastro_patrocinador")
+async def post_cadastrar(request: Request):
+    # capturar os dados do formulário de cadastro como um dicionário
+    dados = dict(await request.form())
+    # normalizar os dados para tipificar os valores corretamente
+    dados["data_nascimento"] = date.fromisoformat(dados["data_nascimento"])
+    dados["perfil"] = int(dados["perfil"])
+    # validar dados do formulário
+    erros = []
+    if dados["senha"] == dados["confirmacao_senha"]:
+        dados.pop("confirmacao_senha")
+    else:
+        erros.append("As senhas não conferem.")
+    if erros:
+        response = RedirectResponse("/cadastro_patrocinador", status.HTTP_303_SEE_OTHER)
+        html = "<h6>Erros encontrados:</h6>"
+        html += "<ul>"
+        for erro in erros:
+            html += f"<li>{erro}</li>"
+        html += "</ul>"
+        adicionar_mensagem_erro(response, html)
+        return response
+    # criptografar a senha com bcrypt
+    senha_hash = bcrypt.hashpw(dados["senha"].encode(), bcrypt.gensalt())
+    dados["senha"] = senha_hash.decode()
+    # criar um objeto Usuario com os dados do dicionário
+    usuario = Usuario(**dados)
+    # inserir o objeto Usuario no banco de dados usando o repositório
+    usuario = UsuarioRepo.inserir(usuario)
+    # se inseriu com sucesso, redirecionar para a página de login
+    if usuario:
+        response = RedirectResponse("/perfil_patrocinador_exemplo", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_sucesso(response, "Cadastro realizado com sucesso!")
+        return response
+    # se não inseriu, redirecionar para a página de cadastro com mensagem de erro
+    else:
+        response = RedirectResponse("/cadastro_patrocinador", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(
+            response,
+            "Ocorreu um problema ao realizar seu cadastro. Tente novamente mais tarde.",
+        )
+        return response
+
+
 
 @router.get("/sair")
 async def get_sair():
@@ -179,18 +236,6 @@ async def get_root(request: Request):
 @router.get("/login_administrador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/login_administrador.html", {"request": request})
-
-@router.get("/cadastro_morador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/cadastro_morador.html", {"request": request})
-
-@router.get("/cadastro_patrocinador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})
-
-@router.get("/perfil_administrador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("pages/perfil_administrador.html", {"request": request})
 
 @router.get("/perfil_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):

@@ -23,6 +23,18 @@ SQL_INSERIR = """
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
+SQL_OBTER_SENHA_POR_EMAIL = """
+    SELECT senha
+    FROM usuario
+    WHERE email = ?
+"""
+
+SQL_OBTER_DADOS_POR_EMAIL = """
+    SELECT id, nome, email, perfil
+    FROM usuario
+    WHERE email=?
+"""
+
 SQL_ALTERAR_DADOS = """
     UPDATE usuario
     SET nome=?, email=?
@@ -46,12 +58,12 @@ SQL_EXCLUIR = """
 """
 
 SQL_OBTER_POR_ID = """
-    SELECT id, nome, email, perfil
+    SELECT id, nome, data_nascimento, email, telefone, perfil
     FROM usuario
     WHERE id=?
 """
 
-SQL_OBTER_POR_EMAIL = """
+SQL_OBTER_DADOS_POR_EMAIL = """
     SELECT id, nome, email, perfil, senha
     FROM usuario
     WHERE email=?

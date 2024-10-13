@@ -10,17 +10,18 @@ from util.database import obter_conexao
 class UsuarioRepo:
     @classmethod
     def criar_tabela(cls):
-        with obter_conexao() as conexao:
-            cursor = conexao.cursor()
+        with obter_conexao() as db:
+            cursor = db.cursor()
             cursor.execute(SQL_CRIAR_TABELA)
 
     @classmethod
     def inserir(cls, usuario: Usuario) -> Optional[Usuario]:
         try:
-            with obter_conexao() as conexao:
-                cursor = conexao.cursor()
+            with obter_conexao() as db:
+                cursor = db.cursor()
                 cursor.execute(
-                    SQL_INSERIR, (                        
+                    SQL_INSERIR, 
+                    (                        
                         usuario.nome,
                         usuario.cpf,
                         usuario.data_nascimento,
@@ -42,6 +43,26 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+        
+    @staticmethod
+    def obter_senha_por_email(email: str) -> Optional[str]:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_SENHA_POR_EMAIL, (email,))
+            dados = cursor.fetchone()
+            if dados is None:
+                return None
+            return dados["senha"]
+
+    @staticmethod
+    def obter_dados_por_email(email: str) -> Optional[Usuario]:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,))
+            dados = cursor.fetchone()
+            if dados is None:
+                return None
+            return Usuario(**dados)        
     
     @classmethod
     def inserir_admins(cls):
@@ -56,7 +77,7 @@ class UsuarioRepo:
                         "2005-04-18",
                         "caiobrundeoliveira@gmail.com",
                         senha_hash,
-                        "3",
+                        3,
                         "",
                         "Masculino",    
                         "29308115",
@@ -82,8 +103,20 @@ class UsuarioRepo:
                     SQL_ALTERAR_DADOS,
                     (
                         usuario.nome,
+                        usuario.cpf,
+                        usuario.data_nascimento,
                         usuario.email,
-                        usuario.id,
+                        usuario.senha,
+                        usuario.perfil,
+                        usuario.cnpj,
+                        usuario.genero,    
+                        usuario.endereco_cep,
+                        usuario.endereco_logradouro,
+                        usuario.endereco_numero,
+                        usuario.endereco_complemento,
+                        usuario.endereco_bairro,
+                        usuario.endereco_cidade,
+                        usuario.endereco_uf
                     ),
                 )
                 return cursor.rowcount > 0
@@ -160,7 +193,7 @@ class UsuarioRepo:
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                (id, nome, email, perfil, senha) = cursor.execute(SQL_OBTER_POR_EMAIL, (email,)).fetchone()
+                (id, nome, email, perfil, senha) = cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,)).fetchone()
                 if id:
                     usuario = Usuario(
                         id=id, 
