@@ -52,92 +52,87 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/cadastro_patrocinador.html", {"request": request})
 
-@router.post("/cadastro_morador")
-async def post_cadastrar(request: Request):
-    # captura os dados do formulário de cadastro em um dicionário
-    dados = dict(await request.form())
-    # normalizar os dados para tipificar os valores corretamente
-    dados["data_nascimento"] = date.fromisoformat(dados["data_nascimento"])
-    dados["perfil"] = int(dados["perfil"])
-    # validar dados do formulário
-    erros = []
-    if dados["senha"] == dados["confirmacao_senha"]:
-        dados.pop("confirmacao_senha")
-    else:
-        erros.append("As senhas não conferem.")
-    if erros:
-        response = RedirectResponse("/cadastro_morador", status.HTTP_303_SEE_OTHER)
-        html = "<h6>Erros encontrados:</h6>"
-        html += "<ul>"
-        for erro in erros:
-            html += f"<li>{erro}</li>"
-        html += "</ul>"
-        adicionar_mensagem_erro(response, html)
-        return response
-    #  bcrypt
-    senha_hash = bcrypt.hashpw(dados["senha"].encode(), bcrypt.gensalt())
-    dados["senha"] = senha_hash.decode()
-    # criar um objeto Usuario com os dados do dicionário
-    usuario = Usuario(**dados)
-    # inserir o objeto Usuario no banco de dados usando o repositório
-    usuario = UsuarioRepo.inserir(usuario)
-    # se inseriu com sucesso, redirecionar para a página de login
-    if usuario:
-        response = RedirectResponse("/login_morador", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_sucesso(response, "Cadastro realizado com sucesso!")
-        return response
-    # se não inseriu, redirecionar para a página de cadastro com mensagem de erro
-    else:
-        response = RedirectResponse("/cadastro_morador", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(
-            response,
-            "Ocorreu um problema ao realizar seu cadastro. Tente novamente mais tarde.",
-        )
-        return response
+@router.post("/post_cadastro_morador")
+async def post_cadastrar(
+    cpf: str = Form(...),
+    nome: str = Form(...),
+    data_nascimento: str = Form(...),
+    genero: str = Form(...),
+    endereco_cidade: str = Form(...),
+    endereco_bairro: str = Form(...),
+    endereco_cep: str = Form(...),
+    endereco_numero: str = Form(...),
+    endereco_complemento: str = Form(None),
+    endereco_logradouro: str = Form(...),
+    email: str = Form(...),
+    senha: str = Form(...),
+    confsenha: str = Form(...),
+):
+    if senha != confsenha:
+        return RedirectResponse("/cadastro_morador", status_code=status.HTTP_303_SEE_OTHER)
+    
+    senha_hash = obter_hash_senha(senha)
+
+    usuario = Usuario(
+        cpf=cpf,
+        nome=nome,
+        data_nascimento=date.fromisoformat(data_nascimento),  # Supondo que a data seja no formato ISO (yyyy-mm-dd)
+        genero=genero,
+        endereco_cidade=endereco_cidade,
+        endereco_bairro=endereco_bairro,
+        endereco_cep=endereco_cep,
+        endereco_numero=endereco_numero,
+        endereco_complemento=endereco_complemento,
+        endereco_logradouro=endereco_logradouro,
+        email=email,
+        senha=senha_hash,
+        perfil=1,
+    )
+
+    UsuarioRepo.inserir(usuario)
+    return RedirectResponse("/login_morador", status_code=status.HTTP_303_SEE_OTHER)
 
 
-@router.post("/cadastro_patrocinador")
-async def post_cadastrar(request: Request):
-    # capturar os dados do formulário de cadastro como um dicionário
-    dados = dict(await request.form())
-    # normalizar os dados para tipificar os valores corretamente
-    dados["data_nascimento"] = date.fromisoformat(dados["data_nascimento"])
-    dados["perfil"] = int(dados["perfil"])
-    # validar dados do formulário
-    erros = []
-    if dados["senha"] == dados["confirmacao_senha"]:
-        dados.pop("confirmacao_senha")
-    else:
-        erros.append("As senhas não conferem.")
-    if erros:
-        response = RedirectResponse("/cadastro_patrocinador", status.HTTP_303_SEE_OTHER)
-        html = "<h6>Erros encontrados:</h6>"
-        html += "<ul>"
-        for erro in erros:
-            html += f"<li>{erro}</li>"
-        html += "</ul>"
-        adicionar_mensagem_erro(response, html)
-        return response
-    # criptografar a senha com bcrypt
-    senha_hash = bcrypt.hashpw(dados["senha"].encode(), bcrypt.gensalt())
-    dados["senha"] = senha_hash.decode()
-    # criar um objeto Usuario com os dados do dicionário
-    usuario = Usuario(**dados)
-    # inserir o objeto Usuario no banco de dados usando o repositório
-    usuario = UsuarioRepo.inserir(usuario)
-    # se inseriu com sucesso, redirecionar para a página de login
-    if usuario:
-        response = RedirectResponse("/perfil_patrocinador_exemplo", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_sucesso(response, "Cadastro realizado com sucesso!")
-        return response
-    # se não inseriu, redirecionar para a página de cadastro com mensagem de erro
-    else:
-        response = RedirectResponse("/cadastro_patrocinador", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(
-            response,
-            "Ocorreu um problema ao realizar seu cadastro. Tente novamente mais tarde.",
-        )
-        return response
+
+@router.post("/post_cadastro_patrocinador")
+async def post_cadastrar(
+    cnpj: str = Form(...),
+    nome: str = Form(...),
+    data_nascimento: str = Form(...),
+    endereco_cidade: str = Form(...),
+    endereco_bairro: str = Form(...),
+    endereco_cep: str = Form(...),
+    endereco_numero: str = Form(...),
+    endereco_complemento: str = Form(None),
+    endereco_logradouro: str = Form(...),
+    email: str = Form(...),
+    senha: str = Form(...),
+    confsenha: str = Form(...),
+):
+    if senha != confsenha:
+        return RedirectResponse("/cadastro_patrocinador", status_code=status.HTTP_303_SEE_OTHER)
+    
+    senha_hash = obter_hash_senha(senha)
+
+    usuario = Usuario(
+        cnpj=cnpj,
+        nome=nome,
+        data_nascimento=date.fromisoformat(data_nascimento),  
+        endereco_cidade=endereco_cidade,
+        endereco_bairro=endereco_bairro,
+        endereco_cep=endereco_cep,
+        endereco_numero=endereco_numero,
+        endereco_complemento=endereco_complemento,
+        endereco_logradouro=endereco_logradouro,
+        email=email,
+        senha=senha_hash,
+        perfil=1,
+    )
+
+    UsuarioRepo.inserir(usuario)
+    return RedirectResponse("/login_patrocinador", status_code=status.HTTP_303_SEE_OTHER)
+
+
 
 
 

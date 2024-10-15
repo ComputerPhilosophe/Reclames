@@ -13,32 +13,24 @@
         Essas informações são importantes para validarmos seu cadastro. <span class="required" style="color: red;">*</span> Campos obrigatórios
     </p>
 
-    <form action="/cadastro_patrocinador" method="post">
+    <form action="/post_cadastro_patrocinador" method="post">
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="cnpj" class="required" style="color: red;">CNPJ</label>
-            <input type="text" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
+            <input type="text" name="cnpj" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
         </div>
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="nome" class="required" style="color: red;">Nome fantasia</label>
-            <input type="text" id="nome" class="form-control" placeholder="Digite seu nome e seu sobrenome">
+            <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome fantasia da sua empresa">
         </div>
         <div class="form-group" style="margin-bottom: 15px;">
-            <label for="nascimento" class="required" style="color: red;">Data de Nascimento</label>
-            <input type="date" id="nascimento" class="form-control">
+            <label for="data_nascimento" class="required" style="color: red;">Data de Fundação</label>
+            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control">
         </div>
-        <div class="form-group form-check" style="margin-bottom: 15px;">
-            <input type="checkbox" class="form-check-input" id="nomeSocialCheck">
-            <label class="form-check-label" for="nomeSocialCheck">Quero inserir meu nome social e autorizo o ReclameES compartilhar essa informação</label>
-        </div>
-
-        <div class="gray-box" style="background-color: #f0f4f7; padding: 10px; border-radius: 5px; font-size: 0.9rem;">
-            Nome social é o nome que pessoas transgêneros e travestis preferem ser chamadas, e possui a mesma proteção concedida ao nome de registro. É assegurado pelo Decreto 8727/16.
-        </div>
-    
+        
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
             <div class="col-md-6">
-                <label for="cidade" class="required" style="color: red;">Cidade</label>
-                <select class="form-select" id="cidade">
+                <label for="endereco_cidade" class="required" style="color: red;">Cidade</label>
+                <select name="endereco_cidade" class="form-select" id="endereco_cidade">
                     <option>Selecione sua cidade</option>
                     <option>Alegre</option>
                     <option>Anchieta</option>
@@ -91,46 +83,44 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="bairro" class="required" style="color: red;">Bairro</label>
-                <select class="form-select" id="bairro">
-                    <option>Selecione seu bairro</option>
-                </select>
+                <label for="endereco_bairro" class="required" style="color: red;">Bairro</label>
+                <input type="text" name="endereco_bairro" id="endereco_bairro" class="form-control" placeholder="Escreva aqui o bairro">
             </div>
         </div>
 
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
             <div class="col-md-4">
-                <label for="cep" class="required" style="color: red;">CEP</label>
-                <input type="text" class="form-control" id="cep" placeholder="Digite o CEP">
+                <label for="endereco_cep" class="required" style="color: red;">CEP</label>
+                <input type="text" name="endereco_cep" id="endereco_cep" class="form-control" placeholder="Digite o CEP">
             </div>
             <div class="col-md-4">
-                <label for="numero" class="required" style="color: red;">Número</label>
-                <input type="text" class="form-control" id="numero" placeholder="Número">
+                <label for="endereco_numero" class="required" style="color: red;">Número</label>
+                <input type="text" name="endereco_numero" id="endereco_numero" class="form-control" placeholder="Número">
             </div>
             <div class="col-md-4">
-                <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+                <label for="endereco_complemento">Complemento</label>
+                <input type="text" name="endereco_complemento" id="endereco_complemento" class="form-control" placeholder="Complemento">
             </div>
         </div>
 
         <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="logradouro" class="required" style="color: red;">Logradouro</label>
-            <input type="text" class="form-control" id="logradouro" placeholder="Digite o logradouro da sua empresa">
+            <label for="endereco_logradouro" class="required" style="color: red;">Logradouro</label>
+            <input type="text" name="endereco_logradouro" id="endereco_logradouro" class="form-control" placeholder="Digite o logradouro">
         </div>
 
         <div class="form-group mt-3" style="margin-bottom: 15px;">
             <label for="email" class="required" style="color: red;">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Digite seu email">
         </div>
 
         <div class="form-group mt-3" style="margin-bottom: 15px;">
             <label for="senha" class="required" style="color: red;">Senha</label>
-            <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+            <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua senha">
         </div>
 
         <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="senha" class="required" style="color: red;">Confirme sua senha</label>
-            <input type="password" class="form-control" id="senha" placeholder="Digite sua senha outra vez">
+            <label for="confsenha" class="required" style="color: red;">Confirme sua senha</label>
+            <input type="password" name="confsenha" id="confsenha" class="form-control" placeholder="Digite sua senha outra vez">
         </div>
 
         <div class="form-group mt-4" style="margin-top: 15px;">
@@ -139,7 +129,7 @@
     </form>
 </div>
 </div>
-</div>
-
+</body>
+</html>
 
 {% endblock %}
