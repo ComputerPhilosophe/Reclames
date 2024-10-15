@@ -27,15 +27,16 @@ class UsuarioRepo:
                         usuario.nome,
                         usuario.data_nascimento,
                         usuario.genero,
-                        usuario.senha,
-                        usuario.perfil,
-                        usuario.genero,    
+                        usuario.endereco_cidade,
+                        usuario.endereco_bairro,
                         usuario.endereco_cep,
-                        usuario.endereco_logradouro,
                         usuario.endereco_numero,
                         usuario.endereco_complemento,
-                        usuario.endereco_bairro,
-                        usuario.endereco_cidade
+                        usuario.endereco_logradouro,
+                        usuario.email,
+                        usuario.senha,
+                        usuario.perfil  
+   
                     ))
             return resultado.rowcount > 0        
 
@@ -51,20 +52,18 @@ class UsuarioRepo:
                         "",                    
                         "Caio Brun de Oliveira",
                         "2005-04-18",
-                        "caiobrundeoliveira@gmail.com",
-                        senha_hash,
-                        3,
-                        "Masculino",    
+                        "Masculino",
+                        "Cachoeiro de Itapemirim",
+                        "Aquidaban",
                         "29308115",
-                        "Rua Parecis",
                         "22",
                         "hospital elefante branco",
-                        "Aquidaban",
-                        "Cachoeiro de Itapemirim"                       
+                        "Rua Parecis",
+                        "caiobrundeoliveira@gmail.com",
+                        senha_hash,
+                        3                                         
                     ))                  
-                #nome, cpf, data_nascimento, email, senha, perfil, cnpj, genero, 
-                # endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, 
-                # endereco_bairro, endereco_cidade
+
         except sqlite3.Error as ex:
                  print(ex)
         return None
