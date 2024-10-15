@@ -1,26 +1,26 @@
 SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
         cpf TEXT,
-        data_nascimento DATE NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        senha TEXT NOT NULL,
-        perfil INT NOT NULL,
         cnpj TEXT,
-        genero TEXT,       
+        nome TEXT NOT NULL,
+        data_nascimento DATE NOT NULL,
+        genero TEXT,
+        endereco_cidade TEXT NOT NULL,
+        endereco_bairro TEXT NOT NULL,
         endereco_cep TEXT NOT NULL,
-        endereco_logradouro TEXT NOT NULL,
         endereco_numero TEXT NOT NULL,
         endereco_complemento TEXT,
-        endereco_bairro TEXT NOT NULL,
-        endereco_cidade TEXT NOT NULL,
-        endereco_uf TEXT NOT NULL)
+        endereco_logradouro TEXT NOT NULL,    
+        email TEXT NOT NULL UNIQUE,
+        senha TEXT NOT NULL,
+        perfil INT NOT NULL,   
+        token TEXT)
     """
 
 SQL_INSERIR = """
-    INSERT INTO usuario(nome, cpf, data_nascimento, email, senha, perfil, cnpj, genero, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade, endereco_uf)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO usuario(cpf, cnpj, nome,  data_nascimento, genero, endereco_cidade,  endereco_bairro, endereco_cep, endereco_numero, endereco_complemento, endereco_logradouro, email, senha, perfil)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 SQL_OBTER_SENHA_POR_EMAIL = """
@@ -43,7 +43,7 @@ SQL_ALTERAR_DADOS = """
 
 SQL_ALTERAR_ENDERECO = """
     UPDATE usuario
-    SET endereco_cep=?, endereco_logradouro=?, endereco_numero=?, endereco_complemento=?, endereco_bairro=?, endereco_cidade=?, endereco_uf=?
+    SET endereco_cep=?, endereco_logradouro=?, endereco_numero=?, endereco_complemento=?, endereco_bairro=?, endereco_cidade=?
     WHERE id=?
 """
 SQL_ALTERAR_SENHA = """
@@ -58,19 +58,19 @@ SQL_EXCLUIR = """
 """
 
 SQL_OBTER_POR_ID = """
-    SELECT id, nome, data_nascimento, email, telefone, perfil
+    SELECT id, nome, data_nascimento, email, perfil, token
     FROM usuario
     WHERE id=?
 """
 
 SQL_OBTER_DADOS_POR_EMAIL = """
-    SELECT id, nome, email, perfil, senha
+    SELECT id, nome, email, perfil, token
     FROM usuario
     WHERE email=?
 """
 
 SQL_OBTER_POR_TOKEN = """
-    SELECT id, nome, email, perfil
+    SELECT id, nome, email, perfil, token
     FROM usuario
     WHERE token=?
 """
@@ -84,4 +84,9 @@ SQL_EMAIL_EXISTE = """
     SELECT COUNT(*)
     FROM usuario
     WHERE email=?
+"""
+SQL_CHECAR_CREDENCIAIS = """
+    SELECT email, senha, perfil
+    FROM usuario
+    WHERE email = ?
 """

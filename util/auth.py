@@ -29,11 +29,11 @@ async def obter_usuario_logado(request: Request) -> dict:
     
 
 async def checar_autenticacao(request: Request, call_next):
-    token = request.cookies.get("jwt_token", None)
-    if token:
-        usuario_autenticado = validar_token(token)
-        request.state.usuario = usuario_autenticado
+    usuario = await obter_usuario_logado(request)
+    request.state.usuario = usuario
     response = await call_next(request)
+    if response.status_code == status.HTTP_307_TEMPORARY_REDIRECT:
+        return response
     return response
 
 
@@ -67,43 +67,49 @@ def conferir_senha(senha: str, hash_senha: str) -> bool:
     except ValueError:
         return False
     
+def conferir_nome(nome: str, dados: str) -> bool:
+    if nome == dados:
+        return None
+    else:
+        return False
+        
+    
 
-def criar_token(UsuarioAutenticado: UsuarioAutenticado) -> str:
-    dados_token = {
-        "id": UsuarioAutenticado.id,
-        "nome": UsuarioAutenticado.nome,
-        "email": UsuarioAutenticado.email,
-        "perfil": UsuarioAutenticado.perfil,
+def criar_token(nome: str, email: str, perfil: int) -> str:
+    payload = {
+
+        "nome": nome,
+        "email": email,
+        "perfil": perfil,
         "exp": datetime.now() + timedelta(days=1),
     }
-    secret_key = os.getenv("JWT_TOKEN_SECRET_KEY")
-    return jwt.encode(dados_token, secret_key, "HS256")
+    return jwt.encode(payload, 
+        os.getenv("JWT_SECRET"),
+        os.getenv("JWT_ALGORITHM"))
 
 def validar_token(token: str) -> Optional[UsuarioAutenticado]:
-    secret_key = os.getenv("JWT_TOKEN_SECRET_KEY")
     try:
-        dados_token = jwt.decode(token, secret_key, "HS256")
-        return UsuarioAutenticado(
-            id=int(dados_token["id"]),
-            nome=dados_token["nome"],
-            email=dados_token["email"],
-            perfil=int(dados_token["perfil"]),
-        )
+        return jwt.decode(token, 
+            os.getenv("JWT_SECRET"),
+            os.getenv("JWT_ALGORITHM"))
     except jwt.ExpiredSignatureError:
-        return None
+        return { "nome": None, "email": None, "perfil": 0, "mensagem": "Token expirado" }
     except jwt.InvalidTokenError:
-        return None
+        return { "nome": None, "email": None, "perfil": 0, "mensagem": "Token inválido" }        
+    except Exception as e:
+        return { "nome": None, "email": None, "perfil": 0, "mensagem": f"Erro: {e}" }
 
 
 
-def adicionar_token(response: RedirectResponse, token: str):
+def adicionar_token(response, token):
     response.set_cookie(
-        key="jwt_token",
+        key=NOME_COOKIE_AUTH,
         value=token,
-        max_age=3600 * 24,
+        max_age=1800,
         httponly=True,
-        samesite="strict",
+        samesite="lax",
     )
+    return response
 
 def remover_token(response: RedirectResponse):
     response.set_cookie(

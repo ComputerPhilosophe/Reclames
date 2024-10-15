@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 def configurar_excecoes(app: FastAPI):
-
     @app.exception_handler(401)
     async def unauthorized_exception_handler(request: Request, _):
         return_url = f"?return_url={request.url.path}"

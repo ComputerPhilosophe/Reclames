@@ -14,49 +14,35 @@ router = APIRouter()
 templates = obter_jinja_templates("templates/main")
 
 @router.get("/entrar")
-async def get_entrar(request: Request):
-    usuario = request.state.usuario if hasattr(request.state, "usuario") else None
-    if not usuario or not usuario.perfil:
-        return templates.TemplateResponse("pages/entrar.html", {"request": request})
-    if usuario.perfil == 1:
-        return RedirectResponse("/patrocinador", status_code=status.HTTP_303_SEE_OTHER)
-    if usuario.perfil == 2:
-        return RedirectResponse("/morador", status_code=status.HTTP_303_SEE_OTHER)
-    if usuario.perfil == 3:
-        return RedirectResponse("/administrador", status_code=status.HTTP_303_SEE_OTHER)
-
-@router.post("/entrar")
-async def post_entrar(request: Request):
-    dados = dict(await request.form())
-    email = dados["email"]
-    senha = dados["senha"]
-    senha_hash = UsuarioRepo.obter_senha_por_email(email)
-    if senha_hash and bcrypt.checkpw(senha.encode(), senha_hash.encode()):
-        usuario = UsuarioRepo.obter_dados_por_email(email)
-        usuarioAutenticado = UsuarioAutenticado(
-            id=usuario.id,
-            nome=usuario.nome,
-            email=usuario.email,
-            perfil=usuario.perfil,
-        )
-        token = criar_token(usuarioAutenticado)
-        nome_perfil = None
-        match (usuarioAutenticado.perfil):
-            case 1: nome_perfil = "morador"
-            case 2: nome_perfil = "patrocinador"
-            case 3: nome_perfil = "administrador"    
-        response = RedirectResponse(f"/{nome_perfil}/perfil_{nome_perfil}", status.HTTP_303_SEE_OTHER)    
-        adicionar_token(response, token)
-        adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
+async def get_root(request: Request):
+  return templates.TemplateResponse("pages/entrar.html", {"request": request})
+    
+@router.post("/post_entrar")
+async def post_entrar(
+    email: str = Form(...), 
+    senha: str = Form(...)):
+    usuario = UsuarioRepo.checar_credenciais(email, senha)
+    if usuario is None:
+        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
         return response
-    else:    
-        response = RedirectResponse("/entrar", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(response, "Credenciais inválidas! Cheque os valores digitados e tente novamente.")
-        return response
+    token = criar_token(usuario[0], usuario[1], usuario[2])
+    nome_perfil = None
+    match (usuario[2]):
+        case 1: nome_perfil = "morador"
+        case 2: nome_perfil = "patrocinador"
+        case 3: nome_perfil = "administrador"
+        case _: nome_perfil = ""
+    response = RedirectResponse(f"/{nome_perfil}/perfil_{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
+    response.set_cookie(
+        key=NOME_COOKIE_AUTH,
+        value=token,
+        max_age=3600*24*365*10,
+        httponly=True,
+        samesite="lax"
+    )
+    return response
    
     
-   
-
 
 @router.get("/cadastro_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
@@ -68,7 +54,7 @@ async def get_root(request: Request):
 
 @router.post("/cadastro_morador")
 async def post_cadastrar(request: Request):
-    # capturar os dados do formulário de cadastro como um dicionário
+    # captura os dados do formulário de cadastro em um dicionário
     dados = dict(await request.form())
     # normalizar os dados para tipificar os valores corretamente
     dados["data_nascimento"] = date.fromisoformat(dados["data_nascimento"])
@@ -88,7 +74,7 @@ async def post_cadastrar(request: Request):
         html += "</ul>"
         adicionar_mensagem_erro(response, html)
         return response
-    # criptografar a senha com bcrypt
+    #  bcrypt
     senha_hash = bcrypt.hashpw(dados["senha"].encode(), bcrypt.gensalt())
     dados["senha"] = senha_hash.decode()
     # criar um objeto Usuario com os dados do dicionário
