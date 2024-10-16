@@ -32,7 +32,7 @@ async def post_entrar(
         case 2: nome_perfil = "patrocinador"
         case 3: nome_perfil = "administrador"
         case _: nome_perfil = ""
-    response = RedirectResponse(f"/{nome_perfil}/perfil_{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
+    response = RedirectResponse(f"/perfil_{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
     response.set_cookie(
         key=NOME_COOKIE_AUTH,
         value=token,
@@ -76,7 +76,7 @@ async def post_cadastrar(
     usuario = Usuario(
         cpf=cpf,
         nome=nome,
-        data_nascimento=date.fromisoformat(data_nascimento),  # Supondo que a data seja no formato ISO (yyyy-mm-dd)
+        data_nascimento=date.fromisoformat(data_nascimento), 
         genero=genero,
         endereco_cidade=endereco_cidade,
         endereco_bairro=endereco_bairro,
