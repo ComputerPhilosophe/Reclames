@@ -280,4 +280,4 @@ class UsuarioRepo:
             if dados:
                 if conferir_senha(senha, dados[1]):
                     return (dados[0], dados[1], dados[2])
-            return None    
+            return None
