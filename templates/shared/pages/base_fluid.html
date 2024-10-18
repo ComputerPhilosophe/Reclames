@@ -14,16 +14,16 @@
 
 <body class="d-flex flex-column min-vh-100">
     {%- set usuario = request.state.usuario -%}
-    {% include "includes/header.html" %}
+    {% include "shared/includes/header.html" %}
     <main class="container-fluid d-flex flex-column flex-fill">
         <div class="row">
             <div class="col-12">
-                {% include "includes/message.html" %}
+                {% include "shared/includes/mensagem.html" %}
             </div>
         </div>
         {% block conteudo %}{% endblock %}
     </main>
-    {% include "includes/footer.html" %}
+    {% include "shared/includes/footer.html" %}
     <script src="/static/lib/bootstrap/bootstrap.bundle.min.js"></script>
     </article>
 </body>

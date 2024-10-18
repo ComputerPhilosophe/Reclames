@@ -17,6 +17,7 @@ UsuarioRepo.inserir_admins()
 app = FastAPI(dependencies=[Depends(checar_autorizacao)])
 app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 app.middleware(middleware_type="http")(checar_autenticacao)
+configurar_excecoes(app)
 
 app.include_router(main_routes)
 app.include_router(usuario_router)

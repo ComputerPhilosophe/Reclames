@@ -7,7 +7,7 @@ from dtos.usuario_autenticado import UsuarioAutenticado
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, adicionar_token, conferir_senha, criar_token, obter_hash_senha
-from util.cookies import adicionar_mensagem_erro, adicionar_mensagem_sucesso
+from util.mensagens import adicionar_mensagem_erro, adicionar_mensagem_sucesso
 from util.templates import obter_jinja_templates
 
 router = APIRouter()
@@ -40,8 +40,8 @@ async def post_entrar(
         httponly=True,
         samesite="lax"
     )
+    adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
     return response
-   
     
 
 @router.get("/cadastro_morador", response_class=HTMLResponse)
