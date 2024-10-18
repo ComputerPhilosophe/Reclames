@@ -2,7 +2,7 @@
 {% block subtitulo %}Criar conta patrocinador{% endblock %}
 {% block conteudo %}
 
-<body>
+
 <div class="custom-container bg-light rounded shadow-sm p-4 mt-3 mb-5" style="max-width: 500px; margin: auto; padding: 20px;">
     <div class="mascot" style="display: flex; justify-content: center; margin-bottom: 10px;">
         <img src="/static/img/reclamito.png" alt="Mascote" style="width: 100px;">
@@ -16,7 +16,7 @@
     <form action="/post_cadastro_patrocinador" method="post">
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="cnpj" class="required" style="color: red;">CNPJ</label>
-            <input type="text" name="cnpj" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
+            <input data-mask='cnpj' type="text" name="cnpj" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
         </div>
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="nome" class="required" style="color: red;">Nome fantasia</label>
@@ -91,7 +91,7 @@
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
             <div class="col-md-4">
                 <label for="endereco_cep" class="required" style="color: red;">CEP</label>
-                <input type="text" name="endereco_cep" id="endereco_cep" class="form-control" placeholder="Digite o CEP">
+                <input data-mask='cep' type="text" name="endereco_cep" id="endereco_cep" class="form-control" placeholder="Digite o CEP">
             </div>
             <div class="col-md-4">
                 <label for="endereco_numero" class="required" style="color: red;">Número</label>
@@ -129,7 +129,7 @@
     </form>
 </div>
 </div>
-</body>
-</html>
+<script src="/static/js/mascararCampos.js"></script>
+
 
 {% endblock %}
