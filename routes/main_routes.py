@@ -126,7 +126,7 @@ async def post_cadastrar(
         endereco_logradouro=endereco_logradouro,
         email=email,
         senha=senha_hash,
-        perfil=1,
+        perfil=2,
     )
 
     UsuarioRepo.inserir(usuario)
