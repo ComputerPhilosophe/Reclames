@@ -233,3 +233,11 @@ async def get_root(request: Request):
 @router.get("/duvidas_frequentes_patrocinador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("main/pages/duvidas_frequentes_patrocinador.html", {"request": request})
+
+@router.get("/alterar_perfil_patrocinador_exemplo", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("main/pages/alterar_perfil_patrocinador_exemplo.html", {"request": request})
+
+@router.get("/alterar_perfil_morador_exemplo", response_class=HTMLResponse)
+async def get_root(request: Request):
+    return templates.TemplateResponse("main/pages/alterar_perfil_morador_exemplo.html", {"request": request})
