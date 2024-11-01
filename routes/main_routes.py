@@ -32,7 +32,7 @@ async def post_entrar(
         case 2: nome_perfil = "patrocinador"
         case 3: nome_perfil = "administrador"
         case _: nome_perfil = ""
-    response = RedirectResponse(f"/perfil_{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
+    response = RedirectResponse(f"/{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
     response.set_cookie(
         key=NOME_COOKIE_AUTH,
         value=token,
@@ -173,7 +173,6 @@ async def get_root(request: Request):
 async def get_root(request: Request):
     return templates.TemplateResponse("main/pages/politica_privacidade.html", {"request": request})
 
-
 @router.get("/sobre_o_es", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("main/pages/sobre_o_es.html", {"request": request})
@@ -217,14 +216,6 @@ async def get_root(request: Request):
 @router.get("/login_administrador", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse("main/pages/login_administrador.html", {"request": request})
-
-@router.get("/perfil_patrocinador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/perfil_patrocinador.html", {"request": request})
-
-@router.get("/perfil_morador", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/perfil_morador.html", {"request": request})
 
 @router.get("/duvidas_frequentes_morador", response_class=HTMLResponse)
 async def get_root(request: Request):

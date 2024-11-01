@@ -278,6 +278,6 @@ class UsuarioRepo:
             dados = cursor.execute(
                 SQL_CHECAR_CREDENCIAIS, (email,)).fetchone()
             if dados:
-                if conferir_senha(senha, dados[1]):
+                if conferir_senha(senha, dados[3]):
                     return (dados[0], dados[1], dados[2])
             return None
