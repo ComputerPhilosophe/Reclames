@@ -1,0 +1,22 @@
+{% macro input(name, label, type='text', style="color: red" value='', attributes='required') -%}
+<div class="form-group" style="margin-bottom: 15px;">
+    <label for="{{name}}">{{label}}</label>
+    <input data-mask="{{name}}" type="{{type}}" style="{{style}}" class="form-control" id="{{name}}" name="{{name}}" placeholder="{{placeholder}} " {{attributes|safe}} value="{{value|e}}"> 
+</div>
+{%- endmacro %}
+
+{% macro select(name, label, options, value='', attributes='') -%}
+<div class="form-floating">
+    <select class="form-select" id="{{name}}" name="{{name}}" {{attributes|safe}}>
+        <option value="" selected>Escolha uma opção...</option>
+        {% for option in options %}
+        <option value="{{option['value']}}" {% if value==option['value']: %}selected{% endif %}>{{option['label']}}</option>
+        {% endfor %}
+    </select>
+    <label for="{{name}}">{{label}}</label>    
+</div>
+{%- endmacro %}
+
+{% macro button(label, color='primary') -%}
+<button class="btn btn-{{color}} w-100" type="submit">{{label}}</button>
+{%- endmacro %}
