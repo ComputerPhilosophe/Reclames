@@ -1,7 +1,7 @@
 {% extends "pages/base.html" %}
 {% block subtitulo %}Criar conta patrocinador{% endblock %}
 {% block conteudo %}
-{% from 'shared/pages/macros.html' import input, select, button %}
+{% from 'shared/macros.html' import input, select, button, input_col, input_col2 %}
 
 
 <div class="custom-container bg-light rounded shadow-sm p-4 mt-3 mb-5" style="max-width: 500px; margin: auto; padding: 20px;">
@@ -15,22 +15,12 @@
     </p>
 
     <form action="/post_cadastro_patrocinador" method="post">
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="cnpj" class="required" style="color: red;">CNPJ</label>
-            <input data-mask='cnpj' type="text" name="cnpj" id="cnpj" class="form-control" placeholder="__/__/____/____-__">
-        </div>
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="nome" class="required" style="color: red;">Nome fantasia</label>
-            <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome fantasia da sua empresa">
-        </div>
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label for="data_nascimento" class="required" style="color: red;">Data de Fundação</label>
-            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control">
-        </div>
-        
+        {{ input('cnpj', 'CNPJ', type='text', value='', mask='cnpj', placeholder='__/__/____/____-__') }}
+        {{ input('nome', 'Nome fantasia', type='text', value='', placeholder='Digite o nome fantasia da sua empresa') }}
+        {{ input('data_nascimento', 'Data de Fundação', type='date') }}
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
             <div class="col-md-6">
-                <label for="endereco_cidade" class="required" style="color: red;">Cidade</label>
+                <label for="endereco_cidade" style="color: red;">Cidade</label>
                 <select name="endereco_cidade" class="form-select" id="endereco_cidade">
                     <option>Selecione sua cidade</option>
                     <option>Alegre</option>
@@ -83,47 +73,18 @@
                     <option>Vitória</option>
                 </select>
             </div>
-            <div class="col-md-6">
-                <label for="endereco_bairro" class="required" style="color: red;">Bairro</label>
-                <input type="text" name="endereco_bairro" id="endereco_bairro" class="form-control" placeholder="Escreva aqui o bairro">
-            </div>
+            {{ input_col('endereco_bairro', 'Bairro', type='text', placeholder='Escreva aqui o bairro') }}
         </div>
 
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
-            <div class="col-md-4">
-                <label for="endereco_cep" class="required" style="color: red;">CEP</label>
-                <input data-mask='cep' type="text" name="endereco_cep" id="endereco_cep" class="form-control" placeholder="Digite o CEP">
-            </div>
-            <div class="col-md-4">
-                <label for="endereco_numero" class="required" style="color: red;">Número</label>
-                <input type="text" name="endereco_numero" id="endereco_numero" class="form-control" placeholder="Número">
-            </div>
-            <div class="col-md-4">
-                <label for="endereco_complemento">Complemento</label>
-                <input type="text" name="endereco_complemento" id="endereco_complemento" class="form-control" placeholder="Complemento">
-            </div>
+            {{ input_col2('endereco_cep', 'CEP', type='text', placeholder='Digite o CEP', mask='cep') }}
+            {{ input_col2('endereco_numero', 'Número', type='text', placeholder='Número') }}
+            {{ input_col2('endereco_complemento', 'Complemento', type='text', placeholder='Complemento') }}
         </div>
-
-        <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="endereco_logradouro" class="required" style="color: red;">Logradouro</label>
-            <input type="text" name="endereco_logradouro" id="endereco_logradouro" class="form-control" placeholder="Digite o logradouro">
-        </div>
-
-        <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="email" class="required" style="color: red;">Email</label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="Digite seu email">
-        </div>
-
-        <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="senha" class="required" style="color: red;">Senha</label>
-            <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua senha">
-        </div>
-
-        <div class="form-group mt-3" style="margin-bottom: 15px;">
-            <label for="confsenha" class="required" style="color: red;">Confirme sua senha</label>
-            <input type="password" name="confsenha" id="confsenha" class="form-control" placeholder="Digite sua senha outra vez">
-        </div>
-
+        {{ input('endereco_logradouro', 'Logradouro', type='text', placeholder='Digite o logradouro') }}
+        {{ input('email', 'Email', type='email', placeholder='Digite seu email') }}
+        {{ input('senha', 'Senha', type='password', placeholder='Digite sua senha') }}
+        {{ input('confsenha', 'Confirme sua senha', type='password', placeholder='Digite sua senha outra vez') }}
         <div class="form-group mt-4" style="margin-top: 15px;">
             {{ button('Cadastrar') }}
         </div>

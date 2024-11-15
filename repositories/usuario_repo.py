@@ -281,3 +281,10 @@ class UsuarioRepo:
                 if conferir_senha(senha, dados[3]):
                     return (dados[0], dados[1], dados[2])
             return None
+        
+@classmethod
+def obter_todos(cls) -> list[Usuario]:
+    with obter_conexao() as conexao:
+        cursor = conexao.cursor()
+        usuarios = cursor.execute("SELECT id, nome, email FROM usuario").fetchall()
+        return [Usuario(id=u[0], nome=u[1], email=u[2]) for u in usuarios]        
