@@ -1,7 +1,7 @@
 {% extends "pages/base.html" %}
 {% block subtitulo %}Criar conta morador{% endblock %}
 {% block conteudo %}
-{% from 'shared/macros.html' import input, select, button, input_col, input_col2 %}
+{% from 'shared/macros.html' import input, select, button, input_col, input_col2, select_form_group, select_col %}
 
 <body>
 <div class="custom-container bg-light rounded shadow-sm p-4 mt-3 mb-5" style="max-width: 500px; margin: auto; padding: 20px;">
@@ -28,72 +28,69 @@
             Nome social é o nome que pessoas transgêneros e travestis preferem ser chamadas, e possui a mesma proteção concedida ao nome de registro. É assegurado pelo Decreto 8727/16.
         </div>
 
-        <div class="form-group mt-2" style="margin-bottom: 15px;">
-            <label for="genero" style="color: red;">Com qual gênero você se identifica?</label>
-            <select class="form-select" id="genero" name="genero">
-                <option value="">Selecione seu gênero</option>
-                <option value="Feminino">Feminino</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Outro">Outro</option>
-            </select>
-        </div>
+        {{ select_form_group('genero', 'Com qual gênero você se identifica?', {
+            'Feminino': 'Feminino',
+            'Masculino': 'Masculino',
+            'Outro': 'Outro'
+        }) }}
 
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
-            <div class="col-md-6">
-                <label for="endereco_cidade" style="color: red;">Cidade</label>
-                <select class="form-select" id="endereco_cidade" name="endereco_cidade">
-                    <option value="">Selecione sua cidade</option>
-                    <option value="Alegre">Alegre</option>
-                    <option value="Anchieta">Anchieta</option>
-                    <option value="Apiacá">Apiacá</option>
-                    <option value="Aracruz">Aracruz</option>
-                    <option value="Baixo Guandu">Baixo Guandu</option>
-                    <option value="Barra de São Francisco">Barra de São Francisco</option>
-                    <option value="Boa Esperança">Boa Esperança</option>
-                    <option value="Bom Jesus do Norte">Bom Jesus do Norte</option>
-                    <option value="Brejetuba">Brejetuba</option>
-                    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
-                    <option value="Cariacica">Cariacica</option>
-                    <option value="Castelo">Castelo</option>
-                    <option value="Colatina">Colatina</option>
-                    <option value="Conceição da Barra">Conceição da Barra</option>
-                    <option value="Conceição do Castelo">Conceição do Castelo</option>
-                    <option value="Divino de São Lourenço">Divino de São Lourenço</option>
-                    <option value="Domingos Martins">Domingos Martins</option>
-                    <option value="Ecoporanga">Ecoporanga</option>
-                    <option value="Fundão">Fundão</option>
-                    <option value="Governador Lindenberg">Governador Lindenberg</option>
-                    <option value="Guaçuí">Guaçuí</option>
-                    <option value="Guarapari">Guarapari</option>
-                    <option value="IBiporã">IBiporã</option>
-                    <option value="Itaguaçu">Itaguaçu</option>
-                    <option value="Itapemirim">Itapemirim</option>
-                    <option value="Jerônimo Monteiro">Jerônimo Monteiro</option>
-                    <option value="João Neiva">João Neiva</option>
-                    <option value="Laranja da Terra">Laranja da Terra</option>
-                    <option value="Linhares">Linhares</option>
-                    <option value="Mantenópolis">Mantenópolis</option>
-                    <option value="Marataízes">Marataízes</option>
-                    <option value="Montanha">Montanha</option>
-                    <option value="Mucurici">Mucurici</option>
-                    <option value="Nova Venécia">Nova Venécia</option>
-                    <option value="Piúma">Piúma</option>
-                    <option value="Pontões">Pontões</option>
-                    <option value="Presidente Kennedy">Presidente Kennedy</option>
-                    <option value="Rio Bananal">Rio Bananal</option>
-                    <option value="Rio Novo do Sul">Rio Novo do Sul</option>
-                    <option value="Santa Teresa">Santa Teresa</option>
-                    <option value="São Domingos do Norte">São Domingos do Norte</option>
-                    <option value="São Gabriel da Palha">São Gabriel da Palha</option>
-                    <option value="São Mateus">São Mateus</option>
-                    <option value="São Roque do Canaã">São Roque do Canaã</option>
-                    <option value="Serra">Serra</option>
-                    <option value="Sooretama">Sooretama</option>
-                    <option value="Vargem Alta">Vargem Alta</option>
-                    <option value="Vila Velha">Vila Velha</option>
-                    <option value="Vitória">Vitória</option>
-                </select>
-            </div>
+            {{ select_col(
+                'endereco_cidade',
+                'Cidade',
+                {
+                    'Alegre': 'Alegre',
+                    'Anchieta': 'Anchieta',
+                    'Apiacá': 'Apiacá',
+                    'Aracruz': 'Aracruz',
+                    'Baixo Guandu': 'Baixo Guandu',
+                    'Barra de São Francisco': 'Barra de São Francisco',
+                    'Boa Esperança': 'Boa Esperança',
+                    'Bom Jesus do Norte': 'Bom Jesus do Norte',
+                    'Brejetuba': 'Brejetuba',
+                    'Cachoeiro de Itapemirim': 'Cachoeiro de Itapemirim',
+                    'Cariacica': 'Cariacica',
+                    'Castelo': 'Castelo',
+                    'Colatina': 'Colatina',
+                    'Conceição da Barra': 'Conceição da Barra',
+                    'Conceição do Castelo': 'Conceição do Castelo',
+                    'Divino de São Lourenço': 'Divino de São Lourenço',
+                    'Domingos Martins': 'Domingos Martins',
+                    'Ecoporanga': 'Ecoporanga',
+                    'Fundão': 'Fundão',
+                    'Governador Lindenberg': 'Governador Lindenberg',
+                    'Guaçuí': 'Guaçuí',
+                    'Guarapari': 'Guarapari',
+                    'IBiporã': 'IBiporã',
+                    'Itaguaçu': 'Itaguaçu',
+                    'Itapemirim': 'Itapemirim',
+                    'Jerônimo Monteiro': 'Jerônimo Monteiro',
+                    'João Neiva': 'João Neiva',
+                    'Laranja da Terra': 'Laranja da Terra',
+                    'Linhares': 'Linhares',
+                    'Mantenópolis': 'Mantenópolis',
+                    'Marataízes': 'Marataízes',
+                    'Montanha': 'Montanha',
+                    'Mucurici': 'Mucurici',
+                    'Nova Venécia': 'Nova Venécia',
+                    'Piúma': 'Piúma',
+                    'Pontões': 'Pontões',
+                    'Presidente Kennedy': 'Presidente Kennedy',
+                    'Rio Bananal': 'Rio Bananal',
+                    'Rio Novo do Sul': 'Rio Novo do Sul',
+                    'Santa Teresa': 'Santa Teresa',
+                    'São Domingos do Norte': 'São Domingos do Norte',
+                    'São Gabriel da Palha': 'São Gabriel da Palha',
+                    'São Mateus': 'São Mateus',
+                    'São Roque do Canaã': 'São Roque do Canaã',
+                    'Serra': 'Serra',
+                    'Sooretama': 'Sooretama',
+                    'Vargem Alta': 'Vargem Alta',
+                    'Vila Velha': 'Vila Velha',
+                    'Vitória': 'Vitória'
+                }
+            ) }}
+            
             {{ input_col('endereco_bairro', 'Bairro', type='text', placeholder='Digite seu bairro') }}
         </div>
 

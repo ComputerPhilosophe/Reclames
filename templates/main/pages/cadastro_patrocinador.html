@@ -1,7 +1,7 @@
 {% extends "pages/base.html" %}
 {% block subtitulo %}Criar conta patrocinador{% endblock %}
 {% block conteudo %}
-{% from 'shared/macros.html' import input, select, button, input_col, input_col2 %}
+{% from 'shared/macros.html' import input, select, button, input_col, input_col2, select_col, select_form_group %}
 
 
 <div class="custom-container bg-light rounded shadow-sm p-4 mt-3 mb-5" style="max-width: 500px; margin: auto; padding: 20px;">
@@ -19,60 +19,61 @@
         {{ input('nome', 'Nome fantasia', type='text', value='', placeholder='Digite o nome fantasia da sua empresa') }}
         {{ input('data_nascimento', 'Data de Fundação', type='date') }}
         <div class="form-row row mt-3" style="margin-bottom: 15px;">
-            <div class="col-md-6">
-                <label for="endereco_cidade" style="color: red;">Cidade</label>
-                <select name="endereco_cidade" class="form-select" id="endereco_cidade">
-                    <option>Selecione sua cidade</option>
-                    <option>Alegre</option>
-                    <option>Anchieta</option>
-                    <option>Apiacá</option>
-                    <option>Aracruz</option>
-                    <option>Baixo Guandu</option>
-                    <option>Barra de São Francisco</option>
-                    <option>Boa Esperança</option>
-                    <option>Bom Jesus do Norte</option>
-                    <option>Brejetuba</option>
-                    <option>Cariacica</option>
-                    <option>Castelo</option>
-                    <option>Colatina</option>
-                    <option>Conceição da Barra</option>
-                    <option>Conceição do Castelo</option>
-                    <option>Divino de São Lourenço</option>
-                    <option>Domingos Martins</option>
-                    <option>Ecoporanga</option>
-                    <option>Fundão</option>
-                    <option>Governador Lindenberg</option>
-                    <option>Guaçuí</option>
-                    <option>Guarapari</option>
-                    <option>IBiporã</option>
-                    <option>Itaguaçu</option>
-                    <option>Itapemirim</option>
-                    <option>Jerônimo Monteiro</option>
-                    <option>João Neiva</option>
-                    <option>Laranja da Terra</option>
-                    <option>Linhares</option>
-                    <option>Mantenópolis</option>
-                    <option>Marataízes</option>
-                    <option>Montanha</option>
-                    <option>Mucurici</option>
-                    <option>Nova Venécia</option>
-                    <option>Piúma</option>
-                    <option>Pontões</option>
-                    <option>Presidente Kennedy</option>
-                    <option>Rio Bananal</option>
-                    <option>Rio Novo do Sul</option>
-                    <option>Santa Teresa</option>
-                    <option>São Domingos do Norte</option>
-                    <option>São Gabriel da Palha</option>
-                    <option>São Mateus</option>
-                    <option>São Roque do Canaã</option>
-                    <option>Serra</option>
-                    <option>Sooretama</option>
-                    <option>Vargem Alta</option>
-                    <option>Vila Velha</option>
-                    <option>Vitória</option>
-                </select>
-            </div>
+            {{ select_col(
+                'endereco_cidade',
+                'Cidade',
+                {
+                    'Alegre': 'Alegre',
+                    'Anchieta': 'Anchieta',
+                    'Apiacá': 'Apiacá',
+                    'Aracruz': 'Aracruz',
+                    'Baixo Guandu': 'Baixo Guandu',
+                    'Barra de São Francisco': 'Barra de São Francisco',
+                    'Boa Esperança': 'Boa Esperança',
+                    'Bom Jesus do Norte': 'Bom Jesus do Norte',
+                    'Brejetuba': 'Brejetuba',
+                    'Cachoeiro de Itapemirim': 'Cachoeiro de Itapemirim',
+                    'Cariacica': 'Cariacica',
+                    'Castelo': 'Castelo',
+                    'Colatina': 'Colatina',
+                    'Conceição da Barra': 'Conceição da Barra',
+                    'Conceição do Castelo': 'Conceição do Castelo',
+                    'Divino de São Lourenço': 'Divino de São Lourenço',
+                    'Domingos Martins': 'Domingos Martins',
+                    'Ecoporanga': 'Ecoporanga',
+                    'Fundão': 'Fundão',
+                    'Governador Lindenberg': 'Governador Lindenberg',
+                    'Guaçuí': 'Guaçuí',
+                    'Guarapari': 'Guarapari',
+                    'IBiporã': 'IBiporã',
+                    'Itaguaçu': 'Itaguaçu',
+                    'Itapemirim': 'Itapemirim',
+                    'Jerônimo Monteiro': 'Jerônimo Monteiro',
+                    'João Neiva': 'João Neiva',
+                    'Laranja da Terra': 'Laranja da Terra',
+                    'Linhares': 'Linhares',
+                    'Mantenópolis': 'Mantenópolis',
+                    'Marataízes': 'Marataízes',
+                    'Montanha': 'Montanha',
+                    'Mucurici': 'Mucurici',
+                    'Nova Venécia': 'Nova Venécia',
+                    'Piúma': 'Piúma',
+                    'Pontões': 'Pontões',
+                    'Presidente Kennedy': 'Presidente Kennedy',
+                    'Rio Bananal': 'Rio Bananal',
+                    'Rio Novo do Sul': 'Rio Novo do Sul',
+                    'Santa Teresa': 'Santa Teresa',
+                    'São Domingos do Norte': 'São Domingos do Norte',
+                    'São Gabriel da Palha': 'São Gabriel da Palha',
+                    'São Mateus': 'São Mateus',
+                    'São Roque do Canaã': 'São Roque do Canaã',
+                    'Serra': 'Serra',
+                    'Sooretama': 'Sooretama',
+                    'Vargem Alta': 'Vargem Alta',
+                    'Vila Velha': 'Vila Velha',
+                    'Vitória': 'Vitória'
+                }
+            ) }}
             {{ input_col('endereco_bairro', 'Bairro', type='text', placeholder='Escreva aqui o bairro') }}
         </div>
 

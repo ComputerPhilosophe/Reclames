@@ -1,6 +1,7 @@
 {% extends "pages/base_fluid.html" %}
 {% block subtitulo %}login do administrador{% endblock %}
 {% block conteudo %}
+{% from 'shared/macros.html' import input, select, button, input_password, input_email_or_cpf %}
 <style>
   .btn-outline-white:hover {
     background-color: white;
@@ -31,13 +32,21 @@
           <div class="row flex-column flex-fill justify-content-center">
             <div class="d-flex flex-column justify-content-center align-items-center">
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+                {{ input_email_or_cpf(
+                  name='email',
+                  label='Email ou CPF',
+                  id='exampleInputEmail1',
+                  attributes='placeholder="Digite seu email ou CPF" required',
+              ) }}
                 <div id="emailHelp" class="form-text"></div>
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Senha:</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
+                {{ input_password(
+                  name='senha',
+                  label='Senha',
+                  id='exampleInputPassword1',
+                  attributes='placeholder="Digite sua senha" required'
+              ) }}
                 <a href="/esqueci_senha">
                   <div id="emailHelp" class="form-text">Esqueci minha Senha</div>
                 </a>
