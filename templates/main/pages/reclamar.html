@@ -1,6 +1,8 @@
 {% extends "pages/base.html" %}
 {% block subtitulo %}Reclamar{% endblock %}
 {% block conteudo %}
+{% from 'shared/macros.html' import input, select, button, input_password, input_email_or_cpf, input_text, textarea %}
+
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
 <div class="mb-5">
@@ -15,22 +17,44 @@
     <font size="+1"><p class="text-center">Descreva o seu problema com a empresa</p></font>
     <form> 
         <div class="form-group" style="margin-bottom: 15px;"> 
-            <label for="titulo_da_historia" class="required">Título da História</label> 
-            <input type="text" id="titulo_da_historia" class="form-control" placeholder="Resuma em poucas palavras o seu problema." required maxlength="100"> 
+            {{ input_text(
+                name='titulo_da_historia',
+                label='Título da História',
+                id='titulo_da_historia',
+                placeholder='Resuma em poucas palavras o seu problema.',
+                attributes='required',
+                maxlength='100'
+            ) }}
         </div> 
         <div class="form-group" style="margin-bottom: 15px;"> 
-            <label for="conte_sua_historia" class="required">Conte sua História</label> 
-            <textarea id="conte_sua_historia" class="form-control" rows="4" placeholder="Escreva aqui o seu problema." required></textarea>
+            {{ textarea(
+                name='conte_sua_historia',
+                label='Conte sua História',
+                id='conte_sua_historia',
+                placeholder='Escreva aqui o seu problema.',
+                rows=4,
+                attributes='required'
+            ) }}
         </div> 
 
         <font size="+1"><b><p>Qual o telefone que a empresa pode entrar em contato?</p></b></font>
         <div class="form-group" style="margin-bottom: 15px;"> 
-            <label for="celular" class="required">Celular</label> 
-            <input type="tel" id="celular" class="form-control" placeholder="+55 (__)____-____" required pattern="\+?[0-9\s\-\(\)]{10,15}"> 
+            {{ input_text(
+                name='celular',
+                label='Celular',
+                id='celular',
+                placeholder='+55 (__)____-____',
+                attributes='required pattern="\\+?[0-9\\s\\-\\(\\)]{10,15}"'
+            ) }}
         </div> 
         <div class="form-group" style="margin-bottom: 15px;"> 
-            <label for="telefone" class="required">Telefone</label> 
-            <input type="tel" id="telefone" class="form-control" placeholder="+55 (__)____-____" pattern="\+?[0-9\s\-\(\)]{10,15}"> 
+            {{ input_text(
+                name='telefone',
+                label='Telefone',
+                id='telefone',
+                placeholder='+55 (__)____-____',
+                attributes='pattern="\\+?[0-9\\s\\-\\(\\)]{10,15}"'
+            ) }}
         </div> 
 
         <font size="+1"><b><p>Anexar arquivos?</p></b></font> 

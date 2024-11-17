@@ -62,8 +62,7 @@
         class="form-control" 
         id="{{ id or name }}" 
         name="{{ name }}" 
-        {{ attributes|safe }}
-     >
+        {{ attributes|safe }}>
 </div>
 {%- endmacro %}
 
@@ -76,10 +75,37 @@
         id="{{ id or name }}" 
         name="{{ name }}" 
         aria-describedby="{{ id or name }}Help" 
-        {{ attributes|safe }}
-    >
+        {{ attributes|safe }}>
     {% if help_text %}
         <small id="{{ id or name }}Help" class="form-text text-muted">{{ help_text }}</small>
     {% endif %}
 </div>
 {%- endmacro %}
+
+{% macro input_text(name, label, id='', attributes='', placeholder='', maxlength='') -%}
+    <label for="{{id or name}}" class="required">{{label}}</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        id="{{ id or name }}" 
+        name="{{ name }}" 
+        placeholder="{{ placeholder }}" 
+        {{ attributes|safe }} 
+        maxlength="{{ maxlength }}">
+{%- endmacro %}
+
+
+{% macro textarea(name, label, id='', placeholder='', rows=3, attributes='') %}
+<div class="form-group">
+    <label for="{{ id or name }}" class="required">{{ label }}</label>
+    <textarea 
+        id="{{ id or name }}" 
+        name="{{ name }}" 
+        class="form-control" 
+        rows="{{ rows }}" 
+        placeholder="{{ placeholder }}" 
+        {{ attributes }}>
+    </textarea>
+</div>
+{% endmacro %}
+
