@@ -48,18 +48,18 @@ class UsuarioRepo:
                 cursor = conexao.cursor()
                 cursor.execute(
                     SQL_INSERIR, (    
-                        "15447833925",
+                        "2086022569",
                         "",                    
-                        "Caio Brun de Oliveira",
-                        "2005-04-18",
-                        "Masculino",
+                        "Lara Zanotelli",
+                        "1998-08-12",
+                        "Feminino",
                         "Cachoeiro de Itapemirim",
-                        "Aquidaban",
+                        "Zumbi",
                         "29308115",
                         "22",
                         "hospital elefante branco",
                         "Rua Parecis",
-                        "caiobrundeoliveira@gmail.com",
+                        "lara@gmail.com",
                         senha_hash,
                         3                                         
                     ))                  
