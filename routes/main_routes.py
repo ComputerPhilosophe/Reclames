@@ -42,6 +42,42 @@ async def post_entrar(
     )
     adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
     return response
+
+
+# Função para tratar o login do administrador
+@router.post("/post_entrar_admin")
+async def post_entrar_admin(
+    email: str = Form(...), 
+    senha: str = Form(...)):
+    # Verifica credenciais do usuário
+    usuario = UsuarioRepo.checar_credenciais(email, senha)
+    if usuario is None or usuario[2] != 3:  # Verifica se é um administrador (perfil 3)
+        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
+        return response
+    
+    # Cria o token de autenticação
+    token = criar_token(usuario[0], usuario[1], usuario[2])
+    
+    # Mapeia os e-mails para os perfis específicos de administrador
+    admin_map = {
+        "lara@gmail.com": "perfil_administrador_lara",
+        "artur@gmail.com": "perfil_administrador_artur",
+        "caio@gmail.com": "perfil_administrador_caio",
+        "karina@gmail.com": "perfil_administrador_karina",
+    }
+    nome_perfil = admin_map.get(email, "administrador")  # Redireciona para página genérica se não encontrado
+    
+    # Redireciona o usuário para o perfil correspondente com caminho absoluto
+    response = RedirectResponse(f"/administrador/{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)
+    response.set_cookie(
+        key=NOME_COOKIE_AUTH,
+        value=token,
+        max_age=3600 * 24 * 365 * 10,
+        httponly=True,
+        samesite="lax"
+    )
+    adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
+    return response
     
 
 @router.get("/cadastro_morador", response_class=HTMLResponse)
