@@ -10,9 +10,9 @@ templates = obter_jinja_templates("templates")
 async def get_perfil_administrador(request: Request):
     return RedirectResponse("/morador/perfil_morador", 303)
 
-@router.get("/alterar_perfil_morador_exemplo", response_class=HTMLResponse)
+@router.get("/alterar_perfil_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/alterar_perfil_morador_exemplo.html", {"request": request})
+    return templates.TemplateResponse("main/pages/alterar_perfil_morador.html", {"request": request})
 
 @router.get("/perfil_morador_exemplo", response_class=HTMLResponse)
 async def get_root(request: Request):
