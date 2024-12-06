@@ -43,35 +43,55 @@ class UsuarioRepo:
     @classmethod
     def inserir_admins(cls):
         try:
-            senha_hash = obter_hash_senha("123456")
+            senha_hash_lara = obter_hash_senha("123456")  
+            senha_hash_caio = obter_hash_senha("123456")  
+
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                cursor.execute(
-                    SQL_INSERIR, (    
-                        "2086022569",
-                        "",                    
-                        "Lara Zanotelli",
-                        "1998-08-12",
-                        "Feminino",
-                        "Cachoeiro de Itapemirim",
-                        "Zumbi",
-                        "29308115",
-                        "22",
-                        "hospital elefante branco",
-                        "Rua Parecis",
-                        "lara@gmail.com",
-                        senha_hash,
-                        3                                         
-                    ))                  
+
+            # Inserir Lara Zanotelli
+            cursor.execute(
+                SQL_INSERIR, (    
+                    "2086022569",          
+                    "",                     
+                    "Lara Zanotelli",       
+                    "1998-08-12",           
+                    "Feminino",             
+                    "Cachoeiro de Itapemirim", 
+                    "Zumbi",               
+                    "29308115",             
+                    "22",                   
+                    "hospital elefante branco", 
+                    "Rua Parecis",          
+                    "lara@gmail.com",       
+                    senha_hash_lara,        
+                    3                       
+                ))
+
+            
+            cursor.execute(
+                SQL_INSERIR, (    
+                    "12345678900",         
+                    "",                    
+                    "Caio Brun de Oliveira", 
+                    "1990-03-24",          
+                    "Masculino",           
+                    "Vitória",             
+                    "Centro",              
+                    "29308115",            
+                    "22",                  
+                    "hospital elefante branco", 
+                    "Rua Parecis",         
+                    "caio@gmail.com",      
+                    senha_hash_caio,       
+                    3                      
+                ))
 
         except sqlite3.Error as ex:
-                 print(ex)
+            print(ex)
         return None
 
-
- 
-
-        
+            
     @staticmethod
     def obter_senha_por_email(email: str) -> Optional[str]:
         with obter_conexao() as db:

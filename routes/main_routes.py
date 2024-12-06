@@ -51,12 +51,10 @@ async def post_entrar_admin(request: Request):
     dados = dict(await request.form())
     email = dados["email"]
     senha = dados["senha"]
-
-    # Verifica se o usuário existe e se é um administrador (perfil 3)
     senha_hash = UsuarioRepo.obter_senha_por_email(email)
     if senha_hash and bcrypt.checkpw(senha.encode(), senha_hash.encode()):
         usuario = UsuarioRepo.obter_dados_por_email(email)
-        if usuario.perfil == 3:  # Verifica se é um administrador
+        if usuario.perfil == 3: 
             usuarioAutenticadoDto = UsuarioAutenticado(
                 id=usuario.id,
                 nome=usuario.nome,
@@ -66,8 +64,8 @@ async def post_entrar_admin(request: Request):
             token = criar_token(usuarioAutenticadoDto)
             admin_map = {
             "lara@gmail.com": "perfil_administrador_lara",
-            "artur@gmail.com": "perfil_administrador_artur",
             "caio@gmail.com": "perfil_administrador_caio",
+            "artur@gmail.com": "perfil_administrador_artur",
             "karina@gmail.com": "perfil_administrador_karina",
         }
             nome_perfil = admin_map.get(email, "administrador") 
