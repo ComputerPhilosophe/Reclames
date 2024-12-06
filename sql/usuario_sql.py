@@ -50,11 +50,8 @@ SQL_ALTERAR_DADOS = """
         endereco_complemento = ?, 
         endereco_logradouro = ?, 
         email = ?, 
-        senha = ?, 
-        perfil = ?, 
-        token = ?
     WHERE id = ?
-"""
+"""     
 
 SQL_ALTERAR_ENDERECO = """
     UPDATE usuario

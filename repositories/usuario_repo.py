@@ -44,8 +44,7 @@ class UsuarioRepo:
     def inserir_admins(cls):
         try:
             senha_hash_lara = obter_hash_senha("123456")  
-            senha_hash_caio = obter_hash_senha("123456")  
-
+            senha_hash_caio = obter_hash_senha("123")  
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 cursor.execute(
@@ -143,35 +142,32 @@ class UsuarioRepo:
     
    
          
-    @classmethod
-    def alterar_dados(cls, usuario: Usuario) -> bool:
-        try:
-            with obter_conexao() as conexao:
-                cursor = conexao.cursor()
-                cursor.execute(
-                    SQL_ALTERAR_DADOS,
-                    (
-                        usuario.nome,
-                        usuario.cpf,
-                        usuario.data_nascimento,
-                        usuario.email,
-                        usuario.senha,
-                        usuario.perfil,
-                        usuario.cnpj,
-                        usuario.genero,    
-                        usuario.endereco_cep,
-                        usuario.endereco_logradouro,
-                        usuario.endereco_numero,
-                        usuario.endereco_complemento,
-                        usuario.endereco_bairro,
-                        usuario.endereco_cidade,
-                        usuario.endereco_uf
-                    ),
-                )
-                return cursor.rowcount > 0
-        except sqlite3.Error as ex:
-            print(ex)
+    @staticmethod
+    def atualizar_dados(usuario: Usuario) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(
+            SQL_ALTERAR_DADOS,
+            (
+                usuario.cpf,
+                usuario.cnpj,
+                usuario.nome,
+                usuario.data_nascimento,
+                usuario.genero,
+                usuario.endereco_cidade,
+                usuario.endereco_bairro,
+                usuario.endereco_cep,
+                usuario.endereco_numero,
+                usuario.endereco_complemento,
+                usuario.endereco_logradouro,
+                usuario.email,
+                usuario.id,
+            ),
+        )
+        if cursor.rowcount == 0:
             return False
+        return True
+
         
     @classmethod
     def alterar_endereco(cls, usuario: Usuario) -> bool:
