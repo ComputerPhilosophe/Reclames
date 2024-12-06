@@ -11,24 +11,6 @@ from dtos.usuario_autenticado import UsuarioAutenticado
 
 NOME_COOKIE_AUTH = "jwt-token"
 
-#async def obter_usuario_logado(request: Request) -> dict:
-    #try:
-        #token = request.cookies[NOME_COOKIE_AUTH]
-        #if token.strip() == "":
-            #return None
-        #dados = validar_token(token)
-        #usuario = UsuarioAutenticado(
-            #ome = dados["nome"], 
-            #email = dados["email"], 
-            #perfil= dados["perfil"])
-        #if "mensagem" in dados.keys():
-            #usuario.mensagem = dados["mensagem"]
-        #eturn usuario
-    #except KeyError:
-        #return None
-    
-
-
 async def checar_autenticacao(request: Request, call_next):
     token = request.cookies.get("jwt_token", None)
     if token:

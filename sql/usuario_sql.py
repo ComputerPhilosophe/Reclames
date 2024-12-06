@@ -79,7 +79,7 @@ SQL_OBTER_POR_ID = """
 """
 
 SQL_OBTER_DADOS_POR_EMAIL = """
-    SELECT id, nome, cpf, cnpj, email, senha, endereco_cidade, perfil
+    SELECT id, nome, data_nascimento, cpf, cnpj, email, senha, endereco_bairro, endereco_cidade, perfil
     FROM usuario
     WHERE email = ?
 """

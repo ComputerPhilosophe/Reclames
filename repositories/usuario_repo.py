@@ -221,14 +221,19 @@ class UsuarioRepo:
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
-                (id, nome, email, perfil, senha) = cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,)).fetchone()
+                (id, nome, data_nascimento, cpf, cnpj, email, senha, endereco_bairro, endereco_cidade, perfil) = cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,)).fetchone()
                 if id:
                     usuario = Usuario(
                         id=id, 
-                        nome=nome, 
+                        nome=nome,
+                        data_nascimento=data_nascimento,
+                        cpf=cpf,
+                        cnpj=cnpj,                         
                         email=email, 
                         perfil=perfil, 
-                        senha=senha)
+                        senha=senha,
+                        endereco_bairro=endereco_bairro,
+                        endereco_cidade=endereco_cidade)
                     return usuario
                 else:
                     return None
