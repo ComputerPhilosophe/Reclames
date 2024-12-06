@@ -73,6 +73,10 @@ async def post_entrar_admin(request: Request):
             adicionar_token(response, token)
             adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
             return response
+    else:
+        response = RedirectResponse(f"/login_administrador", status_code=status.HTTP_303_SEE_OTHER)        
+        adicionar_mensagem_sucesso(response, "Credenciais inválidas!")
+        return response
     
 
 @router.get("/cadastro_morador", response_class=HTMLResponse)
