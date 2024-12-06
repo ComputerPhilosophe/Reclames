@@ -16,7 +16,7 @@ class UsuarioRepo:
 
 
     @classmethod
-    def inserir(cls, usuario: Usuario) -> bool:
+    def inserir(cls, usuario: Usuario) -> Optional[Usuario]:
             with obter_conexao() as db:
                 cursor = db.cursor()
                 resultado = cursor.execute(
@@ -96,18 +96,13 @@ class UsuarioRepo:
 
     @staticmethod
     def obter_dados_por_email(email: str) -> Optional[Usuario]:
-        try:
-            with obter_conexao() as conexao:
-                cursor = conexao.cursor()
-                tupla  = cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,)).fetchone()
-                if tupla:
-                    usuario = Usuario(*tupla)
-                    return usuario
-                else:
-                    return None
-        except sqlite3.Error as ex:
-            print(ex)
-            return None
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,))
+            dados = cursor.fetchone()
+            if dados is None:
+                return None
+            return Usuario(**dados)
         
     @classmethod
     def obter_por_token(cls, token: str) -> Optional[Usuario]:
@@ -287,4 +282,62 @@ def obter_todos(cls) -> list[Usuario]:
     with obter_conexao() as conexao:
         cursor = conexao.cursor()
         usuarios = cursor.execute("SELECT id, nome, email FROM usuario").fetchall()
-        return [Usuario(id=u[0], nome=u[1], email=u[2]) for u in usuarios]        
+        return [Usuario(id=u[0], nome=u[1], email=u[2]) for u in usuarios]
+
+
+@staticmethod
+def obter_dados_por_email(email: str) -> Optional[Usuario]:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,))
+            dados = cursor.fetchone()
+            if dados is None:
+                return None
+            return Usuario(**dados)
+
+
+@staticmethod
+def obter_senha_por_email(email: str) -> Optional[str]:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_SENHA_POR_EMAIL, (email,))
+            dados = cursor.fetchone()
+            if dados is None:
+                return None
+            return dados["senha"]
+
+
+@staticmethod
+def listar_todos():
+        try:
+            # Conectando ao banco de dados (ajuste o caminho do arquivo para seu banco)
+            conn = sqlite3.connect( )
+            cursor = conn.cursor()
+
+            # Query SQL para selecionar todos os usuários
+            cursor.execute("SELECT id, nome, email, perfil, cpf, data_nascimento, endereco_cidade, endereco_bairro FROM usuarios")
+            usuarios = cursor.fetchall()  # Retorna uma lista de tuplas com os dados dos usuários
+
+            # Convertendo as tuplas para dicionários (opcional, para facilitar o uso)
+            lista_usuarios = [
+                {
+                    "id": usuario[0],
+                    "nome": usuario[1],
+                    "email": usuario[2],
+                    "perfil": usuario[3],
+                    "cpf": usuario[4],
+                    "data_nascimento": usuario[5],
+                    "endereco_cidade": usuario[6],
+                    "endereco_bairro": usuario[7],
+                }
+                for usuario in usuarios
+            ]
+
+            return lista_usuarios
+
+        except sqlite3.Error as e:
+            print(f"Erro ao listar usuários: {e}")
+            return []
+        finally:
+            if conn:
+                conn.close()                            

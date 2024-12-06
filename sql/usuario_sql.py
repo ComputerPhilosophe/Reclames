@@ -29,6 +29,7 @@ SQL_OBTER_SENHA_POR_EMAIL = """
     WHERE email = ?
 """
 
+
 SQL_OBTER_DADOS_POR_EMAIL = """
     SELECT id, nome, email, perfil
     FROM usuario
@@ -37,8 +38,22 @@ SQL_OBTER_DADOS_POR_EMAIL = """
 
 SQL_ALTERAR_DADOS = """
     UPDATE usuario
-    SET nome=?, email=?
-    WHERE id=?
+    SET cpf = ?, 
+        cnpj = ?, 
+        nome = ?, 
+        data_nascimento = ?, 
+        genero = ?, 
+        endereco_cidade = ?, 
+        endereco_bairro = ?, 
+        endereco_cep = ?, 
+        endereco_numero = ?, 
+        endereco_complemento = ?, 
+        endereco_logradouro = ?, 
+        email = ?, 
+        senha = ?, 
+        perfil = ?, 
+        token = ?
+    WHERE id = ?
 """
 
 SQL_ALTERAR_ENDERECO = """
@@ -58,15 +73,15 @@ SQL_EXCLUIR = """
 """
 
 SQL_OBTER_POR_ID = """
-    SELECT id, nome, data_nascimento, email, perfil, token
+    SELECT id, cpf, cnpj, nome, data_nascimento
     FROM usuario
     WHERE id=?
 """
 
 SQL_OBTER_DADOS_POR_EMAIL = """
-    SELECT id, nome, email, perfil, token
+    SELECT id, nome, cpf, cnpj, email, senha, endereco_cidade, perfil
     FROM usuario
-    WHERE email=?
+    WHERE email = ?
 """
 
 SQL_OBTER_POR_TOKEN = """

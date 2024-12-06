@@ -1,5 +1,6 @@
 from datetime import date
 from os import stat
+from urllib import request
 import bcrypt
 from fastapi import APIRouter, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -9,6 +10,7 @@ from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, adicionar_token, conferir_senha, criar_token, obter_hash_senha
 from util.mensagens import adicionar_mensagem_erro, adicionar_mensagem_sucesso
 from util.templates import obter_jinja_templates
+from util.validators import *
 
 router = APIRouter()
 templates = obter_jinja_templates("templates")
@@ -18,66 +20,61 @@ async def get_root(request: Request):
   return templates.TemplateResponse("main/pages/entrar.html", {"request": request})
     
 @router.post("/post_entrar")
-async def post_entrar(
-    email: str = Form(...), 
-    senha: str = Form(...)):
-    usuario = UsuarioRepo.checar_credenciais(email, senha)
-    if usuario is None:
-        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
-        return response
-    token = criar_token(usuario[0], usuario[1], usuario[2])
+async def post_entrar(request: Request):
+    dados = dict(await request.form())
+    email = dados["email"]
+    senha = dados["senha"]
+    senha_hash = UsuarioRepo.obter_senha_por_email(email)
+    if senha_hash and bcrypt.checkpw(senha.encode(), senha_hash.encode()):
+        usuario = UsuarioRepo.obter_dados_por_email(email)
+        usuarioAutenticadoDto = UsuarioAutenticado(
+            id=usuario.id,
+            nome=usuario.nome,
+            email=usuario.email,
+            perfil=usuario.perfil,
+        )
+    token = criar_token(usuarioAutenticadoDto)
     nome_perfil = None
-    match (usuario[2]):
+    match (usuarioAutenticadoDto.perfil):
         case 1: nome_perfil = "morador"
         case 2: nome_perfil = "patrocinador"
         case 3: nome_perfil = "administrador"
         case _: nome_perfil = ""
     response = RedirectResponse(f"/{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)    
-    response.set_cookie(
-        key=NOME_COOKIE_AUTH,
-        value=token,
-        max_age=3600*24*365*10,
-        httponly=True,
-        samesite="lax"
-    )
+    adicionar_token(response, token)
     adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
     return response
 
 
-# Função para tratar o login do administrador
 @router.post("/post_entrar_admin")
-async def post_entrar_admin(
-    email: str = Form(...), 
-    senha: str = Form(...)):
-    # Verifica credenciais do usuário
-    usuario = UsuarioRepo.checar_credenciais(email, senha)
-    if usuario is None or usuario[2] != 3:  # Verifica se é um administrador (perfil 3)
-        response = RedirectResponse("/entrar", status_code=status.HTTP_303_SEE_OTHER)
-        return response
-    
-    # Cria o token de autenticação
-    token = criar_token(usuario[0], usuario[1], usuario[2])
-    
-    # Mapeia os e-mails para os perfis específicos de administrador
-    admin_map = {
-        "lara@gmail.com": "perfil_administrador_lara",
-        "artur@gmail.com": "perfil_administrador_artur",
-        "caio@gmail.com": "perfil_administrador_caio",
-        "karina@gmail.com": "perfil_administrador_karina",
-    }
-    nome_perfil = admin_map.get(email, "administrador")  # Redireciona para página genérica se não encontrado
-    
-    # Redireciona o usuário para o perfil correspondente com caminho absoluto
-    response = RedirectResponse(f"/administrador/{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)
-    response.set_cookie(
-        key=NOME_COOKIE_AUTH,
-        value=token,
-        max_age=3600 * 24 * 365 * 10,
-        httponly=True,
-        samesite="lax"
-    )
-    adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
-    return response
+async def post_entrar_admin(request: Request):
+    dados = dict(await request.form())
+    email = dados["email"]
+    senha = dados["senha"]
+
+    # Verifica se o usuário existe e se é um administrador (perfil 3)
+    senha_hash = UsuarioRepo.obter_senha_por_email(email)
+    if senha_hash and bcrypt.checkpw(senha.encode(), senha_hash.encode()):
+        usuario = UsuarioRepo.obter_dados_por_email(email)
+        if usuario.perfil == 3:  # Verifica se é um administrador
+            usuarioAutenticadoDto = UsuarioAutenticado(
+                id=usuario.id,
+                nome=usuario.nome,
+                email=usuario.email,
+                perfil=usuario.perfil,
+            )
+            token = criar_token(usuarioAutenticadoDto)
+            admin_map = {
+            "lara@gmail.com": "perfil_administrador_lara",
+            "artur@gmail.com": "perfil_administrador_artur",
+            "caio@gmail.com": "perfil_administrador_caio",
+            "karina@gmail.com": "perfil_administrador_karina",
+        }
+            nome_perfil = admin_map.get(email, "administrador") 
+            response = RedirectResponse(f"/administrador/{nome_perfil}", status_code=status.HTTP_303_SEE_OTHER)
+            adicionar_token(response, token)
+            adicionar_mensagem_sucesso(response, "Login realizado com sucesso!")
+            return response
     
 
 @router.get("/cadastro_morador", response_class=HTMLResponse)
