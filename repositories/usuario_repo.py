@@ -68,6 +68,9 @@ class UsuarioRepo:
                  print(ex)
         return None
 
+
+ 
+
         
     @staticmethod
     def obter_senha_por_email(email: str) -> Optional[str]:
