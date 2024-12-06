@@ -68,7 +68,6 @@ class UsuarioRepo:
                     3                       
                 ))
 
-            
             cursor.execute(
                 SQL_INSERIR, (    
                     "12345678900",         
@@ -90,7 +89,6 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
         return None
-
             
     @staticmethod
     def obter_senha_por_email(email: str) -> Optional[str]:
@@ -127,6 +125,7 @@ class UsuarioRepo:
                 return None
             return Usuario(**dados)
         
+
     @classmethod
     def obter_por_token(cls, token: str) -> Optional[Usuario]:
         try:
@@ -143,7 +142,6 @@ class UsuarioRepo:
             return None          
     
    
-                # inserir Lara
          
     @classmethod
     def alterar_dados(cls, usuario: Usuario) -> bool:
