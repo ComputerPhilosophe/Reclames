@@ -16,7 +16,11 @@ async def get_perfil_administrador(request: Request):
 
 @router.get("/alterar_perfil_morador", response_class=HTMLResponse)
 async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/alterar_perfil_morador.html", {"request": request})
+    usuario = request.state.usuario if hasattr(request.state, "usuario") else None
+    if not usuario:
+        return RedirectResponse("/login_morador")
+    dados_usuario = UsuarioRepo.obter_por_email(usuario.email)
+    return templates.TemplateResponse("main/pages/alterar_perfil_morador.html", {"request": request, "dados_usuario": dados_usuario})
 
 @router.get("/perfil_morador_exemplo", response_class=HTMLResponse)
 async def get_root(request: Request):
@@ -39,11 +43,11 @@ async def post_dados(request: Request):
     dados["id"] = usuarioAutenticadoDto.id
     usuario = Usuario(**dados)
     if UsuarioRepo.atualizar_dados(usuario):
-        response = RedirectResponse("/empresa/index", status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse("/perfil_morador", status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_sucesso(response, "Cadastro atualizado com sucesso!")
         return response
     else:
-        response = RedirectResponse("/empresa/editarperfilempresa", status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse("/alterar_perfil_morador", status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_erro(
             response,
             "Ocorreu um problema ao atualizar seu cadastro. Tente novamente mais tarde.",
