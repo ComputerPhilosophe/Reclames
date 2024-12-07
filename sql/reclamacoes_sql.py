@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS reclamacoes (
     titulo TEXT NOT NULL,
     historia TEXT NOT NULL,
     celular TEXT NOT NULL,
-    telefone TEXT,
     arquivos TEXT,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
@@ -13,12 +12,12 @@ CREATE TABLE IF NOT EXISTS reclamacoes (
 """
 
 SQL_INSERIR_RECLAMACAO = """
-INSERT INTO reclamacoes (usuario_id, titulo, historia, celular, telefone, arquivos)
+INSERT INTO reclamacoes (usuario_id, titulo, historia, celular, arquivos)
 VALUES (?, ?, ?, ?, ?, ?)
 """
 
 SQL_BUSCAR_RECLAMACOES = """
-SELECT r.id, r.usuario_id, r.titulo, r.historia, r.celular, r.telefone, r.arquivos, r.data_criacao, 
+SELECT r.id, r.usuario_id, r.titulo, r.historia, r.celular, r.arquivos, r.data_criacao, 
        u.nome AS usuario_nome
 FROM reclamacoes r
 INNER JOIN usuario u ON r.usuario_id = u.id

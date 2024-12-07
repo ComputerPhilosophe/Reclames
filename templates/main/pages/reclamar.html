@@ -3,19 +3,18 @@
 {% block conteudo %}
 {% from 'shared/macros.html' import input, select, button, input_password, input_email_or_cpf, input_text, textarea %}
 
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> 
 <div class="mb-5">
-<div class="custom-container bg-light rounded shadow-sm p-4 mt-3" style="max-width: 500px; margin: auto; padding: 20px;"> 
+  <div class="custom-container bg-light rounded shadow-sm p-4 mt-3" style="max-width: 500px; margin: auto; padding: 20px;"> 
     <div class="mascote" style="display: flex; justify-content: center; margin-bottom: 10px;"> 
-        <img src="/static/img/reclamito.png" alt="Mascote" style="width: 100px;"> 
+      <img src="/static/img/reclamito.png" alt="Mascote" style="width: 100px;"> 
     </div> 
 
     <h2 style="text-align: center; font-weight: bold;">Vamos começar! <p class="text-center texto-azul">Conte sua História</p></h2> 
     <b><p class="info-text" style="text-align: center; color: grey; margin-bottom: 20px;">Veja como são as reclamações em nosso site clicando <a href="/duvidas_frequentes_morador">aqui</a></p></b>
     
     <font size="+1"><p class="text-center">Descreva o seu problema com a empresa</p></font>
-    <form> 
+    <form action="/reclamares" method="post" enctype="multipart/form-data"> <!-- Adicionei enctype aqui -->
         <div class="form-group" style="margin-bottom: 15px;"> 
             {{ input_text(
                 name='titulo_da_historia',
@@ -44,23 +43,14 @@
                 label='Celular',
                 id='celular',
                 placeholder='+55 (__)____-____',
-                attributes='required pattern="\\+?[0-9\\s\\-\\(\\)]{10,15}"'
             ) }}
         </div> 
-        <div class="form-group" style="margin-bottom: 15px;"> 
-            {{ input_text(
-                name='telefone',
-                label='Telefone',
-                id='telefone',
-                placeholder='+55 (__)____-____',
-                attributes='pattern="\\+?[0-9\\s\\-\\(\\)]{10,15}"'
-            ) }}
-        </div> 
+
 
         <font size="+1"><b><p>Anexar arquivos?</p></b></font> 
         <div class="file-upload" id="drop-area" style="border: 2px dashed #ccc; padding: 20px; text-align: center; margin-bottom: 20px;">
             <p>Arraste e solte seus arquivos aqui ou</p>
-            <input type="file" id="fileElem" multiple accept="image/png, image/jpeg, application/pdf" style="display: none;">
+            <input type="file" id="fileElem" name="arquivos[]" multiple accept="image/png, image/jpeg, application/pdf" style="display: none;">
             <button type="button" class="upload-button" id="uploadBtn" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">Selecione os Arquivos</button>
             <p class="small-text" style="font-size: 0.9rem; color: #6c757d;">Formatos permitidos: PNG, JPG, PDF. Máximo de 5Mb por arquivo.</p>
         </div>
@@ -93,6 +83,7 @@
         e.preventDefault();
         dropArea.style.borderColor = "#ccc";
         const files = e.dataTransfer.files;
+        fileElem.files = files;  // Adiciona os arquivos ao input de arquivos
         console.log(files);
     });
 
@@ -102,4 +93,5 @@
     });
 </script>
 </div>
+<script src="/static/js/mascararCampos.js"></script>
 {% endblock %}

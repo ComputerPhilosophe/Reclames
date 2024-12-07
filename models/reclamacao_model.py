@@ -11,7 +11,6 @@ class Reclamacao:
     titulo: Optional[str] = None  
     historia: Optional[str] = None  
     celular: Optional[str] = None  
-    telefone: Optional[str] = None  
     arquivos: Optional[List[str]] = None  
     criado_em: Optional[datetime] = None
 
