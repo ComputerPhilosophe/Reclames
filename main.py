@@ -6,7 +6,6 @@ from repositories.usuario_repo import UsuarioRepo
 from util.exceptions import configurar_excecoes # type: ignore
 from util.auth import checar_autenticacao, checar_autorizacao
 from routes.main_routes import router as main_routes
-from routes.usuario_routes import router as usuario_router
 from routes.administrador_routes import router as administrador_router
 from routes.patrocinador_routes import router as patrocinador_router
 from routes.morador_routes import router as morador_router
@@ -23,7 +22,6 @@ app.middleware(middleware_type="http")(checar_autenticacao)
 configurar_excecoes(app)
 
 app.include_router(main_routes)
-app.include_router(usuario_router)
 app.include_router(administrador_router)
 app.include_router(patrocinador_router)
 app.include_router(morador_router)

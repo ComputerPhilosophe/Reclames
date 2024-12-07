@@ -168,9 +168,6 @@ async def post_cadastrar(
     return RedirectResponse("/login_patrocinador", status_code=status.HTTP_303_SEE_OTHER)
 
 
-
-
-
 @router.get("/sair")
 async def get_sair():
     response = RedirectResponse("/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
