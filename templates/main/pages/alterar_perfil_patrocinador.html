@@ -10,37 +10,37 @@
                 <img src="/static/img/Patrocinador.png" alt="Foto de Perfil" style="border-radius: 50%; width: 100px; height: 100px;">
                 <h3>Olá, {{ usuario.nome }}!</h3>
                 <p class="text-primary">Patrocinador</p>
-                <a href="/patrocinador/alterar_perfil_patrocinador" class="btn btn-primary">Alterar dados do perfil</a>
             </div>
             <hr>
+            <form action="/morador/atualizar_dados" method="post">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="nome">Nome e Sobrenome</label>
-                    <input type="text" id="nome" class="form-control" name="nome" value="{{ usuario.nome }}" disabled>
+                    <input type="text" id="nome" class="form-control" name="nome" value="{{ usuario.nome }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="data-nascimento">Data de Nascimento</label>
-                    <input type="text" id="data-nascimento" class="form-control" name="data_nascimento" value="{{ usuario.data_nascimento }}" disabled>
+                    <input type="text" id="data-nascimento" class="form-control" name="data_nascimento" value="{{ usuario.data_nascimento }}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" name="email" value="{{ usuario.email }}" disabled>
+                    <input type="email" id="email" class="form-control" name="email" value="{{ usuario.email }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{ usuario.cnpj }}" disabled>
+                    <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{ usuario.cnpj }}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" class="form-control" name="endereco_cidade" value="{{ usuario.endereco_cidade }}" disabled>
+                    <input type="text" id="cidade" class="form-control" name="endereco_cidade" value="{{ usuario.endereco_cidade }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" class="form-control" name="endereco_bairro" value="{{ usuario.endereco_bairro }}" disabled>
+                    <input type="text" id="bairro" class="form-control" name="endereco_bairro" value="{{ usuario.endereco_bairro }}">
                 </div>
             </div>
 
@@ -82,10 +82,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-end mb-5">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
         </form>
-        <div class="d-flex justify-content-end mb-5">
-            <a href="/sair" class="btn btn-danger">Sair</a>
-        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -52,9 +52,10 @@ SQL_ALTERAR_DADOS = """
         endereco_numero = ?, 
         endereco_complemento = ?, 
         endereco_logradouro = ?, 
-        email = ?, 
+        email = ?
     WHERE id = ?
-"""     
+"""
+
 
 SQL_ALTERAR_ENDERECO = """
     UPDATE usuario

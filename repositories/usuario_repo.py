@@ -299,23 +299,23 @@ class UsuarioRepo:
                     return (dados[0], dados[1], dados[2])
             return None
         
-@classmethod
-def obter_todos(cls) -> list[Usuario]:
-    with obter_conexao() as conexao:
-        cursor = conexao.cursor()
-        usuarios = cursor.execute("SELECT id, nome, email FROM usuario").fetchall()
-        return [Usuario(id=u[0], nome=u[1], email=u[2]) for u in usuarios]
+    @classmethod
+    def obter_todos(cls) -> list[Usuario]:
+        with obter_conexao() as conexao:
+            cursor = conexao.cursor()
+            usuarios = cursor.execute("SELECT id, nome, email FROM usuario").fetchall()
+            return [Usuario(id=u[0], nome=u[1], email=u[2]) for u in usuarios]
 
 
-@staticmethod
-def obter_dados_por_email(email: str) -> Optional[Usuario]:
-        with obter_conexao() as db:
-            cursor = db.cursor()
-            cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,))
-            dados = cursor.fetchone()
-            if dados is None:
-                return None
-            return Usuario(**dados)
+    @staticmethod
+    def obter_dados_por_email(email: str) -> Optional[Usuario]:
+            with obter_conexao() as db:
+                cursor = db.cursor()
+                cursor.execute(SQL_OBTER_DADOS_POR_EMAIL, (email,))
+                dados = cursor.fetchone()
+                if dados is None:
+                    return None
+                return Usuario(**dados)
 
 
 @staticmethod

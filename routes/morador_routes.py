@@ -43,11 +43,11 @@ async def post_dados(request: Request):
     dados["id"] = usuarioAutenticadoDto.id
     usuario = Usuario(**dados)
     if UsuarioRepo.atualizar_dados(usuario):
-        response = RedirectResponse("/perfil_morador", status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse("/morador/perfil_morador", status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_sucesso(response, "Cadastro atualizado com sucesso!")
         return response
     else:
-        response = RedirectResponse("/alterar_perfil_morador", status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse("/morador/alterar_perfil_morador", status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_erro(
             response,
             "Ocorreu um problema ao atualizar seu cadastro. Tente novamente mais tarde.",
