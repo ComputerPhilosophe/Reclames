@@ -53,7 +53,10 @@
             <input type="file" id="fileElem" name="arquivos[]" multiple accept="image/png, image/jpeg, application/pdf" style="display: none;">
             <button type="button" class="upload-button" id="uploadBtn" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">Selecione os Arquivos</button>
             <p class="small-text" style="font-size: 0.9rem; color: #6c757d;">Formatos permitidos: PNG, JPG, PDF. Máximo de 5Mb por arquivo.</p>
+            <!-- Aqui serão exibidos os arquivos selecionados -->
+            <div id="file-list" style="margin-top: 10px; color: #007bff;"></div>
         </div>
+
         <u><p>Complete as etapas obrigatórias para postar a reclamação</p></u> 
         <div class="form-group mt-4"> 
             <button type="submit" class="btn btn-primary w-100">Reclamar</button> 
@@ -65,11 +68,14 @@
     const fileElem = document.getElementById("fileElem");
     const uploadBtn = document.getElementById("uploadBtn");
     const dropArea = document.getElementById("drop-area");
+    const fileList = document.getElementById("file-list");
 
+    // Abrir o seletor de arquivos quando o botão for clicado
     uploadBtn.addEventListener("click", () => {
         fileElem.click();
     });
 
+    // Quando arquivos forem arrastados para a área de upload
     dropArea.addEventListener("dragover", (e) => {
         e.preventDefault();
         dropArea.style.borderColor = "#007bff";
@@ -84,14 +90,25 @@
         dropArea.style.borderColor = "#ccc";
         const files = e.dataTransfer.files;
         fileElem.files = files;  // Adiciona os arquivos ao input de arquivos
-        console.log(files);
+        displayFiles(files);
     });
 
+    // Mostrar os arquivos selecionados ou arrastados
     fileElem.addEventListener("change", (e) => {
         const files = e.target.files;
-        console.log(files);
+        displayFiles(files);
     });
+
+    function displayFiles(files) {
+        fileList.innerHTML = ""; // Limpa a lista de arquivos
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            let fileName = document.createElement("div");
+            fileName.textContent = file.name;
+            fileList.appendChild(fileName);
+        }
+    }
 </script>
-</div>
+
 <script src="/static/js/mascararCampos.js"></script>
 {% endblock %}
