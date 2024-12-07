@@ -1,7 +1,10 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
+from streamlit import status
 
+from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
+from util.mensagens import adicionar_mensagem_erro, adicionar_mensagem_sucesso
 from util.templates import obter_jinja_templates
 
 router = APIRouter(prefix="/morador")
@@ -27,3 +30,22 @@ async def get_root(request: Request):
     dados_usuario = UsuarioRepo.obter_por_email(usuario.email)
     return templates.TemplateResponse("main/pages/perfil_morador.html", {"request": request, "dados_usuario": dados_usuario})
 
+@router.post("/atualizar_dados")
+async def post_dados(request: Request):
+    dados = dict(await request.form())
+    usuarioAutenticadoDto = (
+        request.state.usuario if hasattr(request.state, "usuario") else None
+    )
+    dados["id"] = usuarioAutenticadoDto.id
+    usuario = Usuario(**dados)
+    if UsuarioRepo.atualizar_dados(usuario):
+        response = RedirectResponse("/empresa/index", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_sucesso(response, "Cadastro atualizado com sucesso!")
+        return response
+    else:
+        response = RedirectResponse("/empresa/editarperfilempresa", status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(
+            response,
+            "Ocorreu um problema ao atualizar seu cadastro. Tente novamente mais tarde.",
+        )
+        return response

@@ -178,19 +178,40 @@
                             </ul>
 
                             {% for reclamacao in reclamacoes %}
-                        <div class="reclamacao">
-                            <div class="perfil">
-                                <img src="/static/img/{{ reclamacao.usuario.foto }}" alt="Foto de Perfil" class="perfil-img">
+                            <div class="card" style="background-color: white; border-color: black; margin-bottom: 15px;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="card-body d-flex">
+                                                <div class="me-3">
+                                                    <img src="/static/img/{{ reclamacao.usuario_foto }}" alt="Foto de perfil" class="rounded-circle" style="width: 70px; height: 70px;">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h6 class="mb-1">{{ reclamacao.usuario_nome }}</h6>
+                                                        <span class="badge bg-danger">Reclamação</span>
+                                                    </div>
+                                                    <h5>{{ reclamacao.titulo }}</h5>
+                                                    <p class="mb-2">{{ reclamacao.historia }}</p>
+                                                    <p><strong>Contato:</strong> {{ reclamacao.celular }} / {{ reclamacao.telefone }}</p>
+                                                    <div class="d-flex align-items-center">
+                                                        <button class="btn btn-outline-secondary btn-sm me-2">
+                                                            <i class="bi bi-hand-thumbs-up"></i> 0
+                                                        </button>
+                                                        <button class="btn btn-outline-secondary btn-sm me-2">
+                                                            <i class="bi bi-chat"></i> 0
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm">
+                                                            <i class="bi bi-exclamation-triangle"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="conteudo">
-                                <h3>{{ reclamacao.titulo }}</h3>
-                                <p>{{ reclamacao.historia }}</p>
-                                <p><strong>Contato:</strong> {{ reclamacao.celular }} / {{ reclamacao.telefone }}</p>
-                                <p><a href="/comentarios/{{ reclamacao.id }}">Comentar</a></p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                        </div>
+                            {% endfor %}
                     </div>
                 </div>
             </div>

@@ -1,3 +1,6 @@
+from unittest.mock import DEFAULT
+
+
 SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

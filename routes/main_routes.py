@@ -6,6 +6,7 @@ from fastapi import APIRouter, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from dtos.usuario_autenticado import UsuarioAutenticado
 from models.usuario_model import Usuario
+from repositories.reclamacao_repo import ReclamacaoRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, adicionar_token, conferir_senha, criar_token, obter_hash_senha
 from util.mensagens import adicionar_mensagem_erro, adicionar_mensagem_sucesso
@@ -230,8 +231,9 @@ async def get_root(request: Request):
     return templates.TemplateResponse("main/pages/ranking.html", {"request": request})
 
 @router.get("/interacao_proj_sug", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/interacao_proj_sug.html", {"request": request})
+async def exibir_reclamacoes(request: Request):
+    reclamacoes = ReclamacaoRepo.listar_reclamacoes()
+    return templates.TemplateResponse("main/pages/interacao_proj_sug.html", {"request": request, "reclamacoes": reclamacoes})
 
 @router.get("/instrucoes_mapa", response_class=HTMLResponse)
 async def get_root(request: Request):

@@ -16,3 +16,11 @@ SQL_INSERIR_RECLAMACAO = """
 INSERT INTO reclamacoes (usuario_id, titulo, historia, celular, telefone, arquivos)
 VALUES (?, ?, ?, ?, ?, ?)
 """
+
+SQL_BUSCAR_RECLAMACOES = """
+SELECT r.id, r.usuario_id, r.titulo, r.historia, r.celular, r.telefone, r.arquivos, r.data_criacao, 
+       u.nome AS usuario_nome
+FROM reclamacoes r
+INNER JOIN usuario u ON r.usuario_id = u.id
+ORDER BY r.data_criacao DESC;
+"""

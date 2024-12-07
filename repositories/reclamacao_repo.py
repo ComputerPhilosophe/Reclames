@@ -33,4 +33,28 @@ class ReclamacaoRepo:
             )
         )
         db.commit()
-        return cursor.lastrowid > 0         
+        return cursor.lastrowid > 0
+
+    @classmethod
+    def listar_reclamacoes(cls):
+        with obter_conexao() as conexao:
+            cursor = conexao.cursor()
+            cursor.execute(SQL_BUSCAR_RECLAMACOES)
+        resultados = cursor.fetchall()
+
+        reclamacoes = []
+        for linha in resultados:
+            reclamacao = {
+            "id": linha["id"],
+            "usuario_id": linha["usuario_id"],
+            "titulo": linha["titulo"],
+            "historia": linha["historia"],
+            "celular": linha["celular"],
+            "telefone": linha["telefone"],
+            "arquivos": linha["arquivos"].split(",") if linha["arquivos"] else [],
+            "data_criacao": linha["data_criacao"],
+            "usuario_nome": linha["usuario_nome"],
+        }
+            reclamacoes.append(reclamacao)
+
+        return reclamacoes         
