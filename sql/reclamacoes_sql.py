@@ -1,4 +1,4 @@
-SQL_CRIAR_TABELA = """
+SQL_CRIAR_TABELA_RECLAMAR= """
 CREATE TABLE IF NOT EXISTS reclamacoes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario_id INTEGER NOT NULL,
@@ -12,3 +12,7 @@ CREATE TABLE IF NOT EXISTS reclamacoes (
 );
 """
 
+SQL_INSERIR_RECLAMACAO = """
+INSERT INTO reclamacoes (usuario_id, titulo, historia, celular, telefone, arquivos)
+VALUES (?, ?, ?, ?, ?, ?)
+"""

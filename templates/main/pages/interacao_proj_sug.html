@@ -176,6 +176,20 @@
                                 </li>
                                 {% endfor %}
                             </ul>
+
+                            {% for reclamacao in reclamacoes %}
+                        <div class="reclamacao">
+                            <div class="perfil">
+                                <img src="/static/img/{{ reclamacao.usuario.foto }}" alt="Foto de Perfil" class="perfil-img">
+                            </div>
+                            <div class="conteudo">
+                                <h3>{{ reclamacao.titulo }}</h3>
+                                <p>{{ reclamacao.historia }}</p>
+                                <p><strong>Contato:</strong> {{ reclamacao.celular }} / {{ reclamacao.telefone }}</p>
+                                <p><a href="/comentarios/{{ reclamacao.id }}">Comentar</a></p>
+                            </div>
+                        </div>
+                    {% endfor %}
                         </div>
                     </div>
                 </div>

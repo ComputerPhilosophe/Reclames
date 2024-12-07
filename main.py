@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.staticfiles import StaticFiles
+from repositories.reclamacao_repo import ReclamacaoRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.exceptions import configurar_excecoes # type: ignore
 from util.auth import checar_autenticacao, checar_autorizacao
@@ -14,6 +15,8 @@ from routes.morador_routes import router as morador_router
 load_dotenv()
 UsuarioRepo.criar_tabela()
 UsuarioRepo.inserir_admins()
+ReclamacaoRepo.criar_tabela()
+
 app = FastAPI(dependencies=[Depends(checar_autorizacao)])
 app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 app.middleware(middleware_type="http")(checar_autenticacao)
