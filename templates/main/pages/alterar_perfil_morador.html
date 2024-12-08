@@ -12,57 +12,57 @@
         </div>
         <hr>
         <form action="/atualizar_dados" class="col-12" method="post">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="nome">Nome e Sobrenome</label>
-                <input type="text" id="nome" class="form-control" value="{{ dados_usuario.nome }}">
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="data-nascimento">Data de Nascimento</label>
-                <input type="text" id="data-nascimento" class="form-control" value="{{ dados_usuario.data_nascimento }}">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" value="{{ dados_usuario.email }}">
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="cpf">CPF</label>
-                <input type="text" id="cpf" class="form-control" value="{{ dados_usuario.cpf }}">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" class="form-control" value="{{ dados_usuario.endereco_cidade }}">
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" class="form-control" value="{{ dados_usuario.endereco_bairro }}">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <label for="reclamacoes">Reclamações Feitas</label>
-                <div class="info-card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-                    {% if dados_usuario.reclamacoes %}
-                        {% for reclamacao in dados_usuario.reclamacoes %}
-                            <p>{{ reclamacao }}</p>
-                        {% endfor %}
-                    {% else %}
-                        <p>Nenhuma reclamação registrada.</p>
-                    {% endif %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome">Nome e Sobrenome</label>
+                    <input type="text" id="nome" name="nome" class="form-control" value="{{ dados_usuario.nome }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="data-nascimento">Data de Nascimento</label>
+                    <input type="text" id="data-nascimento" name="data_nascimento" class="form-control" value="{{ dados_usuario.data_nascimento }}">
                 </div>
             </div>
-        </div>
-        <div class="d-flex justify-content-end mb-5">
-            <button type="submit" class="btn btn-success">Enviar</button>
-        </div>
-    </form>
+        
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" value="{{ dados_usuario.email }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" class="form-control" value="{{ dados_usuario.cpf }}">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" name="endereco_cidade" class="form-control" value="{{ dados_usuario.endereco_cidade }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" id="bairro" name="endereco_bairro" class="form-control" value="{{ dados_usuario.endereco_bairro }}">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="reclamacoes">Reclamações Feitas</label>
+                    <div class="info-card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        {% if dados_usuario.reclamacoes %}
+                            {% for reclamacao in dados_usuario.reclamacoes %}
+                                <p>{{ reclamacao }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>Nenhuma reclamação registrada.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mb-5">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </form>
     </div>
 
 {% endblock %}

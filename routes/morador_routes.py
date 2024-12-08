@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, logger
 from fastapi.responses import HTMLResponse, RedirectResponse
 from streamlit import status
 
@@ -37,19 +37,28 @@ async def get_root(request: Request):
 @router.post("/atualizar_dados")
 async def post_dados(request: Request):
     dados = dict(await request.form())
-    usuarioAutenticadoDto = (
-        request.state.usuario if hasattr(request.state, "usuario") else None
-    )
+    logger.info(f"Dados recebidos no formulário: {dados}")
+
+    usuarioAutenticadoDto = request.state.usuario if hasattr(request.state, "usuario") else None
+    if not usuarioAutenticadoDto:
+        logger.error("Usuário autenticado não encontrado.")
+        return RedirectResponse("/morador/login_morador", status.HTTP_303_SEE_OTHER)
+
     dados["id"] = usuarioAutenticadoDto.id
-    usuario = Usuario(**dados)
-    if UsuarioRepo.atualizar_dados(usuario):
-        response = RedirectResponse("/morador/perfil_morador", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_sucesso(response, "Cadastro atualizado com sucesso!")
-        return response
-    else:
+    try:
+        usuario = Usuario(**dados)
+        if UsuarioRepo.atualizar_dados(usuario):
+            logger.info(f"Usuário {usuario.id} atualizado com sucesso.")
+            response = RedirectResponse("/perfil_morador", status.HTTP_303_SEE_OTHER)
+            adicionar_mensagem_sucesso(response, "Cadastro atualizado com sucesso!")
+            return response
+        else:
+            logger.error(f"Falha ao atualizar o usuário {usuario.id}.")
+            response = RedirectResponse("/alterar_perfil_morador", status.HTTP_303_SEE_OTHER)
+            adicionar_mensagem_erro(response, "Não foi possível atualizar os dados. Tente novamente.")
+            return response
+    except Exception as e:
+        logger.error(f"Erro ao processar atualização: {e}")
         response = RedirectResponse("/morador/alterar_perfil_morador", status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(
-            response,
-            "Ocorreu um problema ao atualizar seu cadastro. Tente novamente mais tarde.",
-        )
+        adicionar_mensagem_erro(response, "Erro inesperado. Tente novamente mais tarde.")
         return response

@@ -149,18 +149,13 @@ class UsuarioRepo:
             cursor.execute(
             SQL_ALTERAR_DADOS,
             (
+                usuario.nome,
+                usuario.email,
+                usuario.endereco_cidade,
+                usuario.data_nascimento,
                 usuario.cpf,
                 usuario.cnpj,
-                usuario.nome,
-                usuario.data_nascimento,
-                usuario.genero,
-                usuario.endereco_cidade,
                 usuario.endereco_bairro,
-                usuario.endereco_cep,
-                usuario.endereco_numero,
-                usuario.endereco_complemento,
-                usuario.endereco_logradouro,
-                usuario.email,
                 usuario.id,
             ),
         )

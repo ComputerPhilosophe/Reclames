@@ -41,18 +41,13 @@ SQL_OBTER_DADOS_POR_EMAIL = """
 
 SQL_ALTERAR_DADOS = """
     UPDATE usuario
-    SET cpf = ?, 
-        cnpj = ?, 
-        nome = ?, 
-        data_nascimento = ?, 
-        genero = ?, 
+    SET nome = ?, 
+        email = ?,
         endereco_cidade = ?, 
-        endereco_bairro = ?, 
-        endereco_cep = ?, 
-        endereco_numero = ?, 
-        endereco_complemento = ?, 
-        endereco_logradouro = ?, 
-        email = ?
+        data_nascimento = ?,
+        cpf = ?, 
+        cnpj = ?, 
+        endereco_bairro = ? 
     WHERE id = ?
 """
 
