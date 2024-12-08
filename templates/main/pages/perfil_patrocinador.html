@@ -8,7 +8,7 @@
         <form action="/post_cadastrar" method="post">
             <div class="profile-header" style="text-align: left; margin-bottom: 30px;">
                 <img src="/static/img/Patrocinador.png" alt="Foto de Perfil" style="border-radius: 50%; width: 100px; height: 100px;">
-                <h3>Olá, {{ usuario.nome }}!</h3>
+                <h3>Olá, {{ dados_usuario.nome }}!</h3>
                 <p class="text-primary">Patrocinador</p>
                 <a href="/patrocinador/alterar_perfil_patrocinador" class="btn btn-primary">Alterar dados do perfil</a>
             </div>
@@ -16,31 +16,31 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="nome">Nome e Sobrenome</label>
-                    <input type="text" id="nome" class="form-control" name="nome" value="{{ usuario.nome }}" disabled>
+                    <input type="text" id="nome" class="form-control" name="nome" value="{{ dados_usuario.nome }}" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="data-nascimento">Data de Nascimento</label>
-                    <input type="text" id="data-nascimento" class="form-control" name="data_nascimento" value="{{ usuario.data_nascimento }}" disabled>
+                    <input type="text" id="data-nascimento" class="form-control" name="data_nascimento" value="{{ dados_usuario.data_nascimento }}" disabled>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" name="email" value="{{ usuario.email }}" disabled>
+                    <input type="email" id="email" class="form-control" name="email" value="{{ dados_usuario.email }}" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{ usuario.cnpj }}" disabled>
+                    <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{ dados_usuario.cnpj }}" disabled>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" class="form-control" name="endereco_cidade" value="{{ usuario.endereco_cidade }}" disabled>
+                    <input type="text" id="cidade" class="form-control" name="endereco_cidade" value="{{ dados_usuario.endereco_cidade }}" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" class="form-control" name="endereco_bairro" value="{{ usuario.endereco_bairro }}" disabled>
+                    <input type="text" id="bairro" class="form-control" name="endereco_bairro" value="{{ dados_usuario.endereco_bairro }}" disabled>
                 </div>
             </div>
 
@@ -48,8 +48,8 @@
                 <div class="col-md-4 mb-3">
                     <div class="info-card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
                         <h5>Reclamações Respondidas</h5>
-                        {% if usuario.reclamacoes_respondidas %}
-                            {% for reclamacao in usuario.reclamacoes_respondidas %}
+                        {% if dados_usuario.reclamacoes_respondidas %}
+                            {% for reclamacao in dados_usuario.reclamacoes_respondidas %}
                                 <p>{{ reclamacao }}</p>
                             {% endfor %}
                         {% else %}
@@ -60,8 +60,8 @@
                 <div class="col-md-4 mb-3">
                     <div class="info-card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
                         <h5>Projetos Respondidos</h5>
-                        {% if usuario.projetos_respondidos %}
-                            {% for projeto in usuario.projetos_respondidos %}
+                        {% if dados_usuario.projetos_respondidos %}
+                            {% for projeto in dados_usuario.projetos_respondidos %}
                                 <p>{{ projeto }}</p>
                             {% endfor %}
                         {% else %}
@@ -72,8 +72,8 @@
                 <div class="col-md-4 mb-3">
                     <div class="info-card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
                         <h5>Projetos/Reclamações Patrocinados</h5>
-                        {% if usuario.projetos_reclamacoes_patrocinados %}
-                            {% for patrocinio in usuario.projetos_reclamacoes_patrocinados %}
+                        {% if dados_usuario.projetos_reclamacoes_patrocinados %}
+                            {% for patrocinio in dados_usuario.projetos_reclamacoes_patrocinados %}
                                 <p>{{ patrocinio }}</p>
                             {% endfor %}
                         {% else %}
